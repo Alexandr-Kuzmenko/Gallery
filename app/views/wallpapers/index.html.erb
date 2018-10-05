@@ -1,0 +1,26 @@
+<h1>Wallpapers, common page</h1><br>
+<%= link_to 'Backto main menu', home_index_path %><br>
+<%= link_to 'Upload wallpaper', new_wallpaper_path %>
+
+
+<br>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Category</th>
+    <th>Image</th>
+    <th colspan="3"></th>
+  </tr>
+  <% @wallpapers.each do |wallpaper| %>
+    <tr>
+      <td><%= wallpaper.title %></td>
+      <td><%= wallpaper.category %></td>
+      <td><%= wallpaper.image%>
+      <td><%= link_to 'get fullscrean image', wallpaper_path(wallpaper) %></td>
+      <td><%= link_to 'edit wallpaper', edit_wallpaper_path(wallpaper) %></td>
+      <td><%= link_to 'Destroy', wallpaper_path(wallpaper),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+
+  <% end %>   
+</table>

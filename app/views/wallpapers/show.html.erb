@@ -1,0 +1,8 @@
+<%= link_to 'All wallpapers', wallpapers_path %>
+<h1><%= @wallpaper.title %></h1>
+ 
+<%= image_tag(@wallpaper.image.url, alt: 'Image') if @wallpaper.image? %>
+ 
+<p><%= @wallpaper.category %></p>
+ 
+<p><%= link_to 'Edit', edit_wallpaper_path(@wallpaper) %></p>

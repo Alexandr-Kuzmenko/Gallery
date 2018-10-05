@@ -1,0 +1,18 @@
+<%= form_with model: @wallpaper do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+ 
+  <div>
+    <%= f.label :category %>
+    <%= f.text_field :category %>
+  </div>
+ 
+  <div>
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+ 
+  <%= f.submit %>
+<% end %>
