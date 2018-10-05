@@ -38,8 +38,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # Hand-written in Project gems
+gem 'activeadmin'
 gem "haml-rails", "~> 1.0"
 gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
 gem 'devise'
 gem 'kaminari'
 
