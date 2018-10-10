@@ -3,12 +3,16 @@ Rails.application.routes.draw do
  
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  get 'wallpapers/index'
-  get 'user/index'
-  get 'home/index'
+  resources :wallpapers
+  root to: 'wallpapers#index'
+
+  
   devise_for :users
   get 'persons/profile', as: 'user_root'
-  root 'home#index'
+  root 'wallpapers#index'
+  
+  get 'home/index'
+
   resources :wallpapers
   root to: 'wallpapers#index'
 

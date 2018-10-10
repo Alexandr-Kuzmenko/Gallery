@@ -3,6 +3,9 @@ class WallpapersController < ApplicationController
 #=begin  
   def index
     @wallpapers = Wallpaper.all
+    @cat_list = category_mass
+    @view_main_page = {}     
+
   end
 
   def show
@@ -44,6 +47,12 @@ class WallpapersController < ApplicationController
   private
   def wallpaper_params
     params.require(:wallpaper).permit(:title, :category, :image)
+  end
+
+  def category_mass
+    categ = []
+    Wallpaper.all.each { |wallpaper| categ << wallpaper.category }
+    categ.uniq.sort
   end
 
 end

@@ -1,13 +1,13 @@
 <%= form_with model: @wallpaper do |f| %>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+  <div class="row">
+    <div class="col-xs-2"><%= f.label :"image name:" %></div>
+    <div class="col-xs-10"><%= f.text_field :title %></div>
   </div>
- 
-  <div>
-    <%= f.label :category %>
-    <%= f.text_field :category %>
+  <div class="row">
+    <div class="col-xs-2"><%= f.label :"category: "%></div>
+    <div class="col-xs-10"><%= f.text_field :category %></div>
   </div>
- 
-  <%= f.submit %>
+  <div class="row">
+  <div class="col-xs-12"><%= f.submit %></div>
+  </div>
 <% end %>

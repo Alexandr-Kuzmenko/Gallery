@@ -1,8 +1,17 @@
-<h1>Wallpapers, common page</h1><br>
-<%= link_to 'Backto main menu', home_index_path %><br>
-<%= link_to 'Upload wallpaper', new_wallpaper_path %>
+<!DOCTYPE html>
+<html>
+<head>
+<link href="app/assets/stylesheets/wallpapers.scss" rel="stylesheet" type="text/css">  
+</head>
+<body>
+  <% @cat_list.each do |cat_list| %>
+    <div class="row">
+      <div class="col-xs-2 col-xs-offset-5" ><a class="btn btn-info" h3 align: center>Category: <%= cat_list %></h3></a></div>
+    </div> 
 
 
+    
+  <% end %>
 <br>
 <table>
   <tr>
@@ -24,3 +33,5 @@
 
   <% end %>   
 </table>
+</body>
+</html>
