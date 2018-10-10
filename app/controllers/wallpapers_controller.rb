@@ -4,7 +4,7 @@ class WallpapersController < ApplicationController
   def index
     @wallpapers = Wallpaper.all
     @cat_list = category_mass
-    @view_main_page = {}     
+    #@view_main_page = {}     
 
   end
 
