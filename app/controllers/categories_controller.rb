@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
+    load_category
   end
 
   def new
@@ -12,11 +12,11 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    @category = Category.find(params[:id])
+    load_category
   end
 
   def create
-  	@category = Category.new(category_params)
+    @category = Category.new(category_params)
     if @category.save
       redirect_to categories_path
     else
@@ -25,12 +25,12 @@ class CategoriesController < ApplicationController
   end
 
   def update
-  	@category = Category.find(params[:id])
+    @category = Category.find(params[:id])
     if @category.update_attributes(category_params)
-  	  redirect_to categories_path
-  	else
-  	  render :edit
-  	end
+      redirect_to categories_path
+    else
+      render :edit
+    end
   end
   
   def destroy
@@ -42,5 +42,9 @@ class CategoriesController < ApplicationController
   private
   def category_params
     params.require(:category).permit(:name, :user_id, :locked)
+  end
+
+  def load_category
+    @category = Category.find(params[:id])
   end
 end

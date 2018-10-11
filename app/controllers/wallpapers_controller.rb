@@ -1,15 +1,12 @@
 class WallpapersController < ApplicationController
   #before_action :set_wallpaper, only: [:show, :edit, :update]
-#=begin  
+ 
   def index
     @wallpapers = Wallpaper.all
-    @cat_list = category_mass
-    #@view_main_page = {}     
-
   end
 
   def show
-    @wallpaper = Wallpaper.find(params[:id])
+    load_wallpaper
   end
 
   def new
@@ -17,11 +14,11 @@ class WallpapersController < ApplicationController
   end
 
   def edit
-    @wallpaper = Wallpaper.find(params[:id])
+    load_wallpaper
   end
 
   def create
-  	@wallpaper = Wallpaper.new(wallpaper_params)
+    @wallpaper = Wallpaper.new(wallpaper_params)
     if @wallpaper.save
       redirect_to wallpapers_path
     else
@@ -30,23 +27,27 @@ class WallpapersController < ApplicationController
   end
 
   def update
-  	@wallpaper = Wallpaper.find(params[:id])
+    @wallpaper = Wallpaper.find(params[:id])
     if @wallpaper.update_attributes(wallpaper_params)
-  	  redirect_to wallpapers_path
-  	else
-  	  render :edit
-  	end
+      redirect_to wallpapers_path
+    else
+      render :edit
+    end
   end
   
   def destroy
     @wallpaper = Wallpaper.find(params[:id])
     @wallpaper.destroy
-    redirect_to wallpapers_path    
+    redirect_to wallpapers_path
   end
 
   private
   def wallpaper_params
-    params.require(:wallpaper).permit(:title, :category, :image)
+    params.require(:wallpaper).permit(:title, :category_id, :image)
+  end
+
+  def load_wallpaper
+    @wallpaper = Wallpaper.find(params[:id])
   end
 
   def category_mass

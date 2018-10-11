@@ -1,12 +1,12 @@
-<%= form_with model: @category do |cat| %>
+<%= form_with model: @category do |f| %>
   <div class="row">
-    <div class="col-xs-2"><%= cat.label :"category name:" %></div>
-    <div class="col-xs-6"><%= cat.text_field :name %></div>
+    <div class="col-xs-2"><%= f.label :"category name:" %></div>
+    <div class="col-xs-6"><%= f.text_field :name %></div>
     <br><%#рабочее= cat.hidden_field :locked, value: false %>
     <%#= cat.hidden_field :user_id, value: current_session_user_id - доработать%>
   
   </div>
   <div class="row">
-  <div class="col-xs-12"><%= cat.submit %></div>
+  <div class="col-xs-12"><%= f.submit %></div>
   </div>
 <% end %>

@@ -1,14 +1,11 @@
+<%# %>
 <!DOCTYPE html>
 <html>
 <head>
 <link href="app/assets/stylesheets/wallpapers.scss" rel="stylesheet" type="text/css">  
 </head>
 <body>
-  <% @cat_list.each do |cat_list| %>
-    <div class="row">
-      <div class="col-xs-2 col-xs-offset-5" ><a class="btn btn-info" h3 align: center>Category: <%= cat_list %></h3></a></div>
-    </div> 
-  <% end %>
+  
 <br>
 <table>
   <tr>
@@ -21,14 +18,14 @@
     <tr>
       <td><%= wallpaper.title %></td>
       <td><%= wallpaper.category %></td>
-      <td><%= link_to(image_tag(wallpaper.image.thumb.url, alt: 'image'), wallpaper.image.url, target: '_blank')%>
+      <td><%#= link_to(image_tag(wallpaper.image.thumb.url, alt: 'image'), wallpaper.image.url, target: '_blank')%>
       <td><%= link_to 'get fullscrean image', wallpaper_path(wallpaper) %></td>
       <td><%= link_to 'edit wallpaper', edit_wallpaper_path(wallpaper) %></td>
       <td><%= link_to 'Destroy', wallpaper_path(wallpaper),
               method: :delete,
               data: { confirm: 'Are you sure?' } %></td>
 
-  <% end %>   
+  <% end %>  
 </table>
 </body>
 </html>
