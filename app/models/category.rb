@@ -1,3 +1,4 @@
 class Category < ApplicationRecord
-  has_many :wallpapers
+  belongs_to :user
+  has_many :wallpapers, dependent: :destroy
 end

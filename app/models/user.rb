@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   #validates :email, presence: true
   #validates :password, presence: true #{ minimum: 8 }       
+  has_many :categories
 end
