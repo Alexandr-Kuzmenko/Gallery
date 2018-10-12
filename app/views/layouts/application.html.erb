@@ -2,32 +2,31 @@
 <html>
   <head>
     <meta charset=utf-8>
-    <title>application Test001</title>
+    <title>application test Gallery</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>  
   </head>
-  
+
   <body>
     <header>
-
     <div class="center_block"><h1>Wallpapers gallery</h1></div>
-    <div class="login_block">
-      <% if user_signed_in? %>
-        <span>Welcome, <%= current_user.email %></span>
-        <br><%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
-      <% else %>
-        <%= link_to 'Войти', new_user_session_path %> / <%= link_to 'Зарегистрироваться', new_user_registration_path %>   
+      <div class="login_block">
+        <% if user_signed_in? %>
+          <span>Welcome, <%= current_user.email %></span>
+          <br><%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+        <% else %>
+          <%= link_to 'Войти', new_user_session_path %> / <%= link_to 'Зарегистрироваться', new_user_registration_path %>
       <% end %>
-    </div>  
+      </div>  
     </header>
-        <a class="btn btn-default" href="<%=wallpapers_path%>">Gallery</a>
-        <a class="btn btn-default" href="<%=categories_path%>">Categories</a>
-        <a class="btn btn-default" href="<%=new_wallpaper_path%>">Upload wallpaper</a>
+      <a class="btn btn-default" href="<%=wallpapers_path%>">Gallery</a>
+      <a class="btn btn-default" href="<%=categories_path%>">Categories</a>
+      <a class="btn btn-default" href="<%=new_wallpaper_path%>">Upload wallpaper</a>
 
     <%= yield %>
-  
+
     <footer>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
