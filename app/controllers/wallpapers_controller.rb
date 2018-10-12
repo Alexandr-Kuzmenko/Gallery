@@ -1,6 +1,6 @@
 class WallpapersController < ApplicationController
-  #before_action :set_wallpaper, only: [:show, :edit, :update]
- 
+  # before_action :set_wallpaper, only: [:show, :edit, :update]
+
   def index
     @wallpapers = Wallpaper.all
   end
@@ -34,7 +34,7 @@ class WallpapersController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     @wallpaper = Wallpaper.find(params[:id])
     @wallpaper.destroy
@@ -42,6 +42,7 @@ class WallpapersController < ApplicationController
   end
 
   private
+  
   def wallpaper_params
     params.require(:wallpaper).permit(:title, :category_id, :image)
   end
@@ -55,5 +56,4 @@ class WallpapersController < ApplicationController
     Wallpaper.all.each { |wallpaper| categ << wallpaper.category }
     categ.uniq.sort
   end
-
 end

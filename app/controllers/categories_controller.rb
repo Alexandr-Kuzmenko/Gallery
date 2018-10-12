@@ -32,7 +32,7 @@ class CategoriesController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
@@ -40,6 +40,7 @@ class CategoriesController < ApplicationController
   end
 
   private
+  
   def category_params
     params.require(:category).permit(:name, :user_id, :locked)
   end
