@@ -50,10 +50,4 @@ class WallpapersController < ApplicationController
   def load_wallpaper
     @wallpaper = Wallpaper.find(params[:id])
   end
-
-  def category_mass
-    categ = []
-    Wallpaper.all.each { |wallpaper| categ << wallpaper.category }
-    categ.uniq.sort
-  end
 end

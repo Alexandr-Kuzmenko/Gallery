@@ -10,6 +10,7 @@
     <div class="row">
       <% @categories.each do |category| %>
         <a class="btn btn-info"><%= category.name %></a>
+        <a class="btn btn-info"><%= category.user_id if category.user_id %></a>
         <br><%= link_to 'view category', category_path(category) %>
         <br><%= link_to 'Delete', category_path(category), method: :delete,
         data: { confirm: 'Are you sure?' } %><br>

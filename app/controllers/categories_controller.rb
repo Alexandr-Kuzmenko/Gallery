@@ -5,6 +5,9 @@ class CategoriesController < ApplicationController
 
   def show
     load_category
+    #@list = @category.wallpapers.find(params[:catefory_id])
+    #@category = id
+    @name = current_user.categories.find(params[:id]).name ? @name = current_user.categories.find(params[:id]).name : @name = 'nothing'
   end
 
   def new
@@ -35,12 +38,12 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category = Category.find(params[:id])
-    if current_user.id == @category.user_id
+    #if current_user.id == @category.user_id
       @category.destroy
       redirect_to categories_path
-    else
-      redirect_to categories_path
-    end
+    #else
+    #  redirect_to categories_path
+    #end
   end
 
   private

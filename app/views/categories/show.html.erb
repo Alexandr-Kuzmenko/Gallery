@@ -1,1 +1,12 @@
-<h2 margin-left: 100px><%= @category.name %></h2>
+<h2 margin-left: 100px><%#= @category.name %></h2>
+<div class="row">
+  <br>
+    <div class="row">
+      <a>name:</a><%#= current_user.categories.find(params[:id]).name %>
+      <br>
+      <%= @name %>
+      <%# @list.each do |f| %>
+        <%#= f %>
+      <%# end %>
+    </div>
+</div>
