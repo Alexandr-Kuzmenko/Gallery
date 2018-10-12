@@ -35,8 +35,12 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category = Category.find(params[:id])
-    @category.destroy
-    redirect_to categories_path
+    if current_user.id == @category.user_id
+      @category.destroy
+      redirect_to categories_path
+    else
+      redirect_to categories_path
+    end
   end
 
   private
