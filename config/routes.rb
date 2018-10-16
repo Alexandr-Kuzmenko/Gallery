@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :wallpapers, :categories
+  resources :wallpapers, :categories, :posts
   #get 'persons/profile', as: 'user_root'
   root 'categories#index'
   

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_12_085430) do
+ActiveRecord::Schema.define(version: 2018_10_16_140556) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(version: 2018_10_12_085430) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.boolean "locked", default: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text "text"
+    t.integer "user_id"
+    t.integer "wallpaper_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
+    t.index ["wallpaper_id"], name: "index_posts_on_wallpaper_id"
   end
 
   create_table "users", force: :cascade do |t|
