@@ -13,13 +13,13 @@
       </tr>
       <% @wallpapers.each do |wallpaper| %>
         <tr>
-          <td><%= wallpaper.title %></td>
-          <td><%= wallpaper.category_id %></td>
+          <td><%= wallpaper.category.name %></td>
+          
           <td><%= link_to(image_tag(wallpaper.image.thumb.url, alt: 'image'),
           wallpaper.image.url, target: '_blank') %></td>
-          <td><%= link_to 'Fullscrean', wallpaper_path(wallpaper) %></td>
-          <td><%= link_to 'Edit', edit_wallpaper_path(wallpaper) %></td>
-          <td><%= link_to 'Destroy', wallpaper_path(wallpaper), method: :delete,
+          <td><%= link_to 'Fullscrean', wallpaper_path(wallpaper), class: "btn btn-default" %></td>
+          <td><%= link_to 'Edit', edit_wallpaper_path(wallpaper), class: "btn btn-default" %></td>
+          <td><%= link_to 'Destroy', wallpaper_path(wallpaper), class: "btn btn-default", method: :delete,
           data: { confirm: 'Are you sure?' } %></td>
       <% end %>
     </table>

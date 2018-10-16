@@ -4,10 +4,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    load_category
-    #@list = @category.wallpapers.find(params[:catefory_id])
-    #@category = id
-    @name = current_user.categories.find(params[:id]).name ? @name = current_user.categories.find(params[:id]).name : @name = 'nothing'
+    @category = Category.find(params[:id])
   end
 
   def new
@@ -15,11 +12,11 @@ class CategoriesController < ApplicationController
   end
 
   def edit
-    load_category
+    personal_category
   end
 
   def create
-    @category = Category.new(category_params)
+    @category = current_user.categories.new(category_params)
     if @category.save
       redirect_to categories_path
     else
@@ -37,22 +34,33 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category = Category.find(params[:id])
-    #if current_user.id == @category.user_id
+    @category = personal_category
+    if @category.locked == false
       @category.destroy
       redirect_to categories_path
-    #else
-    #  redirect_to categories_path
-    #end
+    else
+      redirect_to categories_path
+    end
   end
 
   private
-  
-  def category_params
-    params.require(:category).permit(:name, :user_id, :locked)
+
+  def personal_category
+    @category = current_user.categories.find(params[:id])
   end
 
-  def load_category
-    @category = Category.find(params[:id])
+  def category_params
+    params.require(:category).permit(:name)
+  end
+
+  # Locking category for admins to prevent deleting.
+  def lock_category
+    show
+    @category.locked = true
+  end
+
+  def unlock_category
+    show
+    @category.locked = false
   end
 end
