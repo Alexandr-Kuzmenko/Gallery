@@ -16,12 +16,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    if @post.save
-      redirect_to posts_path
-    else
-      render :new
-    end
+    @wallpaper = Wallpaper.find(params[:wallpaper_id])
+    @post = @wallpaper.posts.create(post_params)
+    redirect_to wallpaper_path(@wallpaper)
   end
 
   def update
@@ -40,8 +37,8 @@ class PostsController < ApplicationController
   end
 
   private
-  
+
   def post_params
-    params.require(:post).permit(:user_id, :wallpaper_id)
+    params.require(:post).permit(:wallpaper_id, :text, :user_id)
   end
 end

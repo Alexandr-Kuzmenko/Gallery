@@ -1,5 +1,14 @@
-<%= link_to 'All wallpapers', wallpapers_path %>
-<h2><%= @wallpaper.title %></h2>
-<%= image_tag(@wallpaper.image.url, alt: 'Image') if @wallpaper.image? %>
-<p><%= @wallpaper.category %></p>
-<p><%= link_to 'Edit', edit_wallpaper_path(@wallpaper) %></p>
+<div class="row">
+  <div class="col-xs-offset-2 col-xs-2"><%= image_tag(@wallpaper.image.thumb.url, alt: 'Image') %></div>
+</div>
+<div class="row">
+  <div class="col-xs-offset-2 col-xs-1"><%#= link_to 'Get Fullscrean', fullsize_path, class: "btn btn-default" %></div>
+</div>
+
+
+<div class="row">
+  <%= render @wallpaper.posts %>
+</div>
+<div class="row">
+  <%= render 'posts/form' %>
+</div>
