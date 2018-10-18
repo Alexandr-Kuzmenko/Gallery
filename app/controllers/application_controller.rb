@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery except: [:index, :show]
-  before_action :authenticate_user!, except: [:index, :show] 
+  protect_from_forgery except: [:index, :show, :fullsize]
+  before_action :authenticate_user!, except: [:index, :show, :fullsize] 
+
+  def require_login
+
+  end
 
   #def after_sign_in_path_for(_resource)
   #  wallpapers_path

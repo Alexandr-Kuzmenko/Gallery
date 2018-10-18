@@ -1,4 +1,4 @@
-<%= form_with model: @wallpaper do |f| %>
+<%= form_for @wallpaper do |f| %>
   <div class="row">
     <div class="col-xs-2"><%= f.label :"image name:" %></div>
     <div class="col-xs-10"><%= f.text_field :title %></div>

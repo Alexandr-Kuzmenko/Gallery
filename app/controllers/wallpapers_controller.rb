@@ -1,6 +1,7 @@
 class WallpapersController < ApplicationController
   # before_action :set_wallpaper, only: [:show, :edit, :update]
-
+  # skip_before_action :authenticate_user!, only: [:index, :show, :load_wallpaper]
+  before_action :authenticate_user!, except: [:index, :show, :load_wallpaper]
   def index
     @wallpapers = Wallpaper.all
   end
@@ -39,6 +40,10 @@ class WallpapersController < ApplicationController
     @wallpaper = Wallpaper.find(params[:id])
     @wallpaper.destroy
     redirect_to wallpapers_path
+  end
+
+  def fullsize
+    @wallpaper = Wallpaper.find(params[:id])
   end
 
   private

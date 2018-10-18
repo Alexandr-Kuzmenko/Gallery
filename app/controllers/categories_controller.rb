@@ -1,4 +1,7 @@
 class CategoriesController < ApplicationController
+
+  #before_action :personal_category, only: %i[show]
+
   def index
     @categories = Category.all
   end
@@ -35,12 +38,8 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category = personal_category
-    if @category.locked == false
-      @category.destroy
-      redirect_to categories_path
-    else
-      redirect_to categories_path
-    end
+    @category.destroy if @category.locked == false
+    redirect_to categories_path
   end
 
   private

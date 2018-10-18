@@ -6,5 +6,5 @@ class User < ApplicationRecord
   #validates :email, presence: true
   #validates :password, presence: true #{ minimum: 8 }       
   has_many :categories
-  has_many :posts
+  has_many :comments
 end
