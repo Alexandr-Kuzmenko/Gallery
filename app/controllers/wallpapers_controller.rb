@@ -28,7 +28,7 @@ class WallpapersController < ApplicationController
   end
 
   def update
-    @wallpaper = Wallpaper.find(params[:id])
+    @wallpaper = load_wallpaper
     if @wallpaper.update_attributes(wallpaper_params)
       redirect_to wallpapers_path
     else
@@ -37,7 +37,7 @@ class WallpapersController < ApplicationController
   end
 
   def destroy
-    @wallpaper = Wallpaper.find(params[:id])
+    @wallpaper = load_wallpaper
     @wallpaper.destroy
     redirect_to wallpapers_path
   end
