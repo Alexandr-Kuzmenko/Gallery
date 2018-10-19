@@ -1,0 +1,14 @@
+.row
+  .col-xs-offset-2.col-xs-2
+    = image_tag(@wallpaper.image.thumb.url, alt: 'Image')
+.row
+  .col-xs-offset-2.col-xs-1
+    = link_to 'Get Fullscrean', fullsize_wallpaper_path, class: "btn btn-default"
+%br/
+%br/
+.row
+  = render(@wallpaper.comments)
+.row
+  = render 'comments/form' if current_user.present?
+.row
+  = link_to 'Back', @wallpaper.category, class: "btn btn-default"

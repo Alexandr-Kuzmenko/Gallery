@@ -1,6 +1,9 @@
 = form_for @category do |f|
   .row
-    .col-xs-2= f.label :name, 'Category name:'
-    .col-xs-6= f.text_field :name
+    .col-xs-2
+      = f.label :name, 'Category name:'
+    .col-xs-6
+      = f.text_field :name
   .row
-    .col-xs-12= f.submit
+    .col-xs-12
+      = f.submit

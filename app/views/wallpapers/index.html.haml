@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %link{ href: "app/assets/stylesheets/wallpapers.scss", rel: "stylesheet", type: "text/css" }
+  %body
+    - @wallpapers.each do |wallpaper|
+      .row
+        .col-xs-1
+          %a.btn.btn-info.disabled
+            = wallpaper.category.name
+        .col-xs-2
+          = link_to(image_tag(wallpaper.image.thumb.url, alt: 'image'), wallpaper.image.url, target: '_blank')
+        .col-xs-1
+          = link_to 'Comment', wallpaper_path(wallpaper), class: "btn btn-default"
+          %br/
+          = link_to 'Edit', edit_wallpaper_path(wallpaper), class: "btn btn-default"
+          %br/
+          = link_to 'Destroy', wallpaper_path(wallpaper), class: "btn btn-default", method: :delete,
+        data: { confirm: 'Are you sure?' }
+      %br/

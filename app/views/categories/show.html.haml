@@ -1,9 +1,8 @@
 %br/
 %br/
 .row
-  %a.btn.btn-default.btn-disabled
+  %a.btn.btn-success.disabled
     Category: #{@category.name}
-  %a
   = link_to 'Edit Category name', edit_category_path(@category), class: "btn btn-default"
   = link_to 'Back', categories_path, class: "btn btn-default"
   - if own?(@category)
@@ -13,7 +12,7 @@
 .row
   - @category.wallpapers.each do |wallpaper|
     = link_to image_tag(wallpaper.image.thumb.url)
-    = link_to 'View', wallpaper_path(wallpaper), class: "btn btn-default"
+    = link_to 'Comment', wallpaper_path(wallpaper), class: "btn btn-default"
     = link_to 'Edit', edit_wallpaper_path(wallpaper), class: "btn btn-default"
     %br/
     %br/

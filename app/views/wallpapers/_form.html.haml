@@ -1,0 +1,19 @@
+= form_for @wallpaper do |f|
+  .row
+    .col-xs-2
+      = f.label :title, 'Image name: '
+    .col-xs-10
+      = f.text_field :title
+  .row
+    .col-xs-2
+      = f.label :category, 'Category: '
+    .col-xs-10
+      = f.collection_select :category_id, Category.all, :id, :name
+  .row
+    .col-xs-2
+      = f.label :image, 'Image: '
+    .col-xs-10
+      = f.file_field :image
+  .row
+    .col-xs-12
+      = f.submit

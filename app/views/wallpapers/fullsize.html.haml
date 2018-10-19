@@ -1,0 +1,8 @@
+.row
+  .col-xs-12
+    = link_to 'Back', wallpaper_path, class: "btn btn-default"
+  %br/
+  /It does not work properly, but later it will be used as hand made link
+  /.col-xs-12= wallpaper.image.url, alt: 'Image'
+  .col-xs-12
+    = image_tag(Wallpaper.find(params[:id]).image.url)
