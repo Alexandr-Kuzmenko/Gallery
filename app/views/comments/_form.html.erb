@@ -1,9 +1,0 @@
-<%= form_for [ @wallpaper, @wallpaper.comments.build ], local: true do |f| %>
-  <div class="row">
-    <div class="col-xs-2"><%= f.label :'Type your comment:' %></div>
-    <div class="col-xs-4"><%= f.text_area :text %></div> 
-  </div>
-  <div class="row">
-    <div class="col-xs-1"><%= f.submit %></div>
-  </div>
-<% end %>
