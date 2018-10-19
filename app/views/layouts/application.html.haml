@@ -1,0 +1,31 @@
+!!!
+%html
+  %head
+    %meta{charset: "utf-8"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  %body
+    %header
+      .center_block
+        %h1 Wallpapers gallery
+      .login_block
+        - if user_signed_in?
+          %span
+            Welcome, #{ current_user.email }
+          %br/
+          = link_to 'Выйти', destroy_user_session_path, method: :delete
+        - else
+          = link_to 'Войти', new_user_session_path
+          \/ #{link_to 'Зарегистрироваться', new_user_registration_path}
+    %a.btn.btn-default{ href: categories_path } Categories
+    %a.btn.btn-default{ href: new_wallpaper_path } Upload wallpaper
+    %a.btn.btn-default{ href: wallpapers_path } Gallery
+    %br/
+    %br/
+    = yield
+    %footer
+      %p.notice= notice
+      %p.alert= alert
