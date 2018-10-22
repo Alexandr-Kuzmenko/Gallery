@@ -55,4 +55,8 @@ class WallpapersController < ApplicationController
   def load_wallpaper
     @wallpaper = Wallpaper.find(params[:id])
   end
+
+  def coll_select
+    @wallpaper.collection_select :category_id, Category.all, :id, :name
+  end
 end
