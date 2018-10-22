@@ -6,10 +6,9 @@ Rails.application.routes.draw do
   resources :wallpapers do
     resources :comments
     member do
-      get 'fullsize'
+      get 'wallpaper/:id/fullsize', to: 'wallpapers#fullsize', as: 'fullsize', method: 'show'
     end
   end
   root 'categories#index'
-  #get 'wallpaper/:id/fullsize', to: 'wallpapers#fullsize'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
