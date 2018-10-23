@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 2018_10_19_110208) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
     t.string "resource_type"
-    t.integer "resource_id"
+    t.bigint "resource_id"
     t.string "author_type"
-    t.integer "author_id"
+    t.bigint "author_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
@@ -48,22 +51,12 @@ ActiveRecord::Schema.define(version: 2018_10_19_110208) do
 
   create_table "comments", force: :cascade do |t|
     t.text "text"
-    t.integer "user_id"
-    t.integer "wallpaper_id"
+    t.bigint "user_id"
+    t.bigint "wallpaper_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_comments_on_user_id"
     t.index ["wallpaper_id"], name: "index_comments_on_wallpaper_id"
-  end
-
-  create_table "posts", force: :cascade do |t|
-    t.text "text"
-    t.integer "user_id"
-    t.integer "wallpaper_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_posts_on_user_id"
-    t.index ["wallpaper_id"], name: "index_posts_on_wallpaper_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -87,4 +80,6 @@ ActiveRecord::Schema.define(version: 2018_10_19_110208) do
     t.integer "category_id"
   end
 
+  add_foreign_key "comments", "users"
+  add_foreign_key "comments", "wallpapers"
 end
