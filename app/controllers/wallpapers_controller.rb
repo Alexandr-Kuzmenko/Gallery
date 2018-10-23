@@ -2,6 +2,7 @@ class WallpapersController < ApplicationController
   # before_action :set_wallpaper, only: [:show, :edit, :update]
   # skip_before_action :authenticate_user!, only: [:index, :show, :load_wallpaper]
   before_action :authenticate_user!, except: [:index, :show, :load_wallpaper]
+  before_action :load_categories, only: [:new, :create, :edit, :update]
   def index
     @wallpapers = Wallpaper.all
   end
@@ -56,7 +57,7 @@ class WallpapersController < ApplicationController
     @wallpaper = Wallpaper.find(params[:id])
   end
 
-  def coll_select
-    @wallpaper.collection_select :category_id, Category.all, :id, :name
+  def load_categories
+    @categories = Category.all
   end
 end
