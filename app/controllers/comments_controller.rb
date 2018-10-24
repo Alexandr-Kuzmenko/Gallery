@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
     @wallpaper = Wallpaper.find(params[:wallpaper_id])
     @comment = current_user.comments.new(comment_params)
     @comment.wallpaper = @wallpaper
-    redirect_to wallpaper_path(@wallpaper) if @comment.save!
+    @comment.save ? redirect_to(wallpaper_path(@wallpaper)) : render :new
   end
 
   def update
