@@ -8,12 +8,11 @@ namespace :autofilling do
         @category.save
         Dir.chdir(d)
         Dir.foreach(Dir.pwd) do |w|
-          if w.include? ".jpg"
-            jpg_name = w
-            jpg_name.slice!(".jpg")
+          if ['.jpg', '.jpeg', '.png'].include? "#{File.extname(w)}"
+            title = File.basename(w, ".*")
             cat_id = Category.find_by_name(d).id
-            @wallpaper = Wallpaper.new(title: jpg_name, category_id: cat_id)
-            @wallpaper.image = Pathname(Dir.pwd << "/#{w}.jpg").open
+            @wallpaper = Wallpaper.new(title: title, category_id: cat_id)
+            @wallpaper.image = Pathname(Dir.pwd << "/#{w}").open
             @wallpaper.save
           end
         end
