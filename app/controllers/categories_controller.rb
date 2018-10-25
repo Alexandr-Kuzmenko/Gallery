@@ -51,15 +51,4 @@ class CategoriesController < ApplicationController
   def category_params
     params.require(:category).permit(:name)
   end
-
-  # Locking category for admins to prevent deleting.
-  def lock_category
-    show
-    @category.locked = true
-  end
-
-  def unlock_category
-    show
-    @category.locked = false
-  end
 end
