@@ -3,13 +3,66 @@ ActiveAdmin.register_page "Dashboard" do
   menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
 
   content title: proc{ I18n.t("active_admin.dashboard") } do
-    div class: "blank_slate_container", id: "dashboard_default_message" do
-      span class: "blank_slate" do
-        span I18n.t("active_admin.dashboard_welcome.welcome")
-        small I18n.t("active_admin.dashboard_welcome.call_to_action")
-      end
-    end
+    #div class: "blank_slate_container", id: "dashboard_default_message" do
+    #  span class: "blank_slate" do
+    #    span I18n.t("active_admin.dashboard_welcome.welcome")
+    #    small I18n.t("active_admin.dashboard_welcome.call_to_action")
+    #  end
+    #end
 
+    columns do
+      #column do
+      #  panel "Recent Uploaded wallpapers" do
+      #    ul do
+      #      Wallpaper.last(5).each do |w|
+      #        @wallpaper = w
+      #        render partial: 'wallpaper_form', wallpaper: @wallpaper
+      #      end
+      #    end
+      #  end
+      #end
+
+      column do
+        panel "Recent Uploaded wallpapers" do
+          ul do
+            Wallpaper.last(10).map do |w|
+              li link_to(image_tag(w.image.thumb.url), wallpaper_path(w))
+            end
+          end
+        end
+      end
+
+      column do
+        panel "Recent written comments" do
+          ul do
+            Category.last(5).map do |comment|
+            #  li link_to(image_tag(comment.wallpaper.image.thumb.url), wallpaper_path(wallpaper))
+            end
+          end
+        end
+      end
+
+      column do
+        panel "Recent Uploaded wallpapers" do
+          ul do
+            Wallpaper.last(5).map do |w|
+              li link_to(image_tag(w.image.thumb.url), wallpaper_path(w))
+            end
+          end
+        end
+      end
+
+      column do
+        panel "Recent Uploaded wallpapers" do
+          ul do
+            Wallpaper.last(5).map do |w|
+            #  li link_to(image_tag(w.image.thumb.url), wallpaper_path(w))
+            end
+          end
+        end
+      end
+
+    end
     # Here is an example of a simple dashboard with columns and panels.
     #
     # columns do
