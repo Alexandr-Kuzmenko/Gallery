@@ -1,5 +1,6 @@
 ActiveAdmin.register Category do
   includes :wallpapers
+  menu priority: 3
   permit_params :name, :locked, :user_id
   index do
     column :name

@@ -1,7 +1,15 @@
 ActiveAdmin.register AdminUser do
-  permit_params :email, :encrypted_password, :password_confirmation
+  menu priority: 2
+  #permit_params :email, :encrypted_password, :password_confirmation
+  permit_params do
+    permitted = [:encrypted_password, :password_confirmation, :nickname, :avatar]
+    permitted << :email if params[:action] == 'create'
+    permitted
+  end
+
   index do
     column :email
+    column :nickname
     column :current_sign_in_at
     column :last_sign_in_at
     column :sign_in_count
@@ -26,7 +34,7 @@ ActiveAdmin.register AdminUser do
     private
 
     def admin_user_params
-      params.require(:admin_user).permit(:email, :password, :password_confirmation)
+      params.require(:admin_user).permit(:email, :password, :password_confirmation, :nickname)
     end
 
     def load_admin_user
@@ -37,23 +45,11 @@ ActiveAdmin.register AdminUser do
   form do |f|
     f.inputs "Admin Details" do
       f.input :email
+      f.input :nickname
+      f.input :avatar
       f.input :password
       f.input :password_confirmation
     end
     f.actions
   end
-
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
-
 end

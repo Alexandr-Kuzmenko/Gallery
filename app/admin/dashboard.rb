@@ -23,10 +23,20 @@ ActiveAdmin.register_page "Dashboard" do
       #end
 
       column do
-        panel "Recent Uploaded wallpapers" do
+        panel "Recent uploaded wallpapers" do
           ul do
             Wallpaper.last(10).map do |w|
-              li link_to(image_tag(w.image.thumb.url), wallpaper_path(w))
+              li link_to(image_tag(w.image.mini_thumb.url), wallpaper_path(w))
+            end
+          end
+        end
+      end
+
+      column do
+        panel "Recent Created Categories" do
+          ul do
+            Category.last(5).map do |c|
+              li link_to(c.name, category_path(c))
             end
           end
         end
@@ -35,25 +45,17 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Recent written comments" do
           ul do
-            Category.last(5).map do |comment|
-            #  li link_to(image_tag(comment.wallpaper.image.thumb.url), wallpaper_path(wallpaper))
+            Comment.last(5).map do |com|
+              li link_to(image_tag(com.wallpaper.image.mini_thumb.url), wallpaper_path(com.wallpaper))
+              li  com.user_id
+              li  com.text
             end
           end
         end
       end
 
       column do
-        panel "Recent Uploaded wallpapers" do
-          ul do
-            Wallpaper.last(5).map do |w|
-              li link_to(image_tag(w.image.thumb.url), wallpaper_path(w))
-            end
-          end
-        end
-      end
-
-      column do
-        panel "Recent Uploaded wallpapers" do
+        panel "Recent user actions" do
           ul do
             Wallpaper.last(5).map do |w|
             #  li link_to(image_tag(w.image.thumb.url), wallpaper_path(w))
