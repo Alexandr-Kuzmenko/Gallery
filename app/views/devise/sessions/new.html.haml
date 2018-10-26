@@ -1,0 +1,25 @@
+!!!
+%h2{align: "left", b: ""} Please, log in to get additional functions
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  .row
+    .col-xs-1
+      = f.label :email
+    .col-xs-5
+      = f.email_field :email, autofocus: true, autocomplete: "email"
+  %br/
+  .row
+    .col-xs-1
+      = f.label :password
+    .col-xs-5
+      = f.password_field :password, autocomplete: "current-password"
+  %br/
+  .row
+    - if devise_mapping.rememberable?
+      .col-xs-2
+        = f.label :remember_me
+        = f.check_box :remember_me
+  .actions
+    .col-xs-2
+      = f.submit "Log in", class: "btn btn-success"
+      = render "devise/shared/links"
+        
