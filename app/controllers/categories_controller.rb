@@ -1,13 +1,14 @@
 class CategoriesController < ApplicationController
-
-  #before_action :personal_category, only: %i[show]
+  skip_before_action :authenticate_user! || :authenticate_admin_user!, only: [:index, :show]
+  before_action :personal_category, only: [:show, :edit, :update]
+  before_action :load_categories, only: [:show, :edit, :update]
 
   def index
     @categories = Category.all
   end
 
   def show
-    @category = Category.find(params[:id])
+    load_categories
   end
 
   def new
@@ -20,20 +21,12 @@ class CategoriesController < ApplicationController
 
   def create
     @category = current_user.categories.new(category_params)
-    if @category.save
-      redirect_to categories_path
-    else
-      render :new
-    end
+    @category.save ? redirect_to(categories_path) : (render :new)
   end
 
   def update
-    @category = Category.find(params[:id])
-    if @category.update_attributes(category_params)
-      redirect_to categories_path
-    else
-      render :edit
-    end
+    load_categories
+    @category.update_attributes(category_params) ? redirect_to(categories_path) : (render :edit)
   end
 
   def destroy
@@ -46,6 +39,10 @@ class CategoriesController < ApplicationController
 
   def personal_category
     @category = current_user.categories.find(params[:id])
+  end
+
+  def load_categories
+    @category = Category.find(params[:id])
   end
 
   def category_params

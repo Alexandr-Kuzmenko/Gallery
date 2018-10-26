@@ -1,7 +1,5 @@
 class WallpapersController < ApplicationController
-  # before_action :set_wallpaper, only: [:show, :edit, :update]
-  # skip_before_action :authenticate_user!, only: [:index, :show, :load_wallpaper]
-  before_action :authenticate_user!, except: [:index, :show, :load_wallpaper]
+  skip_before_action :authenticate_user! || :authenticate_admin_user!, only: [:index, :show]
   before_action :load_categories, only: [:new, :create, :edit, :update]
   def index
     @wallpapers = Wallpaper.all
@@ -21,20 +19,12 @@ class WallpapersController < ApplicationController
 
   def create
     @wallpaper = Wallpaper.new(wallpaper_params)
-    if @wallpaper.save
-      redirect_to wallpapers_path
-    else
-      render :new
-    end
+    @wallpaper.save ? redirect_to(wallpapers_path) : (render :new)
   end
 
   def update
     @wallpaper = load_wallpaper
-    if @wallpaper.update_attributes(wallpaper_params)
-      redirect_to wallpapers_path
-    else
-      render :edit
-    end
+    @wallpaper.update_attributes(wallpaper_params) ? redirect_to(wallpapers_path) : (render :edit)
   end
 
   def destroy
