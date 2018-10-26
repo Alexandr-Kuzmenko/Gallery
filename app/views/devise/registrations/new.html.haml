@@ -1,6 +1,6 @@
 !!!
 %h2{b: ""} Registration form:
-%h4{b: ""} Fill all fields below
+%h4{b: ""} (Fill all fields below)
 = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   = devise_error_messages!
   .row
@@ -26,8 +26,6 @@
       = f.password_field :password_confirmation, autocomplete: "new-password"
   %br/
   .actions
-    = f.submit "Sign up", class: "btn btn-default"
-%br/
-.row
-  .col-xs-2
-    = render "devise/shared/links"
+    .col-xs-2
+      = f.submit "Sign up", class: "btn btn-success"
+      = render "devise/shared/links"

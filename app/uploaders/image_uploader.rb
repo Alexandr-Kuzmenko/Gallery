@@ -4,13 +4,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
   #process :store_dimensions
 
-  version :thumb do
-    process resize_to_fill: [192, 108]
-  end
-  version :mini_thumb do
-    process resize_to_fill: [30, 17]
-  end
-
   #def resize_to_fit_by_percentage(percentage)
   #  resize_to_fit model.width*percentage, nil
   #end
@@ -50,6 +43,14 @@ class ImageUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process resize_to_fit: [50, 50]
   # end
+
+  version :thumb do
+    process resize_to_fill: [192, 108]
+  end
+  version :mini_thumb do
+    process resize_to_fill: [60, 34]
+  end
+
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
