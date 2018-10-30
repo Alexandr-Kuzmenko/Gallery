@@ -14,6 +14,8 @@
       = f.label :image, 'Image: '
     .col-xs-10
       = f.file_field :image
+      = f.hidden_field :image_cache
+  %br/
   .row
     .col-xs-12
       = f.submit

@@ -3,4 +3,4 @@
 = render 'form', category: @category
 %br/
 .col-xs-2
-  %a.btn.btn-default{ href: category_path(@category) } Back
+  = link_to 'Back', category_path(@category), class: "btn.btn-default"

@@ -3,11 +3,11 @@
 .row
   %a.btn.btn-success.disabled
     Category: #{@category.name}
-  = link_to 'Edit Category name', edit_category_path(@category), class: "btn btn-default"
-  = link_to 'Back', categories_path, class: "btn btn-default"
   - if own?(@category)
-    = link_to 'Delete category', category_path(@category), class: "btn btn-warning", method: :delete, |
+    = link_to 'Edit Category name', edit_category_path(@category), class: "btn btn-warning"
+    = link_to 'Delete category', category_path(@category), class: "btn btn-danger", method: :delete, |
       data: { confirm: 'Are you sure?' }
+  = link_to 'Back', categories_path, class: "btn btn-default"
 %br/
 .row
   - @category.wallpapers.each do |wallpaper|

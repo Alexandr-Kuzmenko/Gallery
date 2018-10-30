@@ -1,5 +1,4 @@
-%br/
-%h2{:b => ""} Enter your category's name:
+%h2 Enter your category's name:
 = render 'form', category: @category
 %br/
-%a.btn.btn-default{ href: categories_path } Back
+= link_to 'Back', categories_path, class: "btn btn-default"

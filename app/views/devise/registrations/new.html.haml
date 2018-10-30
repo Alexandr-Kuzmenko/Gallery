@@ -1,6 +1,5 @@
-!!!
-%h2{b: ""} Registration form:
-%h4{b: ""} (Fill all fields below)
+%h2 Registration form:
+%h4 (Fill all fields below)
 = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
   = devise_error_messages!
   .row

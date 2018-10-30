@@ -20,10 +20,10 @@
         - else
           = link_to 'Войти', new_user_session_path
           \/ #{link_to 'Зарегистрироваться', new_user_registration_path}
-    %a.btn.btn-default{ href: categories_path } Categories
-    %a.btn.btn-default{ href: new_wallpaper_path } Upload wallpaper
-    %a.btn.btn-default{ href: wallpapers_path } Gallery
-    %br/
+    .row
+      = link_to 'Categories', categories_path , class: "btn btn-default"
+      = link_to 'Upload wallpaper', new_wallpaper_path , class: "btn btn-default"
+      = link_to 'Gallery', wallpapers_path , class: "btn btn-default"
     %br/
     = yield
     %footer
