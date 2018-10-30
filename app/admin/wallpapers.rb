@@ -2,6 +2,7 @@ ActiveAdmin.register Wallpaper do
   includes :comments
   menu priority: 4
   permit_params :title, :category_id, :image
+
   index do
     column :title
     column :id
@@ -15,28 +16,35 @@ ActiveAdmin.register Wallpaper do
   end
 
   controller do
+    before_action :load_categories, only: [:new, :create, :edit, :update]
+
     def create
       @wallpaper = Wallpaper.new(wallpaper_params)
-      @wallpaper.save ? redirect_to(admin_wallpapers_path) : (render :new)
+      if @wallpaper.save
+        redirect_to admin_wallpapers_path
+      else
+        render :new
+      end
     end
 
     def update
       @wallpaper = Category.find(params[:id])
-      @wallpaper.update_attributes(wallpaper_params) ? redirect_to(admin_wallpapers_path) : (render :edit)
+      if @wallpaper.update_attributes(wallpaper_params)
+        redirect_to admin_wallpapers_path
+      else
+        render :edit
+      end
     end
 
     private
 
     def wallpaper_params
-      params.require(:category).permit(:name)
+      params.require(:wallpaper).permit(:title, :category_id, :image)
     end
-  end
 
-  form do |f|
-    f.inputs "Wallpaper Edit" do
-      f.input :title
-      f.input :category_id
+    def load_categories
+      @categories = Category.all
     end
-    f.actions
   end
+  form partial: 'form'
 end

@@ -1,4 +1,7 @@
 ActiveAdmin.setup do |config|
+  # Forbids rule of Application_controller to ask for user_login
+  config.skip_before_action :authenticate_user!
+
   # == Site Title
   #
   # Set the title that is displayed on the main layout

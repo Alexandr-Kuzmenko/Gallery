@@ -1,11 +1,12 @@
 ActiveAdmin.register Category do
   includes :wallpapers
   menu priority: 3
-  permit_params :name, :locked, :user_id
+  permit_params :name, :locked
   index do
     column :name
     column :id
-    column :user_id
+    column :categorized_id
+    column :categorized_type
     column :created_at
     column :updated_at
     column :locked
@@ -13,29 +14,41 @@ ActiveAdmin.register Category do
   end
 
   controller do
+    before_action :load_category, only: [:show, :edit, :update, :destroy]
     def create
-      @category = User.find(1).categories.new(category_params)
-      @category.save ? redirect_to(admin_categories_path) : (render :new)
+      @category = current_admin_user.categories.new(category_params)
+      if @category.save
+        redirect_to admin_categories_path
+      else
+        render :new
+      end
     end
 
     def update
-      @category = Category.find(params[:id])
-      @category.update_attributes(category_params) ? redirect_to(admin_categories_path) : (render :edit)
+      if @category.update_attributes(category_params)
+        redirect_to admin_categories_path
+      else
+        render :edit
+      end
     end
 
     private
 
-    def category_params
-      params.require(:category).permit(:name)
+    def load_category
+      @category = Category.find(params[:id])
     end
 
+    def category_params
+      params.require(:category).permit(:name, :locked)
+    end
   end
-
+  #form partial: 'form'
   form do |f|
     f.inputs "Category Edit" do
-      f.input :name
+      f.input :name, label: 'Name:'
       f.input :locked
     end
     f.actions
   end
+
 end

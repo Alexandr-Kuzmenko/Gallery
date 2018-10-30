@@ -23,12 +23,20 @@ ActiveAdmin.register AdminUser do
 
     def create
       @admin_user = AdminUser.new(admin_user_params)
-      @admin_user.save ? redirect_to(admin_admin_users_path) : (render :new)
+      if @admin_user.save
+        redirect_to admin_admin_users_path
+      else
+        render :new
+      end
     end
 
     def update
-      @admin_user = load_admin_user
-      @admin_user.update_attributes(admin_user_params) ? redirect_to(admin_admin_users_path) : (render :edit)
+      load_admin_user
+      if @admin_user.update_attributes(admin_user_params)
+        redirect_to admin_admin_users_path
+      else
+        render :edit
+      end
     end
 
     private
