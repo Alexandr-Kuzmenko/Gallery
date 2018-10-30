@@ -4,7 +4,7 @@ namespace :autofilling do
     Dir.chdir("storage/Wallpapers_for_Site")
     Dir.foreach(Dir.pwd) do |d|
       unless d.include? ?.
-        @category = Category.new(name: d, user_id: 1)
+        @category = AdminUser.first.categories.new(name: d)
         @category.save
         Dir.chdir(d)
         Dir.foreach(Dir.pwd) do |w|
@@ -20,5 +20,6 @@ namespace :autofilling do
       end
     end
     Dir.chdir("../../")
+    p 'Task complete'
   end
 end
