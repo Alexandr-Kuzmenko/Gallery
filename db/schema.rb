@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_26_092319) do
+ActiveRecord::Schema.define(version: 2018_10_29_145653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,11 +45,13 @@ ActiveRecord::Schema.define(version: 2018_10_26_092319) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "name", null: false
     t.boolean "locked", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "categorized_type"
+    t.bigint "categorized_id"
+    t.index ["categorized_type", "categorized_id"], name: "index_categories_on_categorized_type_and_categorized_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -79,10 +81,10 @@ ActiveRecord::Schema.define(version: 2018_10_26_092319) do
 
   create_table "wallpapers", force: :cascade do |t|
     t.string "title"
+    t.integer "category_id"
     t.string "image", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "category_id"
   end
 
   add_foreign_key "comments", "users"
