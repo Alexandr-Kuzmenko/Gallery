@@ -1,45 +1,46 @@
 class CommentsController < ApplicationController
-  skip_before_action :authenticate_user! || :authenticate_admin_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show]
+  before_action :load_comment, only: [:show, :edit, :update, :destroy]
+  before_action :load_parent_wallpaper, only: [:create, :update, :destroy]
 
   def index
     @comments = Comment.all
   end
 
-  def show
-    load_comments
-  end
+  def show; end
 
   def new
     @comment = Comment.new
   end
 
-  def edit
-    load_comments
-  end
+  def edit; end
 
   def create
-    load_parent_wallpaper
     @comment = current_user.comments.new(comment_params)
     @comment.wallpaper = @wallpaper
-    @comment.save ? redirect_to(wallpaper_path(@wallpaper)) : (render :new)
+    if @comment.save
+      redirect_to wallpaper_path(@wallpaper)
+    else
+      render :new
+    end
   end
 
   def update
-    load_comments
-    load_parent_wallpaper
-    @comment.update_attributes(comment_params) ? redirect_to(wallpaper_path(@wallpaper)) : (render :edit)
+    if @comment.update_attributes(comment_params)
+      redirect_to wallpaper_path(@wallpaper)
+    else
+      render :edit
+    end
   end
 
   def destroy
-    load_comments
-    load_parent_wallpaper
     @comment.destroy
-    redirect_to(wallpaper_path(@wallpaper))
+    redirect_to wallpaper_path(@wallpaper)
   end
 
   private
 
-  def load_comments
+  def load_comment
     @comment = Comment.find(params[:id])
   end
 

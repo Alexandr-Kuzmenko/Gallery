@@ -1,44 +1,46 @@
 class WallpapersController < ApplicationController
-  skip_before_action :authenticate_user! || :authenticate_admin_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :load_categories, only: [:new, :create, :edit, :update]
+  before_action :load_wallpaper, only: [:show, :edit, :update, :destroy, :fullsize]
+
   def index
     @wallpapers = Wallpaper.all
   end
 
-  def show
-    load_wallpaper
-  end
+  def show; end
 
   def new
     @wallpaper = Wallpaper.new
   end
 
-  def edit
-    load_wallpaper
-  end
+  def edit; end
 
   def create
     @wallpaper = Wallpaper.new(wallpaper_params)
-    @wallpaper.save ? redirect_to(wallpapers_path) : (render :new)
+    if @wallpaper.save
+      redirect_to wallpapers_path
+    else
+      render :new
+    end
   end
 
   def update
-    @wallpaper = load_wallpaper
-    @wallpaper.update_attributes(wallpaper_params) ? redirect_to(wallpapers_path) : (render :edit)
+    if @wallpaper.update_attributes(wallpaper_params)
+      redirect_to wallpapers_path
+    else
+      render :edit
+    end
   end
 
   def destroy
-    @wallpaper = load_wallpaper
     @wallpaper.destroy
     redirect_to wallpapers_path
   end
 
-  def fullsize
-    @wallpaper = Wallpaper.find(params[:id])
-  end
+  def fullsize; end
 
   private
-  
+
   def wallpaper_params
     params.require(:wallpaper).permit(:title, :category_id, :image)
   end

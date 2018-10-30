@@ -1,11 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!|| :authenticate_admin_user!, except: [ :index ]
-
-
-  #def require_login
-  #
-  #end
-
+  before_action :authenticate_user!, except: [:index], unless: :admin_user_signed_in?
   #def after_sign_in_path_for(_resource)
   #  wallpapers_path
   #end
