@@ -15,7 +15,6 @@ class CategoriesController < ApplicationController
   def edit; end
 
   def create
-    @user = current_admin_user || current_user
     if current_admin_user
       @category = current_admin_user.categories.new(category_params)
     elsif current_user
@@ -35,8 +34,7 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category.destroy if @category.locked == false
-    #@category.destroy unless @category.locked?
+    @category.destroy unless @category.locked?
     redirect_to categories_path
   end
 

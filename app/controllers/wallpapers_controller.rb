@@ -18,7 +18,7 @@ class WallpapersController < ApplicationController
   def create
     @wallpaper = Wallpaper.new(wallpaper_params)
     if @wallpaper.save
-      redirect_to wallpapers_path
+      redirection
     else
       render :new
     end
@@ -26,7 +26,7 @@ class WallpapersController < ApplicationController
 
   def update
     if @wallpaper.update_attributes(wallpaper_params)
-      redirect_to wallpapers_path
+      redirection
     else
       render :edit
     end
@@ -34,12 +34,16 @@ class WallpapersController < ApplicationController
 
   def destroy
     @wallpaper.destroy
-    redirect_to wallpapers_path
+    redirection
   end
 
   def fullsize; end
 
   private
+
+  def redirection
+    current_admin_user ? redirect_to(admin_wallpapers_path) : redirect_to(wallpapers_path)
+  end
 
   def wallpaper_params
     params.require(:wallpaper).permit(:title, :category_id, :image)

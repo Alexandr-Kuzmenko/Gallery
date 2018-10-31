@@ -56,11 +56,12 @@ ActiveRecord::Schema.define(version: 2018_10_29_145653) do
 
   create_table "comments", force: :cascade do |t|
     t.text "text", null: false
-    t.bigint "user_id"
     t.bigint "wallpaper_id"
+    t.string "commentable_type"
+    t.bigint "commentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
     t.index ["wallpaper_id"], name: "index_comments_on_wallpaper_id"
   end
 
@@ -87,6 +88,5 @@ ActiveRecord::Schema.define(version: 2018_10_29_145653) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "comments", "users"
   add_foreign_key "comments", "wallpapers"
 end

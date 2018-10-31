@@ -8,5 +8,5 @@ class User < ApplicationRecord
   validates :password, confirmation: true, length: { in: 6..20 }
   validates :email, :nickname, uniqueness: true
   has_many :categories, as: :categorized
-  has_many :comments
+  has_many :comments, as: :commentable
 end

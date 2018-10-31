@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :load_comment, only: [:show, :edit, :update, :destroy]
-  before_action :load_parent_wallpaper, only: [:create, :update, :destroy]
+  before_action :load_comment, only: [:show]
+  before_action :load_parent_wallpaper, only: [:create]
 
   def index
     @comments = Comment.all
@@ -13,30 +13,33 @@ class CommentsController < ApplicationController
     @comment = Comment.new
   end
 
-  def edit; end
+  #def edit; end
 
   def create
-    @comment = current_user.comments.new(comment_params)
-    @comment.wallpaper = @wallpaper
-    if @comment.save
-      redirect_to wallpaper_path(@wallpaper)
+    user = current_admin_user || current_user
+    if user
+      @comment = user.comments.new(comment_params)
+      @comment.wallpaper = @wallpaper
+      if @comment.save
+        redirect_to wallpaper_path(@wallpaper)
+      end
     else
       render :new
     end
   end
 
-  def update
-    if @comment.update_attributes(comment_params)
-      redirect_to wallpaper_path(@wallpaper)
-    else
-      render :edit
-    end
-  end
+  #def update
+  #  if @comment.update_attributes(comment_params)
+  #    redirect_to wallpaper_path(@wallpaper)
+  #  else
+  #    render :edit
+  #  end
+  #end
 
-  def destroy
-    @comment.destroy
-    redirect_to wallpaper_path(@wallpaper)
-  end
+  #def destroy
+  #  @comment.destroy
+  #  redirect_to wallpaper_path(@wallpaper)
+  #end
 
   private
 
@@ -45,7 +48,7 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:wallpaper_id, :text, :user_id)
+    params.require(:comment).permit(:wallpaper_id, :text, :commentable_id, :commentable_type)
   end
 
   def load_parent_wallpaper

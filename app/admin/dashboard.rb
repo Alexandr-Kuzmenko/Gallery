@@ -45,8 +45,9 @@ ActiveAdmin.register_page "Dashboard" do
           ul do
             Comment.last(5).map do |com|
               li link_to(image_tag(com.wallpaper.image.mini_thumb.url), wallpaper_path(com.wallpaper))
-              li  com.user_id
-              li  com.text
+              li com.commentable_type
+              li com.commentable_id
+              li com.text
             end
           end
         end
