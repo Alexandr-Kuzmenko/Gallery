@@ -4,9 +4,11 @@ class User < ApplicationRecord
   mount_uploader :avatar, ImageUploader
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  validates :email, :password, presence: true
-  validates :password, confirmation: true, length: { in: 6..20 }
-  validates :email, :nickname, uniqueness: true
+  validates :email, presence: true
+  validates :password, confirmation: true, length: { in: 6..20 }, on: :create
+  validates :password, confirmation: true, allow_blank: true, on: :update
+  validates :email, uniqueness: true
   has_many :categories, as: :categorized
   has_many :comments, as: :commentable
+  has_many :likes, dependent: :destroy
 end

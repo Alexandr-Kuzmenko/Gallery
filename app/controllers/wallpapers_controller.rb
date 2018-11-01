@@ -56,4 +56,8 @@ class WallpapersController < ApplicationController
   def load_categories
     @categories = Category.all
   end
+
+  def like_proc
+    @wallpaper.likes.action_like
+  end
 end

@@ -285,7 +285,7 @@ ActiveAdmin.setup do |config|
   # By default, the footer shows the current Active Admin version. You can
   # override the content of the footer here.
   #
-  config.footer = 'Application: Gallery. version 0.6.8'
+  config.footer = 'Application: Gallery. version 0.7.2'
 
   # == Sorting
   #

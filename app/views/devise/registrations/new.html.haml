@@ -7,6 +7,7 @@
       = f.label :email
     .col-xs-5
       = f.email_field :email, autofocus: true, autocomplete: "email"
+      /
   %br/
   .row
     .col-xs-1
@@ -23,6 +24,8 @@
       = f.label :password_confirmation
     .col-xs-4
       = f.password_field :password_confirmation, autocomplete: "new-password"
+  %br/
+
   %br/
   .actions
     .col-xs-2

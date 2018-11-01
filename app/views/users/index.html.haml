@@ -1,0 +1,30 @@
+.user_info_block
+  .row
+    .col-xs-2
+      %a.btn.btn-success.btn-block.disabled Email:
+    .col-xs-3
+      %a.btn.btn-primary.btn-block.disabled
+        = @user.email
+  %br/
+  .row
+    .col-xs-2
+      %a.btn.btn-success.btn-block.disabled Nickname:
+    .col-xs-3
+      %a.btn.btn-default.btn-block.disabled
+        = @user.nickname
+  %br/
+  .row
+    .col-xs-3
+      %a.btn.btn-success.btn-block.disabled Avatar:
+    .col-xs-3
+      %a.btn.btn-default.disabled
+        = image_tag(@user.avatar.url, alt: 'avatar', target: '_blank') if @user.avatar?
+  .row
+  %br/
+  .row
+    = link_to 'edit', edit_user_path(@user), class: "btn btn-primary"
+
+.subscriptions_block
+  .row
+    %a.btn.btn-success.btn-block.disabled Here should be user's subscriptions:
+    /= link_to category.name, category_path(category), class: "btn btn-primary"

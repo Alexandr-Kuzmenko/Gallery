@@ -9,6 +9,7 @@ ActiveAdmin.register Wallpaper do
     column :category_id
     column :created_at
     column :updated_at
+    column :likes_count
     actions
   end
   index as: :grid do |wallpaper|

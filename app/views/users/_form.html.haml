@@ -1,0 +1,14 @@
+= form_for @user do |f|
+  .row
+    .col-xs-2
+      = f.label :nickname, 'My nickname:'
+    .col-xs-6
+      = f.text_field :nickname
+  .row
+    .col-xs-2
+      = f.label :avatar, 'My avatar: '
+    .col-xs-10
+      = f.file_field :avatar
+  .row
+    .col-xs-12
+      = f.submit

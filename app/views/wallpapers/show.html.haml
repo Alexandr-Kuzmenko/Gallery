@@ -1,9 +1,16 @@
 .row
-  .col-xs-offset-2.col-xs-2
+  .col-xs-offset-2.col
     = image_tag(@wallpaper.image.thumb.url, alt: 'Image')
 .row
-  .col-xs-offset-2.col-xs-1
-    = link_to 'Get Fullscrean', fullsize_wallpaper_path, class: "btn btn-default"
+  .col-xs-offset-2.col
+    = link_to 'like', new_wallpaper_like_path(@wallpaper), class: "btn btn-default"
+    %span Total likes:
+    %a.btn.btn-default.disabled
+      = @wallpaper.likes_count
+.row
+  .col-xs-offset-2.col
+    = link_to 'Get Fullscrean', fullsize_path, class: "btn btn-default"
+
 %br/
 %br/
 .row
