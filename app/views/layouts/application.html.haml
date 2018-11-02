@@ -17,10 +17,10 @@
             Welcome, #{ current_user.email }
           %br/
           = link_to 'Профиль', user_index_path, class: "btn btn-default"
-          = link_to 'Выйти', destroy_user_session_path, method: :delete
+          = link_to 'Выйти', destroy_user_session_path, class: "btn btn-default", method: :delete
         - else
-          = link_to 'Войти', new_user_session_path
-          \/ #{link_to 'Зарегистрироваться', new_user_registration_path}
+          = link_to 'Войти', new_user_session_path, class: "btn btn-default"
+          = link_to 'Зарегистрироваться', new_user_registration_path, class: "btn btn-default"
     .row
       = link_to 'Categories', categories_path , class: "btn btn-default"
       = link_to 'Upload wallpaper', new_wallpaper_path , class: "btn btn-default"
