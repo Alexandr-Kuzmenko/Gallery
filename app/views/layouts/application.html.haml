@@ -16,6 +16,7 @@
           %span
             Welcome, #{ current_user.email }
           %br/
+          = link_to 'Профиль', user_index_path, class: "btn btn-default"
           = link_to 'Выйти', destroy_user_session_path, method: :delete
         - else
           = link_to 'Войти', new_user_session_path

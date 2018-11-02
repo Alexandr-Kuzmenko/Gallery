@@ -24,7 +24,15 @@
   .row
     = link_to 'edit', edit_user_path(@user), class: "btn btn-primary"
 
+%br/
 .subscriptions_block
   .row
-    %a.btn.btn-success.btn-block.disabled Here should be user's subscriptions:
-    /= link_to category.name, category_path(category), class: "btn btn-primary"
+    - @user.subscriptions.each do |subs|
+      .row
+        %a.btn.btn-success.disabled
+          .col-xs-12
+            #{ subs.category.name } - last updates
+      .row
+        - subs.category.wallpapers.last(5).reverse.each do |wp|
+          = link_to(image_tag(wp.image.thumb.url), wallpaper_path(wp), class: "btn btn-default")
+

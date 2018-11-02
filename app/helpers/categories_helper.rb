@@ -8,5 +8,9 @@ module CategoriesHelper
       false
     end
   end
+
+  def exist_subscription?(obj)
+    @subscription = current_user.subscriptions.find_by category: obj
+  end
 end
 

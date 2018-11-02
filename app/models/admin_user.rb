@@ -11,7 +11,7 @@ class AdminUser < ApplicationRecord
 
   after_create { |admin| admin.send_reset_password_instructions }
   has_many :categories, as: :categorized
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
   def password_required?
     new_record? ? false : super
   end

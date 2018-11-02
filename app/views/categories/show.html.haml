@@ -3,6 +3,11 @@
 .row
   %a.btn.btn-success.disabled
     Category: #{@category.name}
+  - if current_user
+    - if exist_subscription?(@category)
+      = link_to 'Reject subscription', new_category_subscription_path(@category), class: "btn btn-default"
+    - else
+      = link_to 'Subscribe', new_category_subscription_path(@category), class: "btn btn-success"
   - if own?(@category)
     = link_to 'Edit Category name', edit_category_path(@category), class: "btn btn-warning"
     = link_to 'Delete category', category_path(@category), class: "btn btn-danger", method: :delete, |

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_user, only: [:index, :edit, :update, :destroy]
+  before_action :subscriptions_list, only: [:index]
   def index; end
 
   #def show; end
@@ -40,5 +41,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:nickname, :avatar)
+  end
+
+  def subscriptions_list
+    @subscriptions = current_user.subscriptions
   end
 end

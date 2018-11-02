@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :password, confirmation: true, allow_blank: true, on: :update
   validates :email, uniqueness: true
   has_many :categories, as: :categorized
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
 end
