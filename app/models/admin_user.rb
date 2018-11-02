@@ -1,7 +1,7 @@
 class AdminUser < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  mount_uploader :avatar, ImageUploader
+  mount_uploader :image, AvatarUploader
   validates :email, presence: true
   validates :email, :nickname, uniqueness: true
   validates :password, confirmation: true, length: { in: 6..20 }, on: :create
