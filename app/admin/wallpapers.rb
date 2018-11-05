@@ -12,6 +12,13 @@ ActiveAdmin.register Wallpaper do
     column :likes_count
     actions
   end
+
+  show do
+    # renders app/views/admin/posts/_some_partial.html.erb
+    render 'form', { wallpaper: wallpaper }
+  end
+
+
   index as: :grid do |wallpaper|
     link_to image_tag(wallpaper.image.mini_thumb.url), admin_wallpaper_path(wallpaper)
   end

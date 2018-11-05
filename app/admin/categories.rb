@@ -3,6 +3,7 @@ ActiveAdmin.register Category do
   menu priority: 3
   permit_params :name, :locked
   index do
+    selectable_column
     column :name
     column :id
     column :categorized_id

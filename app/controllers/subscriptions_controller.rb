@@ -1,5 +1,6 @@
 class SubscriptionsController < ApplicationController
   before_action :authenticate_user!
+  skip_after_action :record_changing,
   before_action :load_parent_category, only: [:new]
   #before_action :load_categories, only: [:new, :create, :edit, :update]
   #before_action :load_wallpaper, only: [:show, :edit, :update, :destroy, :fullsize]

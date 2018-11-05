@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+  after_action :record_changing, only: [:create]
   before_action :load_comment, only: [:show]
   before_action :load_parent_wallpaper, only: [:create]
 
@@ -20,6 +21,7 @@ class CommentsController < ApplicationController
     if user
       @comment = user.comments.new(comment_params)
       @comment.wallpaper = @wallpaper
+      @record_action = "comments"
       if @comment.save
         redirect_to wallpaper_path(@wallpaper)
       end

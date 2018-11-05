@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  skip_after_action :record_changing
   before_action :load_user, only: [:index, :edit, :update, :destroy]
   before_action :subscriptions_list, only: [:index]
   def index; end

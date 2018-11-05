@@ -1,5 +1,8 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
+
+  after_action :record_changing, only: [:new]
+
   before_action :load_parent_wallpaper, only: [:new]
 
   def new
@@ -13,10 +16,12 @@ class LikesController < ApplicationController
 
   def put_like
     @like = current_user.likes.create(wallpaper: @wallpaper)
+    @record_action = "likes"
   end
 
   def nail_like
     @like.destroy
+    @record_action = "dislikes"
   end
 
   def check_like

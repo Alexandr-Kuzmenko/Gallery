@@ -1,5 +1,6 @@
 class WallpapersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_after_action :record_changing
   before_action :load_categories, only: [:new, :create, :edit, :update]
   before_action :load_wallpaper, only: [:show, :edit, :update, :destroy, :fullsize]
 
