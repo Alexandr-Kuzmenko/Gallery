@@ -57,7 +57,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Recent user actions" do
           ul do
             Activity.last(15).reverse.map do |act|
-              li act.user_email
+              li act.user
               li act.action
               li link_to(act.url_page)
               li act.created_at

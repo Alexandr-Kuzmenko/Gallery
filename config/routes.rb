@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
-  get 'subscriptions/index'
   devise_for :admin_users, :categories, :wallpapers, :comments, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
   devise_for :users
-  resources :users, :comments
+  resources :users, :comments, :activities
   resources :wallpapers do
     resources :comments, :likes
   end

@@ -17,7 +17,7 @@
             Welcome, #{ current_user.email }
           %br/
           = link_to 'Профиль', user_index_path, class: "btn btn-default"
-          = link_to 'Выйти', destroy_user_session_path, class: "btn btn-default", method: :delete
+          = link_to 'Выйти', class: "btn btn-default", method: :record_signing_out
         - else
           = link_to 'Войти', new_user_session_path, class: "btn btn-default"
           = link_to 'Зарегистрироваться', new_user_registration_path, class: "btn btn-default"

@@ -30,14 +30,12 @@ ActiveRecord::Schema.define(version: 2018_11_05_093147) do
   end
 
   create_table "activities", force: :cascade do |t|
-    t.string "user_type"
-    t.integer "user_id"
-    t.string "user_email"
+    t.bigint "user_id"
     t.string "action"
     t.string "url_page"
-    t.string "controller"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
   create_table "activity_logs", force: :cascade do |t|
@@ -140,6 +138,7 @@ ActiveRecord::Schema.define(version: 2018_11_05_093147) do
     t.integer "likes_count", default: 0
   end
 
+  add_foreign_key "activities", "users"
   add_foreign_key "comments", "wallpapers"
   add_foreign_key "likes", "users"
   add_foreign_key "likes", "wallpapers"

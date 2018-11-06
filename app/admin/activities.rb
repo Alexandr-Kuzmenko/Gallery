@@ -3,9 +3,8 @@ ActiveAdmin.register Activity do
   permit_params
 
   index do
-    column :user_email
+    column :user
     column :action
-    column :url_previous_page
     column :url_page
     column :created_at
     actions

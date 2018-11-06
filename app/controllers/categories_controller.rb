@@ -1,6 +1,5 @@
 class CategoriesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  skip_after_action :record_changing
   before_action :load_category, only: [:show, :edit, :update, :destroy]
 
 
