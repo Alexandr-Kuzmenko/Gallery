@@ -58,7 +58,7 @@ ActiveAdmin.register_page "Dashboard" do
           ul do
             Activity.last(15).reverse.map do |act|
               li act.user
-              li act.action
+              li act.action_type
               li link_to(act.url_page)
               li act.created_at
             end

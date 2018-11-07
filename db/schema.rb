@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_05_093147) do
+ActiveRecord::Schema.define(version: 2018_11_05_082930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,23 +31,11 @@ ActiveRecord::Schema.define(version: 2018_11_05_093147) do
 
   create_table "activities", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "action"
+    t.string "action_type"
     t.string "url_page"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_activities_on_user_id"
-  end
-
-  create_table "activity_logs", force: :cascade do |t|
-    t.string "user_id"
-    t.string "browser"
-    t.string "ip_address"
-    t.string "controller"
-    t.string "action"
-    t.string "params"
-    t.string "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -59,8 +47,6 @@ ActiveRecord::Schema.define(version: 2018_11_05_093147) do
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "nickname"
@@ -118,8 +104,6 @@ ActiveRecord::Schema.define(version: 2018_11_05_093147) do
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "nickname"

@@ -2,7 +2,6 @@ class CategoriesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :load_category, only: [:show, :edit, :update, :destroy]
 
-
   def index
     @categories = Category.all
   end
@@ -16,7 +15,6 @@ class CategoriesController < ApplicationController
   def edit; end
 
   def create
-
     if current_admin_user
       @category = current_admin_user.categories.new(category_params)
     elsif current_user

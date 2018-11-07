@@ -1,54 +1,35 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery with: :null_session
   before_action :authenticate_user!, except: [:index], unless: :admin_user_signed_in?
-
   after_action :record_navigation, only: [:index, :new, :show, :edit]
-  before_action :record_signing_out, only: :destroy, if: :sessions_controller?
-
-  def after_sign_in_path_for(resource_or_scope)
-    if resource_or_scope.is_a?(User)
-      record_signing_in
-      root_path
-    elsif resource_or_scope.is_a?(AdminUser)
-      admin_root_path
-    end
+  before_action only: :destroy, if: :sessions_controller? do
+    record_signing("sign out")
   end
-
-  #def after_sign_out_path_for(_resource_or_scope)
-  #end
+  after_action only: :create, if: :sessions_controller? do
+    record_signing("sign in")
+  end
 
   private
 
-  def record_signing_in
-    template_record
-    @activity.action = 'sign in'
-    @activity.save
+  def record_signing(param)
+    if current_user
+      activity = current_user.activities.new(url_page: request.referrer, action_type: param)
+      activity.save
+    end
   end
 
   def record_navigation
     if current_user && location_has_changed
-      template_record
-      @activity.action = 'navigation'
-      @activity.save
+      activity = current_user.activities.new(url_page: request.referrer, action_type: 'navigation')
+      activity.save
     end
   end
 
   def record_changing
     if current_user
-      template_record
-      @activity.action = @record_action
-      @activity.save
+      activity = current_user.activities.new(url_page: request.referrer, action_type: @record_action)
+      activity.save
     end
-  end
-
-  def record_signing_out
-    template_record
-    @activity.action = 'sign out'
-    @activity.save
-  end
-
-  def template_record
-    @activity = current_user.activities.new
-    @activity.url_page = request.referrer
   end
 
   def location_has_changed

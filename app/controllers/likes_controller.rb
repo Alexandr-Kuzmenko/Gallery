@@ -1,9 +1,7 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
-
-  after_action :record_changing, only: [:new]
-
   before_action :load_parent_wallpaper, only: [:new]
+  after_action :record_changing, only: [:new]
 
   def new
     check_like ? nail_like : put_like

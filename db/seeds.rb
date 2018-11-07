@@ -18,7 +18,6 @@ def random_commnets_create
       user.comments.create!(wallpaper_id: wid, text: 'random comment') unless user.comments.find_by wallpaper_id: wid
     end
   end
-
 end
 
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
