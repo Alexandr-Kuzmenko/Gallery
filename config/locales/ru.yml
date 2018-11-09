@@ -6,8 +6,6 @@ ru:
     categories: 'Категории'
     wallpapers: 'Галерея'
     upload: 'Загрузить обои'
-
-
   activerecord:
     errors:
       messages:
