@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
       @comment = user.comments.new(comment_params)
       @comment.wallpaper = @wallpaper
       @record_action = 'comments'
-      if @comment.save
+      if verify_recaptcha(model: @comment) && @comment.save
         redirect_to wallpaper_path(@wallpaper)
       end
     else
