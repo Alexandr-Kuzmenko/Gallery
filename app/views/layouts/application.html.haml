@@ -1,30 +1,42 @@
 !!!
 %html
   %head
+    %script{:src => "https://code.jquery.com/jquery.min.js"}
+    %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"}
     %meta{charset: "utf-8"}/
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-
   %body
     %header
       .center_block
-        %h1 Wallpapers gallery
+        %h1
+          = I18n.t("wallpapers_gallery")
       .login_block
+        / dropdown menu for choosing localization
+        .btn.btn-default.dropdown
+          %a.dropdown-toggle{ "data-toggle": "dropdown", "data-target": "#"}
+            = I18n.t("localization")
+            %b.caret
+          %ul.dropdown-menu
+            %li
+              = button_to "En", {locale: :en}, method: :get
+              = button_to "Ru", {locale: :ru}, method: :get
+        /login logout menus
         - if user_signed_in?
           %span
-            Welcome, #{ current_user.email }
+            = I18n.t("main_page_welcome", email: current_user.email)
           %br/
-          = link_to 'Профиль', user_index_path, class: "btn btn-default"
-          = link_to 'Выйти', destroy_user_session_path, class: "btn btn-default", method: :delete
+          = link_to I18n.t('active_admin.devise.profile'), user_index_path, class: "btn btn-default"
+          = link_to I18n.t('active_admin.devise.links.sign_out'), destroy_user_session_path, class: "btn btn-default", method: :delete
         - else
-          = link_to 'Войти', new_user_session_path, class: "btn btn-default"
-          = link_to 'Зарегистрироваться', new_user_registration_path, class: "btn btn-default"
+          = link_to I18n.t('active_admin.devise.links.sign_in'), new_user_session_path, class: "btn btn-default"
+          = link_to I18n.t('active_admin.devise.links.sign_up'), new_user_registration_path, class: "btn btn-default"
     .row
-      = link_to 'Categories', categories_path , class: "btn btn-default"
-      = link_to 'Upload wallpaper', new_wallpaper_path , class: "btn btn-default"
-      = link_to 'Gallery', wallpapers_path , class: "btn btn-default"
+      = link_to I18n.t('main_bar.categories'), categories_path , class: "btn btn-default"
+      = link_to I18n.t('main_bar.upload'), new_wallpaper_path , class: "btn btn-default"
+      = link_to I18n.t('main_bar.wallpapers'), wallpapers_path , class: "btn btn-default"
     %br/
     = yield
     %footer

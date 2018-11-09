@@ -1,4 +1,11 @@
 en:
+  wallpapers_gallery: 'Wallpapers gallery'
+  localization: 'Localization'
+  main_page_welcome: 'Welcome, %{email}'
+  main_bar:
+    categories: 'Categories'
+    wallpapers: 'Gallery'
+    upload: 'Upload wallpaper'
   activerecord:
     models:
       comment:
@@ -144,10 +151,12 @@ en:
       links:
         sign_up: "Sign up"
         sign_in: "Sign in"
+        sign_out: "Log out"
         forgot_your_password: "Forgot your password?"
         sign_in_with_omniauth_provider: "Sign in with %{provider}"
         resend_unlock_instructions: "Resend unlock instructions"
         resend_confirmation_instructions: "Resend confirmation instructions"
+      profile: "Profile" 
     unsupported_browser:
       headline: "Please note that ActiveAdmin no longer supports Internet Explorer versions 8 or less."
       recommendation: "We recommend that you <a href=\"http://browsehappy.com/\">upgrade your browser</a> to improve your experience."

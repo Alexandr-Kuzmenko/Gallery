@@ -48,7 +48,9 @@ gem 'mini_magick'
 gem 'devise'
 gem 'kaminari'
 gem 'rspec-rails', '~> 3.8'
-
+gem 'rails-i18n'
+gem 'recaptcha'
+gem 'nokogiri'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
