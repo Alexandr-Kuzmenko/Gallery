@@ -10,6 +10,7 @@
         %br/
         %br/
         = link_to image_tag(category.wallpapers.sample.image.thumb.url, alt: 'image')
+= paginate @categories
 %br/
 %a.btn.btn-success.btn-block.disabled Created, but empty for now categories
 %br/
