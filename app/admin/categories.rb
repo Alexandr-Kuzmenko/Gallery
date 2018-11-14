@@ -17,8 +17,8 @@ ActiveAdmin.register Category do
   controller do
     before_action :load_category, only: [:show, :edit, :update, :destroy]
     def create
-      @category = current_admin_user.categories.new(category_params)
-      if @category.save
+      category = current_admin_user.categories.new(category_params)
+      if category.save
         redirect_to admin_categories_path
       else
         render :new
@@ -51,5 +51,4 @@ ActiveAdmin.register Category do
     end
     f.actions
   end
-
 end

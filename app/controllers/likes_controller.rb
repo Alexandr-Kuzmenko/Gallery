@@ -1,11 +1,11 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_parent_wallpaper, only: [:new]
   after_action :record_changing, only: [:new]
 
   def new
+    @wallpaper = Wallpaper.find(params[:wallpaper_id])
     check_like ? nail_like : put_like
-    redirection
+    current_admin_user ? redirect_to(admin_wallpaper_path(@wallpaper)) : redirect_to(wallpaper_path(@wallpaper))
   end
 
   private
@@ -27,12 +27,4 @@ class LikesController < ApplicationController
   end
 
   # end of methods for the button: "like"
-
-  def redirection
-    current_admin_user ? redirect_to(admin_wallpaper_path(@wallpaper)) : redirect_to(wallpaper_path(@wallpaper))
-  end
-
-  def load_parent_wallpaper
-    @wallpaper = Wallpaper.find(params[:wallpaper_id])
-  end
 end

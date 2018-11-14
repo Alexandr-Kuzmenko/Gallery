@@ -15,15 +15,13 @@ class CategoriesController < ApplicationController
   def edit; end
 
   def create
-    if current_admin_user
-      @category = current_admin_user.categories.new(category_params)
-    elsif current_user
-      @category = current_user.categories.new(category_params)
-    else
-      render :new
-    end
-    redirect_to categories_path if @category.save
+    user = current_admin_user || current_user
+    render :new unless user
+    category = user.categories.new(category_params)
+    raise NameBlank unless category.name
+    redirect_to categories_path if category.save
   end
+
 
   def update
     if @category.update_attributes(category_params)

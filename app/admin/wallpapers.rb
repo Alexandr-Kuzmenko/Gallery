@@ -4,6 +4,7 @@ ActiveAdmin.register Wallpaper do
   permit_params :title, :category_id, :image
 
   index do
+    selectable_column
     column :title
     column :id
     column :category_id

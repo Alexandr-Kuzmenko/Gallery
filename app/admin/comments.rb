@@ -19,9 +19,9 @@ ActiveAdmin.register Comment, as: 'User_Comment' do
     def edit; end
 
     def create
-      @comment = current_admin_user.comments.new(comment_params)
-      @comment.wallpaper = @wallpaper
-      if @comment.save
+      comment = current_admin_user.comments.new(comment_params)
+      comment.wallpaper = @wallpaper
+      if comment.save
         redirect_to admin_user_comments_path
       else
         render :new

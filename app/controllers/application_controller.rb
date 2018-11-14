@@ -2,12 +2,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
   before_action :set_locale
   before_action :authenticate_user!, except: [:index], unless: :admin_user_signed_in?
+
+  # Tracking user actions part:
   after_action :record_navigation, only: [:index, :new, :show, :edit]
   before_action only: :destroy, if: :sessions_controller? do
-    record_signing("sign out")
+    record_signing('sign out')
   end
   after_action only: :create, if: :sessions_controller? do
-    record_signing("sign in")
+    record_signing('sign in')
   end
 
   def default_url_options
@@ -21,24 +23,15 @@ class ApplicationController < ActionController::Base
   private
 
   def record_signing(param)
-    if current_user
-      activity = current_user.activities.new(url_page: request.referrer, action_type: param)
-      activity.save
-    end
+    current_user.activities.create(url_page: request.referrer, action_type: param) if current_user
   end
 
   def record_navigation
-    if current_user && location_has_changed
-      activity = current_user.activities.new(url_page: request.referrer, action_type: 'navigation')
-      activity.save
-    end
+    current_user.activities.create(url_page: request.referrer, action_type: 'navigation') if current_user && location_has_changed
   end
 
   def record_changing
-    if current_user
-      activity = current_user.activities.new(url_page: request.referrer, action_type: @record_action)
-      activity.save
-    end
+    current_user.activities.create(url_page: request.referrer, action_type: @record_action) if current_user
   end
 
   def location_has_changed
