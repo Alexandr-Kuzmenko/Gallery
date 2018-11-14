@@ -1,0 +1,4 @@
+= form_tag(admin_parsing_path, multipart: true) do
+  = label_tag 'Enter the link:'
+  = text_field_tag 'link'
+  = submit_tag 'Parse link', name: nil

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     end
     get 'user/index', to: 'users#index'
     get 'wallpaper/:id/fullsize', to: 'wallpapers#fullsize', as: 'fullsize', method: 'show'
+    match 'admin/parsing', to: 'admin/parsing#index', via: [:get, :post]
     #resources :users do
     #  member do
     #    get 'user/index', to: 'users#index'
