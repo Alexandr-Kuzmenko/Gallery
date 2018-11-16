@@ -4,6 +4,9 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable
+  extend FriendlyId
+  friendly_id :nickname, use: :slugged
+
 
   has_many :categories, as: :categorized
   has_many :comments, as: :commentable, dependent: :destroy
