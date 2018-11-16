@@ -36,7 +36,7 @@ ActiveAdmin.register Category do
     private
 
     def load_category
-      @category = Category.find(params[:id])
+      @category = Category.friendly.find(params[:id])
     end
 
     def category_params

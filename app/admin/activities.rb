@@ -3,6 +3,7 @@ ActiveAdmin.register Activity do
   permit_params
 
   index do
+    selectable_column
     column :user
     column :action_type
     column :url_page

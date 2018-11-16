@@ -17,33 +17,18 @@ class CommentsController < ApplicationController
   def create
     user = current_admin_user || current_user
     if user
-      @wallpaper = Wallpaper.find(params[:wallpaper_id])
-      #comment = user.comments.new(comment_params)
-      #comment.wallpaper = @wallpaper
-      comment = user.comments.new(params.fetch(wallpaper_id: @wallpaper).permit(:text, :commentable_id, :commentable_type))
-      @record_action = 'comments'
-      if verify_recaptcha(model: comment) && comment.save
+      @wallpaper = Wallpaper.friendly.find(params[:wallpaper_id])
+      # comment = user.comments.new(params.fetch(wallpaper_id: @wallpaper.id).permit(:text, :commentable_id, :commentable_type))
+      comment = user.comments.new(comment_params)
+      comment.wallpaper = @wallpaper
+      if comment.save && verify_recaptcha(model: comment)
+        @record_action = 'comments'
         redirect_to wallpaper_path(@wallpaper)
       end
     else
       render :new
     end
   end
-
-  #def create
-  #  user = current_admin_user || current_user
-  #  if user
-  #    @comment = user.comments.new(comment_params)
-  #    @comment.wallpaper = @wallpaper
-  #    @record_action = 'comments'
-  #    if verify_recaptcha(model: @comment) && @comment.save
-  #      redirect_to wallpaper_path(@wallpaper)
-  #    end
-  #  else
-  #    render :new
-  #  end
-  #end
-
 
   private
 

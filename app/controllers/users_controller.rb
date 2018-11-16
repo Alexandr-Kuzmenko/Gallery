@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
-    if @user.update_attributes(params.permit(:nickname, :avatar, :encrypted_password, :password_confirmation))
+    if @user.update_attributes(params.require(:user).permit(:nickname, :avatar, :encrypted_password, :password_confirmation))
       current_admin_user ? redirect_to(admin_user_users_path) : redirect_to(users_path)
     else
       render :edit
@@ -25,7 +25,9 @@ class UsersController < ApplicationController
     @user = User.includes(:subscriptions).find(current_user.id)
   end
 
-  #def user_params
-  #  params.require(:user).permit(:nickname, :avatar)
-  #end
+  def user_params
+    params.require(:user).permit(:nickname, :avatar)
+  end
+
+
 end

@@ -46,11 +46,11 @@ class WallpapersController < ApplicationController
   end
 
   def wallpaper_params
-    params.require(:wallpaper).permit(:title, :category_id, :image)
+    params.require(:wallpaper).permit(:title, :image, :category_id, :remote_image_url)
   end
 
   def load_wallpaper
-    @wallpaper = Wallpaper.find(params[:id])
+    @wallpaper = Wallpaper.friendly.find(params[:id])
   end
 
   def load_categories

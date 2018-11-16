@@ -1,6 +1,5 @@
 ActiveAdmin.register_page "Parsing" do
   menu priority: 7, label: proc{ 'Parsing' }
-  #attr_accessor :link
   require 'rubygems'
   require 'nokogiri'
   require 'open-uri'
@@ -25,15 +24,25 @@ ActiveAdmin.register_page "Parsing" do
       page.css("img").each { |n| picture_list << n.attr('src')}
       picture_list
     end
+
+    def save_current_picture(path)
+      Wallpaper.create(title: 'noname', category_id: 1, remote_image_url: path)
+    end
+
     panel "Parsing pictures" do
       render partial: 'link_form'
     end
 
     panel "Parsed pictures" do
       pictures_list = parse_page(params[:link]) if uri?(params[:link])
-      ul do
-
-        pictures_list.each { |p| li image_tag(src="#{Pathname(p)}") } if pictures_list
+      if pictures_list
+        ul do
+          pictures_list.each do |p|
+            li p
+            li image_tag(src=Pathname(p).to_s)
+            li button_to 'Save', save_current_picture(p)
+          end
+        end
       end
     end
   end

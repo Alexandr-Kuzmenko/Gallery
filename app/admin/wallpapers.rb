@@ -26,6 +26,7 @@ ActiveAdmin.register Wallpaper do
 
   controller do
     before_action :load_categories, only: [:new, :create, :edit, :update]
+    before_action :load_wallpaper, only: [:show, :edit, :update, :destroy]
 
     def create
       @wallpaper = Wallpaper.new(wallpaper_params)
@@ -37,7 +38,7 @@ ActiveAdmin.register Wallpaper do
     end
 
     def update
-      @wallpaper = Category.find(params[:id])
+      @wallpaper = Category.friendly.find(params[:id])
       if @wallpaper.update_attributes(wallpaper_params)
         redirect_to admin_wallpapers_path
       else
@@ -45,7 +46,16 @@ ActiveAdmin.register Wallpaper do
       end
     end
 
+    def destroy
+      @wallpaper.destroy
+      redirect_to admin_wallpapers_path
+    end
+
     private
+
+    def load_wallpaper
+      @wallpaper = Wallpaper.friendly.find(params[:id])
+    end
 
     def wallpaper_params
       params.require(:wallpaper).permit(:title, :category_id, :image)

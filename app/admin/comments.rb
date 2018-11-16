@@ -52,7 +52,7 @@ ActiveAdmin.register Comment, as: 'User_Comment' do
     end
 
     def load_parent_wallpaper
-      @wallpaper = Wallpaper.find(params[:wallpaper_id])
+      @wallpaper = Wallpaper.friendly.find(params[:wallpaper_id])
     end
   end
   form do |f|
