@@ -31,6 +31,7 @@ ActiveAdmin.register Wallpaper do
     def create
       @wallpaper = Wallpaper.new(wallpaper_params)
       if @wallpaper.save
+        UserMailer.with(category: @wallpaper.category).list_for_new_wallpapers_recipients.deliver_now
         redirect_to admin_wallpapers_path
       else
         render :new

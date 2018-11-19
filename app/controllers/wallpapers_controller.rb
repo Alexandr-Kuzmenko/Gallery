@@ -18,6 +18,7 @@ class WallpapersController < ApplicationController
   def create
     @wallpaper = Wallpaper.new(wallpaper_params)
     if @wallpaper.save
+      UserMailer.with(category: @wallpaper.category).list_for_new_wallpapers_recipients.deliver_now
       redirection
     else
       render :new
@@ -54,9 +55,9 @@ class WallpapersController < ApplicationController
   end
 
   def load_categories
-    @categories = Category.all
+    @categories = Category.includes(:subscriptions).all
   end
-
+  #
   #def like_proc
   #  @wallpaper.likes.action_like
   #end

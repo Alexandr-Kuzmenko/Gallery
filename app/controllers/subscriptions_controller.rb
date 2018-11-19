@@ -13,6 +13,7 @@ class SubscriptionsController < ApplicationController
 
   def set_subscription
     @subscription = current_user.subscriptions.create(category: @category)
+    UserMailer.with(user: current_user, category: @category).subscribe_created_email.deliver_now
   end
 
   def unset_subscription

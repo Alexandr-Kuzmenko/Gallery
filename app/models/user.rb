@@ -7,11 +7,11 @@ class User < ApplicationRecord
   extend FriendlyId
   friendly_id :nickname, use: :slugged
 
-
   has_many :categories, as: :categorized
+  has_many :subscriptions, dependent: :destroy
+  has_many :categories, through: :subscriptions
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :subscriptions, dependent: :destroy
   has_many :activities
 
   validates :email, presence: true

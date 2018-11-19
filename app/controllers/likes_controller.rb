@@ -15,7 +15,6 @@ class LikesController < ApplicationController
   def put_like
     @like = current_user.likes.create(wallpaper: @wallpaper)
     @record_action = 'likes'
-    #UserMailer.with(user: current_user).greetings_email.deliver_now
   end
 
   def nail_like
@@ -29,18 +28,3 @@ class LikesController < ApplicationController
 
   # end of methods for the button: "like"
 end
-
-# def after_sign_in_path_for(_resource)
-#   respond_to do |format|
-#     if current_user
-#       # Tell the UserMailer to send a welcome email after save
-#       UserMailer.with(user: current_user).greetings_email.deliver_now
-#
-#       format.html { redirect_to(users_path, notice: 'User entered site.') }
-#     end
-#     #  format.json { render json: @user, status: :signed in, location: @user }
-#     #else
-#     #  format.html { render action: 'new' }
-#     #  format.json { render json: @user.errors, status: :unprocessable_entity }
-#   end
-# end
