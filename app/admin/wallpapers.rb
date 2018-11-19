@@ -59,7 +59,7 @@ ActiveAdmin.register Wallpaper do
     end
 
     def wallpaper_params
-      params.require(:wallpaper).permit(:title, :category_id, :image)
+      params.require(:wallpaper).permit(:title, :category_id, :image, :image_cached)
     end
 
     def load_categories

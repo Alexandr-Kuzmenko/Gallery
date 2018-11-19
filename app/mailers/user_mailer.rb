@@ -17,16 +17,12 @@ class UserMailer < ApplicationMailer
   def list_for_new_wallpapers_recipients
     @category = params[:category]
     emails = @category.users.pluck(:email)
-    until emails == [] do
-      email = emails.shift
-      UserMailer.with(category: @category).new_wallpaper_at_subs_category_email(email).deliver_now
-    end
+    emails.each { |email| UserMailer.with(category: @category).new_wallpaper_at_subs_category_email(email).deliver_now }
   end
 
   def new_wallpaper_at_subs_category_email(email)
     @category = params[:category]
     mail(to: email, subject: 'New content on your subscription')
   end
-  # end of methods for subscribed categories
-
+  # ending of methods for subscribed categories
 end

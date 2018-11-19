@@ -47,7 +47,7 @@ class WallpapersController < ApplicationController
   end
 
   def wallpaper_params
-    params.require(:wallpaper).permit(:title, :image, :category_id, :remote_image_url)
+    params.require(:wallpaper).permit(:title, :image, :category_id, :remote_image_url, :image_cached)
   end
 
   def load_wallpaper

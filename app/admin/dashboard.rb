@@ -9,21 +9,11 @@ ActiveAdmin.register_page "Dashboard" do
     #end
 
     columns do
-      #column do
-      #  panel "Recent Uploaded wallpapers" do
-      #    ul do
-      #      Wallpaper.last(5).each do |w|
-      #        @wallpaper = w
-      #        render partial: 'wallpaper_form', wallpaper: @wallpaper
-      #      end
-      #    end
-      #  end
-      #end
-
       column do
         panel "Recent uploaded wallpapers" do
           ul do
-            Wallpaper.last(10).reverse.map do |w|
+            # Wallpaper.last(10).reverse.map do |w|
+            Wallpaper.limit(10).order('created_at desc').each do |w|
               li link_to(image_tag(w.image.mini_thumb.url), wallpaper_path(w))
             end
           end
@@ -33,7 +23,7 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Recent Created Categories" do
           ul do
-            Category.last(5).reverse.map do |c|
+            Category.limit(5).order('created_at desc').each do |c|
               li link_to(c.name, category_path(c))
             end
           end
@@ -43,7 +33,7 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Recent written comments" do
           ul do
-            Comment.last(5).reverse.map do |com|
+            Comment.limit(5).order('created_at desc').each do |com|
               li link_to(image_tag(com.wallpaper.image.mini_thumb.url), wallpaper_path(com.wallpaper))
               li com.commentable_type
               li com.commentable_id
@@ -56,7 +46,7 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Recent user actions" do
           ul do
-            Activity.last(15).reverse.map do |act|
+            Activity.limit(15).order('created_at desc').each do |act|
               li act.user
               li act.action_type
               li link_to(act.url_page)
