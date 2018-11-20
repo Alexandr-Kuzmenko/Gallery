@@ -11,11 +11,48 @@
       = f.collection_select :category_id, @categories, :id, :name
   .row
     .col-xs-2
-      = f.label :image, 'Image: '
-    .col-xs-10
-      = f.file_field :image
-      = f.hidden_field :image_cache
+      .btn.btn-default.disabled
+        Upload local file
+      %br/
+      .col-xs-1
+        = f.label 'Image: '
+      %br/
+      .col-xs-1
+        = f.file_field :image
+        = f.hidden_field :image_cache
+      %br/
+      .col-xs-1
+        = f.text_field :remote_image_url
+    .col-xs-2.other
+      .btn.btn-default.btn-block.disabled
+        or
+    .col-xs-2.other
+      .btn.btn-default.disabled
+        Upload file from link
+      %br/
+      .col-xs-1
+        = f.label :remote_image_url, "image URL"
+      %br/
+
   %br/
   .row
     .col-xs-12
       = f.submit
+/        = button_to "local" do type = 'local' end
+/        = button_to "url" do type = 'url' end
+/  - if type == 'local'
+/    .col-xs-2
+/      = f.label :image, 'Image: '
+/    .col-xs-10
+/      = f.file_field :image
+/      = f.hidden_field :image_cache
+/  - if type == 'url'
+/    .row
+/      .col-xs-2
+/        = f.label :remote_image_url, "image URL"
+/      .col-xs-10
+/        = f.text_field :remote_image_url
+/  %br/
+/  .row
+/    .col-xs-12
+/      = f.submit

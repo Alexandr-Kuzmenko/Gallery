@@ -1,6 +1,10 @@
 .user_info_block
   .row
     .col-xs-2
+      = link_to 'Delete account', user_path(@user), class: "btn btn-danger", method: :delete,
+      data: { confirm: 'Do you really want to delete your own account?'}
+  .row
+    .col-xs-2
       %a.btn.btn-success.btn-block.disabled Email:
     .col-xs-3
       %a.btn.btn-primary.btn-block.disabled

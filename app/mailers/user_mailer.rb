@@ -3,8 +3,7 @@ class UserMailer < ApplicationMailer
 
   def greetings_email
     @user = params[:user]
-    # @url  = 'http://example.com/login'
-    mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+    mail(to: @user.email, subject: 'First welcome mail')
   end
 
   def subscribe_created_email
@@ -13,16 +12,8 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Subscription have been added')
   end
 
-  # new content for subscribed categories
-  def list_for_new_wallpapers_recipients
-    @category = params[:category]
-    emails = @category.users.pluck(:email)
-    emails.each { |email| UserMailer.with(category: @category).new_wallpaper_at_subs_category_email(email).deliver_now }
-  end
-
-  def new_wallpaper_at_subs_category_email(email)
+  def new_wallpaper_at_subs_category(email)
     @category = params[:category]
     mail(to: email, subject: 'New content on your subscription')
   end
-  # ending of methods for subscribed categories
 end
