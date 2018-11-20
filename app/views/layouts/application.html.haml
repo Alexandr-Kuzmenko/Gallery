@@ -33,6 +33,7 @@
         - else
           = link_to I18n.t('active_admin.devise.links.sign_in'), new_user_session_path, class: "btn btn-default"
           = link_to I18n.t('active_admin.devise.links.sign_up'), new_user_registration_path, class: "btn btn-default"
+          = link_to "Sign up with Google+", user_google_oauth2_omniauth_authorize_path
     .row
       = link_to I18n.t('main_bar.categories'), categories_path , class: "btn btn-default"
       = link_to I18n.t('main_bar.upload'), new_wallpaper_path , class: "btn btn-default"

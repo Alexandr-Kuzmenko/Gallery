@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :users, only: :omniauth_callbacks, controllers: {
+      passwords: 'passwords', registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
+
   scope '(:locale)', locale: /en|ru/ do
     devise_for :admin_users, :categories, :wallpapers, :comments, ActiveAdmin::Devise.config
     ActiveAdmin.routes(self)
 
-    devise_for :users
+    devise_for :users, skip: :omniauth_callbacks
     resources :users, :comments, :activities
 
     resources :wallpapers do
@@ -22,6 +25,7 @@ Rails.application.routes.draw do
     match 'admin/parsing', to: 'admin/parsing#index', via: [:get, :post]
 
     root 'categories#index'
+    get 'omniauth/:provider', to: 'omniauth#localized', as: :localized_omniauth
 
     # resources :users do
     #   member do
