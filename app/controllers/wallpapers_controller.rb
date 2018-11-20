@@ -18,7 +18,7 @@ class WallpapersController < ApplicationController
   def create
     @wallpaper = Wallpaper.new(wallpaper_params)
     if @wallpaper.save
-      UserMailer.with(category: @wallpaper.category).list_for_new_wallpapers_recipients.deliver_now
+      Wallpaper.prepare_notification_list(@wallpaper)
       redirection
     else
       render :new
@@ -47,7 +47,7 @@ class WallpapersController < ApplicationController
   end
 
   def wallpaper_params
-    params.require(:wallpaper).permit(:title, :image, :category_id, :remote_image_url, :image_cached)
+    params.require(:wallpaper).permit(:title, :image, :category_id, :remote_image_url, :image_cache)
   end
 
   def load_wallpaper

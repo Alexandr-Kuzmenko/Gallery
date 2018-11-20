@@ -12,7 +12,6 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Recent uploaded wallpapers" do
           ul do
-            # Wallpaper.last(10).reverse.map do |w|
             Wallpaper.limit(10).order('created_at desc').each do |w|
               li link_to(image_tag(w.image.mini_thumb.url), wallpaper_path(w))
             end

@@ -5,12 +5,19 @@ class ApplicationController < ActionController::Base
 
   # Tracking user actions part:
   after_action :record_navigation, only: [:index, :new, :show, :edit]
+
   before_action only: :destroy, if: :sessions_controller? do
     record_signing('sign out')
   end
+
   after_action only: :create, if: :sessions_controller? do
     record_signing('sign in')
   end
+
+  after_action only: :create, if: :registrations_controller? do
+    UserMailer.with(user: current_user).greetings_email.deliver_now
+  end
+
 
   def default_url_options
     { locale: I18n.locale }
@@ -42,6 +49,9 @@ class ApplicationController < ActionController::Base
     controller_name.eql?('sessions')
   end
 
+  def registrations_controller?
+    controller_name.eql?('registrations')
+  end
   #def extract_locale_from_accept_language_header
   #  request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
   #end

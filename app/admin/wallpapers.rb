@@ -28,15 +28,15 @@ ActiveAdmin.register Wallpaper do
     before_action :load_categories, only: [:new, :create, :edit, :update]
     before_action :load_wallpaper, only: [:show, :edit, :update, :destroy]
 
-    def create
-      @wallpaper = Wallpaper.new(wallpaper_params)
-      if @wallpaper.save
-        UserMailer.with(category: @wallpaper.category).list_for_new_wallpapers_recipients.deliver_now
-        redirect_to admin_wallpapers_path
-      else
-        render :new
-      end
-    end
+    # def create
+    #   @wallpaper = Wallpaper.new(wallpaper_params)
+    #   if @wallpaper.save
+    #     Wallpaper.prepare_notification_list(@wallpaper)
+    #     redirect_to admin_wallpapers_path
+    #   else
+    #     render :new
+    #   end
+    # end
 
     def update
       @wallpaper = Category.friendly.find(params[:id])
@@ -59,7 +59,7 @@ ActiveAdmin.register Wallpaper do
     end
 
     def wallpaper_params
-      params.require(:wallpaper).permit(:title, :category_id, :image, :image_cached)
+      params.require(:wallpaper).permit(:title, :category_id, :image, :image_cache)
     end
 
     def load_categories
