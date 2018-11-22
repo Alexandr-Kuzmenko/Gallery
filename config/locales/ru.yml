@@ -1,25 +1,197 @@
 ru:
-  wallpapers_gallery: 'Галерея обоев'
-  localization: 'Локализация'
-  main_page_welcome: 'Добро пожаловать, %{email}'
-  main_bar:
-    categories: 'Категории'
-    wallpapers: 'Галерея'
-    upload: 'Загрузить обои'
   activerecord:
+    attributes:
+      active_admin/comment:
+        author_type: "Тип автора"
+        body: "Тело"
+        created_at: "Создано"
+        namespace: "Пространство имен"
+        resource_type: "Тип ресурсов"
+        updated_at: "Обновлено"
     errors:
       messages:
-        record_invalid: 'Возникли ошибки: %{errors}'
+        record_invalid: "Возникли ошибки: %{errors}"
         restrict_dependent_destroy:
-          has_one: 'Невозможно удалить запись, так как существует зависимость: %{record}'
-          has_many: 'Невозможно удалить запись, так как существуют зависимости: %{record}'
+          has_one: "Невозможно удалить запись, так как существует зависимость: %{record}"
+          has_many: "Невозможно удалить запись, так как существуют зависимости: %{record}"
+    models:
+      active_admin/comment:
+        one: "Комментарий"
+        other: "Комментарии"
+      comment:
+        one: "Комментарий"
+        other: "Комментарии"
   active_admin:
+    access_denied:
+      message: "Вы не авторизованы для выполнения этого действия."
+    any: "Любое"
+    batch_actions:
+      button_label: "Групповые действия"
+      default_confirmation: "Вы уверены, что хотите сделать это?"
+      delete_confirmation: "Вы уверены, что хотите удалить эти %{plural_model}?"
+      succesfully_destroyed:
+        one: "1 %{model} успешно удалена"
+        other: "%{count} %{plural_model} успешно удалены"
+      selection_toggle_explanation: "(Переключить выбранное)"
+      action_label: "%{title} выбрано"
+      labels:
+        destroy: "Удалить"
+    blank_slate:
+      content: "%{resource_name} еще не существует."
+      link: "Создать экземпляр"
+    cancel: "Отменить"
+    comments:
+      created_at: "Создано"
+      resource_type: "Тип ресурса"
+      author_type: "Тип автора"
+      body: "Тело"
+      author: "Автор"
+      add: "Добавить комментарий"
+      delete: "Удалить комментарий"
+      delete_confirmation: "Вы уверены, что хотите удалить этот комментарий?"
+      resource: "Ресурс"
+      no_comments_yet: "Еще нет комментариев."
+      author_missing: "Аноним"
+      title_content: "Комментариев (%{count}) "
+      errors:
+        empty_text: "Комментарий не сохранен, отсутствует текст."
+    create_another: "Создать другой экземпляр %{model}"
+    dashboard: "Панель управления"
+    dashboard_welcome:
+      welcome: "Добро пожаловать в Active Admin. Это стартовая страница панели управления."
+      call_to_action: "Чтобы добавить разделы панели управления, измените 'app/admin/dashboard.rb'"
+    delete: "Удалить"
+    delete_confirmation: "Вы уверены, что хотите удалить это?"
+    delete_model: "Удалить %{model}"
+    details: "Детали %{model}"
     devise:
-      profile: 'Профиль'
+      change_password:
+        title: "Изменение пароля"
+        submit: "Изменить пароль"
+      email:
+        title: "Почтовый ящик"
       links:
-        sign_up: 'Регистрация'
-        sign_in: 'Вход'
-        sign_out: 'Выход'
+        sign_up: "Регистрация"
+        sign_in: "Вход"
+        sign_out: "Выход"
+        forgot_your_password: "Забыли пароль?"
+        sign_in_with: "Вход с помощью "
+        resend_unlock_instructions: "Отправить инструкции по разблокировке"
+        resend_confirmation_instructions: "Отправить инструкции по подтверждению"
+      login:
+        title: "Вход"
+        remember_me: "Помнить меня"
+        submit: "Войти"
+      password:
+        title: "Пароль"
+      password_confirmation:
+        title: "Подтверждение пароля"
+      profile: "Профиль"
+      resend_confirmation_instructions:
+        title: "Отправка инструкции по подтверждению"
+        submit: "Отправить инструкции по подтверждению"
+      reset_password:
+        title: "Забыли пароль?"
+        submit: "Сбросить пароль"
+      sign_up:
+        title: "Регистрация"
+        submit: "Зарегистрироваться"
+      subdomain:
+        title: "Субдомен"
+      unlock:
+        title: "Отправка инструкции по разблокировке"
+        submit: "Отправить инструкции по разблокировке"
+      username:
+        title: "Имя пользователя"
+    download: "Загрузить:"
+    dropdown_actions:
+      button_label: "Действия"
+    edit: "Изменить"
+    edit_model: "Изменить %{model}"
+    empty: "Пустое"
+    filters:
+      buttons:
+        filter: "Фильтр"
+        clear: "Очистить фильтры"
+      predicates:
+        contains: "Содержит"
+        equals: "Равно"
+        starts_with: "Начинается с"
+        ends_with: "Заканчивается на"
+        greater_than: "Больше чем"
+        less_than: "Меньше чем"
+        gteq_datetime: "Больше или равно"
+        lteq_datetime: "Меньше или равно"
+        from: "от"
+        to: "до"
+    has_many_delete: "Удалить"
+    has_many_new: "Добавить %{model}"
+    has_many_remove: "Убрать"
+    index_list:
+      table: "Таблица"
+      block: "Список"
+      grid: "Сетка"
+      blog: "Блог"
+    logout: "Выход"
+    main_content: "Пожалуйста, выполните %{model}#main_content для отображения содержимого."
+    move: "Переместить"
+    next: "Следующее"
+    new_model: "Новый %{model}"
+    pagination:
+      empty: "%{model} не найдено"
+      one: "Отображается <b>1</b> %{model}"
+      one_page: "Отображаются <b>все %{n}</b> %{model}"
+      multiple: "Отображаются %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b> из <b>%{total}</b> в сумме"
+      multiple_without_total: "Отображаются %{model} <b>%{from}&nbsp;-&nbsp;%{to}</b>"
+      per_page: "на страницу: "
+      entry:
+        one: "вход"
+        other: "входы"
+    powered_by: "Ведет от by %{active_admin} %{version}"
+    previous: "Предыдущий"
+    scopes:
+      all: "Все"
+    sidebars:
+      filters: "Фильтры"
+      search_status: "Статус поиска"
+    search_status:
+      headline: "Статус поиска:"
+      current_scope: "Область:"
+      current_filters: "Текущие фильтры:"
+      no_current_filters: "Без фильтра"
+    status_tag:
+      "yes": "Да"
+      "no": "Нет"
+    unsupported_browser:
+      headline: "Обратите внимание, что ActiveAdmin больше не поддерживает версии Internet Explorer от 8 и ниже."
+      recommendation: "Мы рекомендуем вам<a href=\"http://browsehappy.com/\">обновить браузер</a> для улучшения работы."
+      turn_off_compatibility_view: "Если вы используете IE 9 или выше, удостоверьтесь, что вы <a href=\"https://support.microsoft.com/en-us/help/17471\">выключили \"Compatibility View\"</a>."
+    view: "Вид"
+    views:
+      pagination:
+        first: "&laquo; Перв"
+        last: "Посл &raquo;"
+        previous: "&lsaquo; Пред"
+        next: "След &rsaquo;"
+        truncate: "&hellip;"
+      helpers:
+        page_entries_info:
+          one_page:
+            display_entries:
+              zero: "No %{entry_name} found"
+              one: "Displaying <b>1</b> %{entry_name}"
+              other: "Displaying <b>all %{count}</b> %{entry_name}"
+          more_pages:
+            display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
+  header:
+    localization: "Локализация"
+    main_bar:
+      categories: "Категории"
+      top_categories: "ТОП категорий"
+      wallpapers: "Галерея"
+      upload: "Загрузить обои"
+    main_page_welcome: "Добро пожаловать, %{email}"
+    wallpapers_gallery: "Галерея обоев"
 
   date:
     abbr_day_names:
