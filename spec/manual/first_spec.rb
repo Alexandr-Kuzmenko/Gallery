@@ -2,33 +2,35 @@ require 'rails_helper'
 
 RSpec.describe AdminUser, type: :model do
   before(:all) do
-    @user = FactoryBot.create(:admin_user)
+    # @admin = FactoryBot.create(:admin_user)
+    # @user = FactoryBot.create(:user)
+    # 3.times { FactoryBot.create(:category) }
+    # @category = Category.last
+    # 2.times { FactoryBot.create(:wallpaper) }
+    # FactoryBot.create(:like)
+    # FactoryBot.create(:subscription)
+    # FactoryBot.create(:activity)
   end
 
-
-#  before do
-#    @user = FactoryGirl.create(email: 'user@example.com', password: 'password', password_confirmation: 'password')
-#    User.create!(email: 'user@example.com', password: 'password', password_confirmation: 'password')
-#  end
-#
-#  subject { @user }
-#
-#  describe "check fields" do
-#    it { expect(@user).to respond_to(:email) }
-#  #  it { expect(@user).to respond_to(:description) }
-#  #  it { expect(@user).to respond_to(:pictures) }
-#  #  it { expect(@user).to respond_to(:user_categories) }
-#  #  it { expect(@user).to respond_to(:users) }
-#  end
   describe 'name' do
     it 'Random admin_user creating' do
       # @user = FactoryBot.create(admin_user)
       # @name = Faker::Name.name
-      puts "current users email is: #{@user.email}, password: #{@user.encrypted_password}, nickname: #{@user.nickname}"
-      expect(@user.email).not_to be_nil
+      # puts "current users email is: #{@user.email}, password: #{@user.encrypted_password}, nickname: #{@user.nickname}"
+      # expect(@user.email).not_to be_nil
+      expect(@category.name).not_to be_nil
     end
   end
-# describe "GET #index" do
+
+  # describe "check fields" do
+  #   it { expect(@user).to respond_to(:email) }
+  #   it { expect(@user).to respond_to(:description) }
+  #   it { expect(@user).to respond_to(:pictures) }
+  #   it { expect(@user).to respond_to(:user_categories) }
+  #   it { expect(@user).to respond_to(:users) }
+  # end
+
+  # describe "GET #index" do
   #   it "returns http success" do
   #     get :index
   #     expect(response).to have_http_status(:success)
@@ -44,13 +46,10 @@ RSpec.describe AdminUser, type: :model do
 
   # describe "User"
   #   describe ".top" do
-  #
   #     before { FactoryGirl.create_list(:user, 3) }
   #     it { User.top(2).should have(2).item }
   #   end
   # end
-
-
 
   # describe 'some user' do
   #   it 'may be created' do
