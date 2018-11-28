@@ -11,4 +11,5 @@ class Category < ApplicationRecord
   max_paginates_per 7
 
   validates :name, presence: true
+  validates :name, uniqueness: true
 end

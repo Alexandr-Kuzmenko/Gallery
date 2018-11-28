@@ -10,6 +10,7 @@ class Wallpaper < ApplicationRecord
   max_paginates_per 10
 
   validates :title, presence: true
+  validates :image, presence: true
 
   def self.prepare_notification_list(wallpaper)
     category = wallpaper.category
