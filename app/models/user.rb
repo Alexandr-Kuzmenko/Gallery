@@ -2,18 +2,18 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   mount_uploader :avatar, AvatarUploader
-  devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2]
-
-  extend FriendlyId
-  friendly_id :nickname, use: :slugged
-
   has_many :categories, as: :categorized
   has_many :subscriptions, dependent: :destroy
-  has_many :categories, through: :subscriptions
+  has_many :follows, through: :subscriptions, class_name: 'Category', source: :category
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :activities
+
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2]
+
+  extend FriendlyId
+  friendly_id :nickname, use: :slugged
 
   validates :email, presence: true
   validates :password, confirmation: true, length: { in: 6..20 }, on: :create
@@ -38,6 +38,4 @@ class User < ApplicationRecord
       end
     end
   end
-
-
 end

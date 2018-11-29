@@ -1,7 +1,7 @@
 class AdminUser < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  mount_uploader :image, AvatarUploader
+  mount_uploader :avatar, AvatarUploader
   has_many :categories, as: :categorized
   has_many :comments, as: :commentable, dependent: :destroy
 
