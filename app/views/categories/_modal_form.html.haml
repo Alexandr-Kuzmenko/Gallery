@@ -1,0 +1,12 @@
+= form_for @category do |f|
+  .bar_menu.btn-toolbar
+    .btn-group.btn-group-sm{role: "group"}
+      .btn.btn-dark.disabled
+        %h5
+          = f.label :name, 'Category name:'
+      .btn.btn-primary.disabled
+        %h4
+          = f.text_field :name
+      .btn.btn-success
+        %h5
+          = f.submit

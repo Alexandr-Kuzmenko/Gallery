@@ -1,4 +1,8 @@
-%h2 Enter your category's name:
+%h4
+  Enter your category's name:
+
 = render 'form', category: @category
+
 %br/
-= link_to 'Back', categories_path, class: "btn btn-default"
+.btn.btn-outline-primary
+  = link_to 'Back', categories_path

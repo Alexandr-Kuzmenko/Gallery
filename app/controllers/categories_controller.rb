@@ -22,7 +22,6 @@ class CategoriesController < ApplicationController
     redirect_to categories_path if category.save
   end
 
-
   def update
     if @category.update_attributes(category_params)
       redirect_to categories_path

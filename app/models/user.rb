@@ -4,7 +4,7 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   has_many :categories, as: :categorized
   has_many :subscriptions, dependent: :destroy
-  has_many :follows, through: :subscriptions, class_name: 'Category', source: :category
+  has_many :follows, through: :subscriptions, source: :category
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :activities
