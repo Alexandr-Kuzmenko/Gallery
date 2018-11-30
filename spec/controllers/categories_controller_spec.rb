@@ -7,11 +7,9 @@ class CategoriesControllerTest < ActionController::TestCase
       @admin = FactoryBot.create(:admin_user)
       @user = FactoryBot.create(:user)
       @category = FactoryBot.create(:category)
-      # @cat2 = FactoryBot.create(:category)
+      # get :index
+      # assert_response :success
     end
-    #before(:create) do
-    #  @cat2 =
-    #end
 
     def setup
       @request.env["devise.mapping"] = Devise.mappings[:user]
@@ -55,7 +53,7 @@ class CategoriesControllerTest < ActionController::TestCase
         expect { get :show, params: { id: @category.id, locale: :fr } }.to raise_error
       end
 
-      it 'no id failure' do
+      it 'no object id failure' do
         expect { get :show, params: { locale: :en } }.to raise_error
       end
     end
@@ -85,7 +83,7 @@ class CategoriesControllerTest < ActionController::TestCase
         expect(response).to redirect_to('/users/sign_in')
       end
 
-      it 'no id failure' do
+      it 'no object id failure' do
         sign_in @user
         expect { get :edit, params: { locale: :en } }.to raise_error
       end
@@ -104,28 +102,76 @@ class CategoriesControllerTest < ActionController::TestCase
     end
 
     describe '#create' do
-      # it 'redirect after create' do
-      #
-      #   sign_in @user
-      #   post :create, { categoty: { name: Faker::Book.unique.genre } }#, categorized_id: @user.id, categorized_type: @user.class }
-      #   # expect { }.to redirect_to('/categories')
-      # end
+      it 'authentication required' do
+        post :create, params: { category: { name: Faker::Book.unique.genre } }
+        expect(response).to redirect_to('/users/sign_in')
+      end
+
+      it 'redirect after create' do
+        sign_in @user
+        post :create, params: { category: { name: Faker::Book.unique.genre } }
+        expect(response).to redirect_to(categories_path)
+      end
+
+      it 'db records increase after create' do
+        sign_in @user
+        count = Category.count
+        post :create, params: { category: { name: Faker::Book.unique.genre } }
+        expect(count == Category.last).to be_falsey
+      end
+
+      it 'creating priority to admin' do
+        sign_in @admin
+        sign_in @user
+        post :create, params: { category: { name: Faker::Book.unique.genre } }
+        expect(Category.last.categorized_type).to eq('AdminUser')
+      end
     end
 
     describe '#update' do
-      it 'redirect after update' do
+      it 'authentication required' do
+        patch :update, params: { id: @category.id }
+        expect(response).to redirect_to('/users/sign_in')
+      end
 
+      it 'redirect after update' do
+        sign_in @user
+        patch :update, params: { category: { name: Faker::Book.unique.genre }, id: @category.id }
+        expect(response).to redirect_to(categories_path)
+      end
+
+      it 'db record changed after update' do
+        sign_in @user
+        record = @category.name
+        patch :update, params: { category: { name: 'name_has_changed' }, id: @category.id }
+        expect(Category.find_by_name(record)).to be_nil
       end
     end
 
     describe '#destroy' do
-      it 'redirect after destroy' do
+      it 'no object id failure' do
+        expect { delete :destroy, params: { locale: :en } }.to raise_error
+      end
 
+      it 'authentication required' do
+        delete :destroy, params: { id: @category.id }
+        expect(response).to redirect_to('/users/sign_in')
+      end
+
+      it 'redirect after destroy' do
+        sign_in @user
+        delete :destroy, params: { id: @category.id }
+        expect(response).to redirect_to(categories_path)
+      end
+
+      it 'preventing deleting trigger' do
+        Category.last.update!(locked: true)
+        id = Category.last.id
+        sign_in @user
+        delete :destroy, params: { id: Category.last.id }
+        expect(Category.find(id)).not_to be_nil
       end
     end
-      # expect(subject).to redirect_to :action => :show,
-      # :id => assigns(:widget).id
   end
 end
-#    get :index
-#    assert_response :success
+
