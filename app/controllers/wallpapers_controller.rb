@@ -18,7 +18,7 @@ class WallpapersController < ApplicationController
   def create
     @wallpaper = Wallpaper.new(wallpaper_params)
     if @wallpaper.save
-      Wallpaper.prepare_notification_list(@wallpaper)
+      list_for_notification
       redirection
     else
       render :new
@@ -39,6 +39,11 @@ class WallpapersController < ApplicationController
   end
 
   def fullsize; end
+
+  def list_for_notification
+    emails = @wallpaper.category.users.pluck(:email)
+    emails.each { |email| UserMailer.with(category: @wallpaper.category).new_wallpaper_at_subs_category(email).deliver_now }
+  end
 
   private
 
