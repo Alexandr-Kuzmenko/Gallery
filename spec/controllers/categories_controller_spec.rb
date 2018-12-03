@@ -11,9 +11,13 @@ class CategoriesControllerTest < ActionController::TestCase
       # assert_response :success
     end
 
-    def setup
-      @request.env["devise.mapping"] = Devise.mappings[:user]
-      sign_in FactoryBot.create(:user)
+    # def setup
+    #   @request.env["devise.mapping"] = Devise.mappings[:user]
+    #   sign_in FactoryBot.create(:user)
+    # end
+
+    def random_cat_create
+      post :create, params: { category: { name: Faker::Book.unique.genre } }
     end
 
     describe '#index' do
@@ -103,27 +107,27 @@ class CategoriesControllerTest < ActionController::TestCase
 
     describe '#create' do
       it 'authentication required' do
-        post :create, params: { category: { name: Faker::Book.unique.genre } }
+        random_cat_create
         expect(response).to redirect_to('/users/sign_in')
       end
 
       it 'redirect after create' do
         sign_in @user
-        post :create, params: { category: { name: Faker::Book.unique.genre } }
+        random_cat_create
         expect(response).to redirect_to(categories_path)
       end
 
       it 'db records increase after create' do
         sign_in @user
         count = Category.count
-        post :create, params: { category: { name: Faker::Book.unique.genre } }
-        expect(count == Category.last).to be_falsey
+        random_cat_create
+        expect(count + 1 == Category.count).to be_truthy
       end
 
       it 'creating priority to admin' do
         sign_in @admin
         sign_in @user
-        post :create, params: { category: { name: Faker::Book.unique.genre } }
+        random_cat_create
         expect(Category.last.categorized_type).to eq('AdminUser')
       end
     end
@@ -164,12 +168,19 @@ class CategoriesControllerTest < ActionController::TestCase
         expect(response).to redirect_to(categories_path)
       end
 
+      it 'db record absent after delete' do
+        sign_in @user
+        id = @category.id
+        delete :destroy, params: { id: @category.id }
+        expect(Category.find_by_id(id)).to be_nil
+      end
+
       it 'preventing deleting trigger' do
         Category.last.update!(locked: true)
         id = Category.last.id
         sign_in @user
         delete :destroy, params: { id: Category.last.id }
-        expect(Category.find(id)).not_to be_nil
+        expect(Category.find_by_id(id)).not_to be_nil
       end
     end
   end
