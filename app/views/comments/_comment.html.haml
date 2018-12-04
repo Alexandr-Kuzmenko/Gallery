@@ -1,7 +1,12 @@
-.row
-  /Should be the user's name in next row if future
-  .col-xs-2
-    = comment.commentable.email
-    types:
-  .col-xs-10
-    = comment.text
+.container.align-items-center
+  .btn-group
+    .col-xs-2
+      .btn.btn-outline-dark.disabled
+        = comment.commentable.email
+        types:
+    .col-xs-8.other
+    .col-xs-2.other
+      .btn.btn-outline-dark.disabled
+        = comment.text
+    %br/
+%br/

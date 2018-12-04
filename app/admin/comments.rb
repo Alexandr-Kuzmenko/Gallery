@@ -48,7 +48,7 @@ ActiveAdmin.register Comment, as: 'User_Comment' do
     end
 
     def comment_params
-      params.require(:comment).permit(:text, :commentable_id, :commentable_type, :wallpaper_id)
+      params.require(:comment).permit(:text, :wallpaper_id)
     end
 
     def load_parent_wallpaper

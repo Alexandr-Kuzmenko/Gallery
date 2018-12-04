@@ -54,12 +54,6 @@ class WallpapersControllerTest < ActionController::TestCase
       it 'no object id failure' do
         expect { get :show, params: { locale: :en } }.to raise_error
       end
-
-      # it 'comments rendered?' do
-      #   # get :show, params: { id: wallpaper.id }
-      #   expect(subject).to render_template('/comments/_comment')
-      #   # response.should render_template(partial: @wallpaper.comments)
-      # end
     end
 
     describe '#new' do
@@ -134,7 +128,7 @@ class WallpapersControllerTest < ActionController::TestCase
         expect(count + 1 == Wallpaper.count).to be_truthy
       end
 
-      it 'none category create unavailable' do
+      it 'unsuccessful creation do not get into db' do
         sign_in user
         count = Wallpaper.count
         img_link = Faker::Internet.url('gandex.ru', '/upl/oboi/gandex.ru-19837_cad81a31a64ce92ac3a1ac69f30fb7ac.jpg')

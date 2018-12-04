@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   after_action :record_changing, only: [:create]
+  before_action :load_parent_wallpaper, only: [:create]
 
   def index
     @comments = Comment.all
@@ -17,10 +18,8 @@ class CommentsController < ApplicationController
   def create
     user = current_admin_user || current_user
     if user
-      @wallpaper = Wallpaper.friendly.find(params[:wallpaper_id])
-      # comment = user.comments.new(params.fetch(wallpaper_id: @wallpaper.id).permit(:text, :commentable_id, :commentable_type))
-      comment = user.comments.new(comment_params)
-      comment.wallpaper = @wallpaper
+      comment = @wallpaper.comments.new(comment_params)
+      comment.commentable = user
       if comment.save && verify_recaptcha(model: comment)
         @record_action = 'comments'
         redirect_to wallpaper_path(@wallpaper)
@@ -33,6 +32,10 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:wallpaper_id, :text, :commentable_id, :commentable_type)
+    params.require(:comment).permit(:text)
+  end
+
+  def load_parent_wallpaper
+    @wallpaper = Wallpaper.friendly.find(params[:wallpaper_id])
   end
 end
