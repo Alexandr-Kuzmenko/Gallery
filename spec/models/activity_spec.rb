@@ -1,17 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Activity, type: :model do
-  before(:all) do
-    @activity = FactoryBot.create(:activity)
-  end
+  let(:activity) { FactoryBot.create(:activity) }
 
   it 'attributes valid?' do
-    expect(@activity).to be_valid
+    expect(activity).to be_valid
   end
 
   it 'user must present' do
-    activity = build(:activity, user: nil)
-    expect(activity).to_not be_valid
+    next_activity = build(:activity, user: nil)
+    expect(next_activity).to_not be_valid
   end
 end
 
