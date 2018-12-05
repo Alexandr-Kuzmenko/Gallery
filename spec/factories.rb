@@ -13,7 +13,7 @@ FactoryBot.define do
   end
 
   factory :category, class: Category do
-    name { Faker::Book.unique.genre }
+    name { Faker::Company.unique.name }
     # locked false
     association :categorized, factory: [:user, :admin_user].sample
   end
