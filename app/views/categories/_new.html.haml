@@ -1,6 +1,9 @@
+.modal-header
+  .col-auto.mr-auto
+    .btn.btn-outline-primary.disabled
+      Creating new category
+  .col-auto
+    %button.close{"aria-label": "Close", "data-dismiss": "modal", type: "button"}
+      ×
 .modal-body
-  = render 'modal_form', category: @category
-.modal-footer
-  .btn.btn-outline-danger.btn-sm.btn-block.close{"data-dismiss": "modal", type: "button"}
-    %h5
-      Cancel
+  = render 'form', category: @category

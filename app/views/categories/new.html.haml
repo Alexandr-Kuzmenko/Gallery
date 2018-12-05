@@ -1,8 +1,6 @@
 %h4
-  Enter your category's name:
-
-= render 'form', category: @category
-
-%br/
-.btn.btn-outline-primary
-  = link_to 'Back', categories_path
+  Enter the name of category you want to create, or get
+  = link_to 'back', categories_path
+.card{style: "width: 18rem;"}
+  .card-body
+    = render 'form', category: @category

@@ -1,9 +1,12 @@
 = form_for @category do |f|
-  .row
-    .col-xs-2
-      = f.label :name, 'Category name:'
-    .col-xs-6
-      = f.text_field :name
-  .row
-    .col-xs-12
-      = f.submit 'Create'
+  %h4
+    .row
+      .col-auto
+        = f.label :name, 'Name:'
+    .row
+      .col-auto
+        = f.text_field :name
+    %br/
+    .actions
+      .col-auto
+        = f.submit 'Save', class: "btn btn-success"

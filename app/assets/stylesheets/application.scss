@@ -1,4 +1,11 @@
 @import "bootstrap";
+$zindex-dropdown:          1000 !default;
+$zindex-sticky:            1020 !default;
+$zindex-fixed:             1030 !default;
+$zindex-modal-backdrop:    1040 !default;
+$zindex-modal:             1050 !default;
+$zindex-popover:           1060 !default;
+$zindex-tooltip:           1070 !default;
 
 header {
 	margin-top: 0px;
@@ -15,6 +22,14 @@ header {
     text-align: center;
     margin-top: 0px;
     margin-bottom: 0px;
+  }
+
+  bar_menu {
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    position: relative;
+    cellpadding: 10px;
   }
 }
 
@@ -37,28 +52,34 @@ body {
 	background-color: #FAEBD7;
   position: relative;
 }
+
 h1 {
   color: #000080;
   font-size: 200%;
   font-family: Arial, Verdana, sans-serif;
   text-align: center;
 }
+
 h2 {
   font-size: 175%;
   font-family: Arial, Verdana, sans-serif;
 }
+
 h3 {
   font-size: 150%;
   font-family: Arial, Verdana, sans-serif;
 }
+
 h4 {
   font-size: 125%;
   font-family: Arial, Verdana, sans-serif;
 }
+
 h5 {
   font-size: 100%;
   font-family: Arial, Verdana, sans-serif;
 }
+
 h6 {
   font-size: 75%;
   font-family: Arial, Verdana, sans-serif;

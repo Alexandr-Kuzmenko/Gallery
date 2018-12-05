@@ -1,0 +1,23 @@
+= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  %h4
+    .row
+      .col-auto
+        = f.label :email, 'Email:'
+    .row
+      .col-auto
+        = f.email_field :email, autofocus: true, autocomplete: "email"
+    .row
+      .col-auto
+        = f.label :password, 'Password:'
+    .row
+      .col-auto
+        = f.password_field :password, autocomplete: "current-password"
+    .row
+      .col-auto
+        - if devise_mapping.rememberable?
+          .field
+            = f.label :remember_me, 'Remember me:'
+            = f.check_box :remember_me
+    .actions
+      .col-auto
+        = f.submit 'Log in', class: "btn btn-success"
