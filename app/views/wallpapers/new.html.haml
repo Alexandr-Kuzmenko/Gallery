@@ -1,5 +1,7 @@
-%h4 Fill all fields and then save wallpaper:
-%br/
-= render 'form', wallpaper: @wallpaper
-%br/
-= link_to 'Back', wallpapers_path, class: "btn btn-default"
+%h4
+  Fill the fields and then press "Save", or get
+  = link_to 'back', wallpapers_path
+  to Gallery
+.card{style: "width: 52rem;"}
+  .card-body
+    = render 'form', wallpaper: @wallpaper

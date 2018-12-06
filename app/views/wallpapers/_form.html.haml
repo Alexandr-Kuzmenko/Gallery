@@ -1,58 +1,50 @@
 = form_for @wallpaper do |f|
-  .row
-    .col-xs-2
-      = f.label :title, 'Image name: '
-    .col-xs-10
-      = f.text_field :title
-  .row
-    .col-xs-2
-      = f.label :category, 'Category: '
-    .col-xs-10
-      = f.collection_select :category_id, @categories, :id, :name
-  .row
-    .col-xs-2
-      .btn.btn-default.disabled
-        Upload local file
-      %br/
-      .col-xs-1
-        = f.label 'Image: '
-      %br/
-      .col-xs-1
-        = f.file_field :image
-        = f.hidden_field :image_cache
-      %br/
-      .col-xs-1
-        = f.text_field :remote_image_url
-    .col-xs-2.other
-      .btn.btn-default.btn-block.disabled
-        or
-    .col-xs-2.other
-      .btn.btn-default.disabled
-        Upload file from link
-      %br/
-      .col-xs-1
-        = f.label :remote_image_url, "image URL"
-      %br/
+  %h4
+    .row
+      .col-auto
+        = f.label :title, 'Image name:'
+    .row
+      .col-auto
+        = f.text_field :title
+    .row
+      .col-auto
+        = f.label :category, 'Category: '
+    .row
+      .col-auto
+        = f.collection_select :category_id, @categories, :id, :name
+    %br/
+    .row
+      .col-auto
+        .card{style: "width: 20rem;"}
+          .card-body
+            .row
+              .col-auto
+                = f.label :image, 'Local file:', class: "btn disabled btn-primary"
+            .row
+              .col-auto
+                = f.file_field :image, class: "btn btn-sm btn-secondary"
+                = f.hidden_field :image_cache
+      .col-auto.other
+        %br/
+        .btn.btn-primary.disabled
+          Choose
+          %br/
+          one of
+      .col-auto.other
+        .card{style: "width: 20rem;"}
+          .card-body
+            .row
+              .col-auto
+                = f.label :remote_image_url, "Link to image URL:", class: "btn disabled btn-primary"
+            .row
+              .col-auto
+                = f.text_field :remote_image_url
+    %br/
+    .row
+      .col-auto
+        = f.submit 'Save', class: "btn btn-success"
 
-  %br/
-  .row
-    .col-xs-12
-      = f.submit
-/        = button_to "local" do type = 'local' end
-/        = button_to "url" do type = 'url' end
-/  - if type == 'local'
-/    .col-xs-2
-/      = f.label :image, 'Image: '
-/    .col-xs-10
-/      = f.file_field :image
-/      = f.hidden_field :image_cache
-/  - if type == 'url'
-/    .row
-/      .col-xs-2
-/        = f.label :remote_image_url, "image URL"
-/      .col-xs-10
-/        = f.text_field :remote_image_url
-/  %br/
-/  .row
-/    .col-xs-12
-/      = f.submit
+/ = button_to "local" do type = 'local' end
+/ = button_to "url" do type = 'url' end
+/ - if type == 'local'
+/ - if type == 'url'

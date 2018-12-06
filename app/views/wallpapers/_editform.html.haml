@@ -1,14 +1,18 @@
 = form_for @wallpaper do |f|
-  .row
-    .col-xs-2
-      = f.label :title, 'Image name: '
-    .col-xs-10
-      = f.text_field :title
-  .row
-    .col-xs-2
-      = f.label :category, 'Category: '
-    .col-xs-10
-      = f.collection_select :category_id, @categories, :id, :name
-  .row
-    .col-xs-12
-      = f.submit
+  %h4
+    .row
+      .col-auto
+        = f.label :title, 'Image name:'
+    .row
+      .col-auto
+        = f.text_field :title
+    .row
+      .col-auto
+        = f.label :category, 'Category: '
+    .row
+      .col-auto
+        = f.collection_select :category_id, @categories, :id, :name
+    %br/
+    .row
+      .col-auto
+        = f.submit 'Save', class: "btn btn-success"

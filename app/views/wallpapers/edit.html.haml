@@ -1,5 +1,7 @@
-%h4 Edit Wallpaper
-%br/
-= render 'editform', wallpaper: @wallpaper
-%br/
-= link_to 'Back', wallpapers_path, class: "btn btn-default"
+%h4
+  Edit wallpaper and then press "Save", or get
+  = link_to 'back', wallpapers_path
+  to Gallery
+.card{style: "width: 20rem;"}
+  .card-body
+    = render 'editform', wallpaper: @wallpaper
