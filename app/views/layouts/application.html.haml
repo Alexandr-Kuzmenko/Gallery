@@ -18,9 +18,14 @@
             Root_page
           .btn.btn-outline-primary
             = link_to I18n.t('header.main_bar.categories'), categories_path
-
-          / Here should be top 5 categories
-
+          .btn.btn-primary.dropdown
+            .dropdown-toggle{ "data-toggle": "dropdown", "data-target": "#"}
+              = I18n.t("header.main_bar.top_categories")
+              %b.caret
+            %ul.dropdown-menu
+              - @top_categories.each do |cat|
+                %li
+                  = link_to "#{cat.name}", category_path(cat), class: "btn btn-outline-primary btn-sm btn-block"
           .btn.btn-outline-danger.disabled
             top_images
           .btn.btn-outline-primary
