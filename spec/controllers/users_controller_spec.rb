@@ -14,7 +14,7 @@ class UsersControllerTest < ActionController::TestCase
         get :index
       end
 
-      it 'authentication required' do
+      it 'when logged out' do
         get :index
         expect(response).to redirect_to('/users/sign_in')
       end
@@ -23,11 +23,11 @@ class UsersControllerTest < ActionController::TestCase
         expect(subject.status).to eq(200)
       end
 
-      it 'render template - index' do
+      it 'rendered template index' do
         expect(subject).to render_template :index
       end
 
-      it 'index http success' do
+      it 'rendered template http success' do
         expect(subject).to have_http_status(:success)
       end
     end
@@ -38,22 +38,22 @@ class UsersControllerTest < ActionController::TestCase
         get :edit, params: { id: user.id }
       end
 
-      it 'render template - edit' do
+      it 'rendered template edit' do
         expect(subject).to render_template :edit
       end
 
-      it 'edit http success' do
+      it 'rendered template http success' do
         expect(subject).to have_http_status(:success)
       end
 
-      it 'authentication required' do
+      it 'when logged out' do
         get :edit, params: { locale: :en, id: user.id }
         expect(response).to redirect_to('/users/sign_in')
       end
     end
 
     describe '#update' do
-      it 'authentication required' do
+      it 'when logged out' do
         patch :update, params: { id: user.id }
         expect(response).to redirect_to('/users/sign_in')
       end
@@ -64,7 +64,7 @@ class UsersControllerTest < ActionController::TestCase
         expect(response).to redirect_to(users_path)
       end
 
-      it 'db record changed after update' do
+      it 'db record params have changed' do
         sign_in user
         record = user.nickname
         patch :update, params: { user: { nickname: 'just some new nickname' }, id: user.id }
@@ -73,7 +73,7 @@ class UsersControllerTest < ActionController::TestCase
     end
 
     describe '#destroy' do
-      it 'authentication required' do
+      it 'when logged out' do
         delete :destroy, params: { id: user.id }
         expect(response).to redirect_to('/users/sign_in')
       end

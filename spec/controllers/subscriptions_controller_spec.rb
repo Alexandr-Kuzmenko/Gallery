@@ -19,14 +19,14 @@ class SubscriptionsControllerTest < ActionController::TestCase
         expect(response).to redirect_to(category_path(fresh_subs.category))
       end
 
-      it 'db records increase after like' do
+      it 'db records increase after follow' do
         sign_in user
         count = Subscription.count
         random_subscription_new
         expect(count + 1 == Subscription.count).to be_truthy
       end
 
-      it 'db records decrease after dislike' do
+      it 'db records decrease after unfollow' do
         sign_in user
         count = Subscription.count
         random_subscription_new # get subs

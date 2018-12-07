@@ -28,7 +28,7 @@ class LikesControllerTest < ActionController::TestCase
         expect(counter + 1 == Like.count).to be_truthy
       end
 
-      it 'wallpaper likes counter increases if create' do
+      it 'likes counter increases after create' do
         sign_in user
         counter = wallpaper.likes_count
         random_like_new
@@ -44,7 +44,7 @@ class LikesControllerTest < ActionController::TestCase
         expect(count - 1 == Like.count).to be_truthy
       end
 
-      it 'wallpaper likes counter decreases if delete' do
+      it 'likes counter decreases if delete' do
         sign_in user
         random_like_new # like
         counter = Wallpaper.last.likes_count

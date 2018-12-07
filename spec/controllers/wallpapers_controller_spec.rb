@@ -21,16 +21,16 @@ class WallpapersControllerTest < ActionController::TestCase
         expect(subject.status).to eq(200)
       end
 
-      it 'render template - index' do
+      it 'rendered template index' do
         expect(subject).to render_template :index
       end
 
-      it 'equal to object if object only one' do
+      it 'equal to object when objects count: 1' do
         subject
         expect(assigns(:wallpapers)).to eq([wallpaper])
       end
 
-      it 'index http success' do
+      it 'rendered template http success' do
         get 'index', params: { locale: :ru }
         expect(response).to have_http_status(:success)
       end
@@ -39,19 +39,19 @@ class WallpapersControllerTest < ActionController::TestCase
     describe '#show' do
       subject { get :show, params: { id: wallpaper.id } }
 
-      it 'render template - show' do
+      it 'rendered template show' do
         expect(subject).to render_template :show
       end
 
-      it 'show http success' do
+      it 'rendered template http success' do
         expect(subject).to have_http_status(:success)
       end
 
-      it 'wrong locale failure' do
+      it 'when wrong locale' do
         expect { get :show, params: { id: wallpaper.id, locale: :fr } }.to raise_error
       end
 
-      it 'no object id failure' do
+      it 'when no param :id' do
         expect { get :show, params: { locale: :en } }.to raise_error
       end
     end
@@ -62,15 +62,15 @@ class WallpapersControllerTest < ActionController::TestCase
         get :new
       end
 
-      it 'render template - new' do
+      it 'rendered template new' do
         expect(subject).to render_template :new
       end
 
-      it 'new http success' do
+      it 'rendered template http success' do
         expect(subject).to have_http_status(:success)
       end
 
-      it 'authentication required' do
+      it 'when logged out' do
         get :new, params: { locale: :en }
         expect(response).to redirect_to('/users/sign_in')
       end
@@ -82,20 +82,20 @@ class WallpapersControllerTest < ActionController::TestCase
         get :edit, params: { id: wallpaper.id }
       end
 
-      it 'render template - edit' do
+      it 'rendered template edit' do
         expect(subject).to render_template :edit
       end
 
-      it 'edit http success' do
+      it 'rendered template http success' do
         expect(subject).to have_http_status(:success)
       end
 
-      it 'authentication required' do
+      it 'when logged out' do
         get :edit, params: { locale: :en, id: wallpaper.id }
         expect(response).to redirect_to('/users/sign_in')
       end
 
-      it 'no object id failure' do
+      it 'when no param :id' do
         sign_in user
         expect { get :edit, params: { locale: :en } }.to raise_error
       end
@@ -104,7 +104,7 @@ class WallpapersControllerTest < ActionController::TestCase
     describe '#create' do
       let(:admin) { FactoryBot.create(:admin_user) }
 
-      it 'authentication required' do
+      it 'when logged out' do
         random_wp_create
         expect(response).to redirect_to('/users/sign_in')
       end
@@ -138,7 +138,7 @@ class WallpapersControllerTest < ActionController::TestCase
     end
 
     describe '#update' do
-      it 'authentication required' do
+      it 'when logged out' do
         patch :update, params: { id: wallpaper.id }
         expect(response).to redirect_to('/users/sign_in')
       end
@@ -149,7 +149,7 @@ class WallpapersControllerTest < ActionController::TestCase
         expect(response).to redirect_to(wallpapers_path)
       end
 
-      it 'db record changed after update' do
+      it 'db record have changed' do
         sign_in user
         record = wallpaper.title
         patch :update, params: { wallpaper: { title: 'title_has_changed'}, id: wallpaper.id }
@@ -158,11 +158,11 @@ class WallpapersControllerTest < ActionController::TestCase
     end
 
     describe '#destroy' do
-      it 'no object id failure' do
+      it 'when no param :id' do
         expect { delete :destroy, params: { locale: :en } }.to raise_error
       end
 
-      it 'authentication required' do
+      it 'when logged out' do
         delete :destroy, params: { id: wallpaper.id }
         expect(response).to redirect_to('/users/sign_in')
       end

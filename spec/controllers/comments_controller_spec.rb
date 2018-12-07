@@ -30,18 +30,18 @@ class CommentsControllerTest < ActionController::TestCase
     # end
 
     describe '#new' do
-      it 'authentication required' do
+      it 'when logged out' do
         get :new, params: { locale: :en }
         expect(response).to redirect_to('/users/sign_in')
+      end
+
+      it 'when logged out code 302' do
+        get :new, params: { locale: :en }
+        expect(response).to have_http_status(302)
       end
     end
 
     describe '#create' do
-      it 'authentication required' do
-        random_comment_create
-        expect(response).to redirect_to('/users/sign_in')
-      end
-
       it 'redirect after create' do
         sign_in user
         random_comment_create
@@ -49,18 +49,23 @@ class CommentsControllerTest < ActionController::TestCase
         expect(response).to redirect_to(wallpaper_path(fresh_comment.wallpaper))
       end
 
-      it 'db records increase after create' do
-        sign_in user
-        count = Comment.count
-        random_comment_create
-        expect(count + 1 == Comment.count).to be_truthy
-      end
-
       it 'creating priority to admin' do
         sign_in admin
         sign_in user
         random_comment_create
         expect(Comment.last.commentable_type).to eq('AdminUser')
+      end
+
+      it 'when logged out' do
+        random_comment_create
+        expect(response).to redirect_to('/users/sign_in')
+      end
+
+      it 'db records increase after create' do
+        sign_in user
+        count = Comment.count
+        random_comment_create
+        expect(count + 1 == Comment.count).to be_truthy
       end
     end
   end

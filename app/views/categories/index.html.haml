@@ -2,24 +2,25 @@
   .btn.btn-outline-primary
     = link_to 'New category', new_category_path, {remote: true, "data-toggle": "modal", "data-target": "#modal-window" }
 %br/
-.row
-  - @categories.each do |category|
-    - if category.wallpapers.present?
-      .col-xs-2
-        = link_to category.name, category_path(category), class: "btn btn-primary"
-        %br/
-        %br/
-        = link_to image_tag(category.wallpapers.sample.image.thumb.url, alt: 'image')
-= paginate @categories
-%br/
-%a.btn.btn-success.btn-block.disabled Created, but empty for now categories
-%br/
-.row
-  - @categories.each do |category|
-    - if category.wallpapers.empty?
-      .col-xs-2
-        = link_to category.name, category_path(category), class: "btn btn-primary"
-        %br/
+- if Category.first
+  .row
+    - @categories.each do |category|
+      - if category.wallpapers.present?
+        .col-xs-2
+          = link_to category.name, category_path(category), class: "btn btn-primary"
+          %br/
+          %br/
+          = link_to image_tag(category.wallpapers.sample.image.thumb.url, alt: 'image')
+  = paginate @categories
+  %br/
+  %a.btn.btn-success.btn-block.disabled Created, but empty for now categories
+  %br/
+  .row
+    - @categories.each do |category|
+      - if category.wallpapers.empty?
+        .col-xs-2
+          = link_to category.name, category_path(category), class: "btn btn-primary"
+          %br/
 
 #modal-window.modal.hide.fade{"aria-hidden": "true", "aria-labelledby": "modal-windowLabel", role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-dialog-centered{role: "document"}
