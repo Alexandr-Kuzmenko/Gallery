@@ -1,63 +1,55 @@
 !!!
 %html
   %head
-    %meta{charset: "utf-8"}/
+    %meta{ charset: "utf-8" }/
     = csrf_meta_tags
     = csp_meta_tag
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    %script{src: "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"}
+    %script{ src: "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" }
   %body
     %header
       .center_block
         %h1
           = I18n.t("header.wallpapers_gallery")
-      .bar_menu.btn-toolbar.justify-content-between{"aria-label": "Main site toolbar", role: "toolbar"}
+      .bar_menu.btn-toolbar.justify-content-between{"aria-label": "Main site toolbar", role: "toolbar" }
         .btn-group
-          .btn.btn-outline-danger.disabled
+          %button.btn.btn-outline-danger.disabled
             Root_page
-          .btn.btn-outline-primary
-            = link_to I18n.t('header.main_bar.categories'), categories_path
-          .btn.btn-primary.dropdown
-            .dropdown-toggle{ "data-toggle": "dropdown", "data-target": "#"}
+          = link_to I18n.t('header.main_bar.categories'), categories_path, class: "btn btn-outline-dark"
+          %button.btn.btn-secondary.dropdown
+            .dropdown-toggle{ "data-toggle": "dropdown", "data-target": "#" }
               = I18n.t("header.main_bar.top_categories")
               %b.caret
             %ul.dropdown-menu
               - @top_categories.each do |cat|
                 %li
-                  = link_to "#{cat.name}", category_path(cat), class: "btn btn-outline-primary btn-sm btn-block"
-          .btn.btn-outline-danger.disabled
+                  = link_to "#{cat.name}", category_path(cat), class: "btn btn-outline-dark btn-sm btn-block"
+          %button.btn.btn-outline-danger.disabled
             top_images
-          .btn.btn-outline-primary
-            = link_to I18n.t('header.main_bar.upload'), new_wallpaper_path
-          .btn.btn-outline-danger.disabled
+          = link_to I18n.t('header.main_bar.upload'), new_wallpaper_path, class: "btn btn-outline-dark"
+          %button.btn.btn-outline-danger.disabled
             recent_comments
-          .btn.btn-outline-primary
-            = link_to I18n.t('header.main_bar.wallpapers'), wallpapers_path
-          .btn.btn-primary.dropdown
-            .dropdown-toggle{ "data-toggle": "dropdown", "data-target": "#"}
+          = link_to I18n.t('header.main_bar.wallpapers'), wallpapers_path, class: "btn btn-outline-dark"
+          %button.btn.btn-secondary.dropdown
+            .dropdown-toggle{ "data-toggle": "dropdown", "data-target": "#" }
               = I18n.t("header.localization")
               %b.caret
             %ul.dropdown-menu
               %li
-                = button_to "En", {locale: :en}, method: :get, class: "btn btn-outline-primary btn-sm btn-block"
-                = button_to "Ru", {locale: :ru}, method: :get, class: "btn btn-outline-primary btn-sm btn-block"
+                = button_to "En", {locale: :en}, method: :get, class: "btn btn-outline-dark btn-sm btn-block"
+                = button_to "Ru", {locale: :ru}, method: :get, class: "btn btn-outline-dark btn-sm btn-block"
         .btn-group
           - if user_signed_in?
-            .btn.btn-outline-dark.disabled
+            %button.btn.btn-success.disabled
               = I18n.t("header.main_page_welcome", email: current_user.email)
-            .btn.btn-outline-primary
-              = link_to I18n.t('active_admin.devise.profile'), user_index_path
-            .btn.btn-outline-danger.disabled
-              = link_to I18n.t('active_admin.devise.links.sign_out'), destroy_user_session_path, method: :delete
+            = link_to I18n.t('active_admin.devise.profile'), user_index_path, class: "btn btn-warning"
+            = link_to I18n.t('active_admin.devise.links.sign_out'), destroy_user_session_path, method: :delete, class: "btn btn-info"
           - else
-            .btn.btn-outline-primary
-              = link_to I18n.t('active_admin.devise.links.sign_up'), new_user_registration_path
-            .btn.btn-outline-primary{"data-target": "#sign_in_modal", "data-toggle": "modal", type: "button"}
+            = link_to I18n.t('active_admin.devise.links.sign_up'), new_user_registration_path, class: "btn btn-outline-primary"
+            %button.btn-outline-primary{ "data-target": "#sign_in_modal", "data-toggle": "modal", type: "button" }
               = I18n.t('active_admin.devise.links.sign_in')
-            /= link_to I18n.t('active_admin.devise.links.sign_in'), new_user_session_path
-            .btn.btn-outline-primary
-              = link_to "#{I18n.t('active_admin.devise.links.sign_in_with')}Google", user_google_oauth2_omniauth_authorize_path
+            = link_to "#{I18n.t('active_admin.devise.links.sign_in_with')}Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-outline-primary"
 
     / modal windows
     #sign_in_modal.modal.fade{"aria-hidden": "true", role: "dialog", tabindex: "-1"}

@@ -19,14 +19,14 @@
           .card-body
             .row
               .col-auto
-                = f.label :image, 'Local file:', class: "btn disabled btn-primary"
+                = f.label :image, 'Local file:', class: "btn disabled btn-info"
             .row
               .col-auto
                 = f.file_field :image, class: "btn btn-sm btn-secondary"
                 = f.hidden_field :image_cache
       .col-auto.other
         %br/
-        .btn.btn-primary.disabled
+        %button.btn.btn-info.disabled
           Choose
           %br/
           one of
@@ -35,7 +35,7 @@
           .card-body
             .row
               .col-auto
-                = f.label :remote_image_url, "Link to image URL:", class: "btn disabled btn-primary"
+                = f.label :remote_image_url, "Link to image URL:", class: "btn disabled btn-info"
             .row
               .col-auto
                 = f.text_field :remote_image_url

@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :load_category, only: [:show, :edit, :update, :destroy]
 
   def index
-    @categories = Category.all.order(:created_at).page(params[:page])
+    @categories = Category.all.order('wallpapers_count DESC, name').page(params[:page])
   end
 
   def show; end

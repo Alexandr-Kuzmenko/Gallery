@@ -1,21 +1,26 @@
 .row
-  .col-xs-offset-2.col
-    = image_tag(@wallpaper.image.thumb.url, alt: 'Image')
+  .container.align-items-center
+    .col-auto
+      .row
+        .btn-group-sm.ml-2.mr-2.mt-2.mb-2
+          - if @wallpaper.category
+            = link_to "Watch category: #{@wallpaper.category.name}", category_path(@wallpaper.category), class: "btn btn-info"
+          - else
+            %button.btn.btn-info.btn-block.disabled
+              Uncategorized
+      .row
+        = link_to image_tag(@wallpaper.image.thumb.url, alt: 'image'), @wallpaper.image.url, class: "btn btn-secondary", target: '_blank'
+      .row
+        .btn-group-sm.ml-2.mr-2.mt-2.mb-2{"aria-label" => "Available actions", role: "group"}
+          %button.btn.btn-info.disabled
+            Likes counter:
+            = @wallpaper.likes_count
+          = link_to 'like', new_wallpaper_like_path(@wallpaper), class: "btn btn-success"
 .row
-  .col-xs-offset-2.col
-    = link_to 'like', new_wallpaper_like_path(@wallpaper), class: "btn btn-default"
-    %span Total likes:
-    %a.btn.btn-default.disabled
-      = @wallpaper.likes_count
-.row
-  .col-xs-offset-2.col
-    = link_to 'Get Fullscrean', fullsize_path, class: "btn btn-default"
+  .card{style: "width: 30rem;"}
+    .card-body
+      = render @wallpaper.comments.order('created_at')
+      %br/
+      = render 'comments/form' if current_user.present? || current_admin_user.present?
 
-%br/
-%br/
-.row
-  = render @wallpaper.comments.order('created_at')
-.row
-  = render 'comments/form' if current_user.present? || current_admin_user.present?
-.row
-  = link_to 'Back', @wallpaper.category, class: "btn btn-default"
+/ = link_to 'Get Fullscrean', fullsize_path, class: "btn btn-default"

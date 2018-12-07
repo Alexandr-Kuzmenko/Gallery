@@ -1,26 +1,20 @@
 .row
-  .btn.btn-outline-primary
-    = link_to 'New category', new_category_path, {remote: true, "data-toggle": "modal", "data-target": "#modal-window" }
-%br/
-- if Category.first
-  .row
-    - @categories.each do |category|
-      - if category.wallpapers.present?
-        .col-xs-2
-          = link_to category.name, category_path(category), class: "btn btn-primary"
-          %br/
-          %br/
-          = link_to image_tag(category.wallpapers.sample.image.thumb.url, alt: 'image')
+  = link_to 'New category', new_category_path, { remote: true, "data-toggle": "modal",
+                                                  "data-target": "#modal-window", id: 'new_ctg_btn',
+                                                  class: "btn btn-info" }
+.row
+  - if Category.first
+    .btn-toolbar{"aria-label" => "Toolbar with button groups", :role => "toolbar"}
+      - @categories.each_with_index do |category, index|
+        .btn-group.ml-2.mr-2.mt-2.mb-2{"aria-label" => "top #{index + 1} category", role: "group"}
+          .container.align-items-center
+            .row
+              - if category.wallpapers.first
+                = link_to image_tag(category.wallpapers.sample.image.thumb.url, alt: 'image'), category_path(category), class: "btn btn-secondary"
+            .row
+              = link_to category.name, category_path(category), class: "btn btn-info btn-sm btn-block"
+.row
   = paginate @categories
-  %br/
-  %a.btn.btn-success.btn-block.disabled Created, but empty for now categories
-  %br/
-  .row
-    - @categories.each do |category|
-      - if category.wallpapers.empty?
-        .col-xs-2
-          = link_to category.name, category_path(category), class: "btn btn-primary"
-          %br/
 
 #modal-window.modal.hide.fade{"aria-hidden": "true", "aria-labelledby": "modal-windowLabel", role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-dialog-centered{role: "document"}

@@ -1,3 +1,6 @@
-%h4 User settings
-%br/
-= render 'form', user: @user
+%h4
+  User settings
+  = link_to 'back', user_index_path
+.card{style: "width: 20rem;"}
+  .card-body
+    = render 'form', user: @user

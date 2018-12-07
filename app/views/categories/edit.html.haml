@@ -1,6 +1,6 @@
-%h2 Correct category name
-%br/
-= render 'form', category: @category
-%br/
-.col-xs-2
-  = link_to 'Back', category_path(@category), class: "btn.btn-default"
+%h4
+  Correct category name or get
+  = link_to 'Back', category_path(@category)
+.card{style: "width: 18rem;"}
+  .card-body
+    = render 'form', category: @category

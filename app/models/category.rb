@@ -8,7 +8,7 @@ class Category < ApplicationRecord
   friendly_id :name, use: :slugged
 
   paginates_per 5
-  max_paginates_per 7
+  max_paginates_per 5
 
   validates :name, presence: true
   validates :name, uniqueness: true

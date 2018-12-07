@@ -6,8 +6,8 @@ class Wallpaper < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
-  paginates_per 5
-  max_paginates_per 10
+  paginates_per 9
+  max_paginates_per 20
 
   validates :title, presence: true
   validates :image, presence: true
