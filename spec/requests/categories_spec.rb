@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Categories behavior', type: :request do
   let(:user) { FactoryBot.create(:user) }
+  let(:category) { FactoryBot.create(:category) }
 
   describe 'categories walking' do
     before(:all) do
@@ -36,59 +37,68 @@ RSpec.describe 'Categories behavior', type: :request do
       end
     end
 
-    context 'scenario log in' do
-      it 'successful login' do
-        visit root_url
-        find('#sign_in_modal').click
-        fill_in 'user[email]', with: '123@example.com'
-        fill_in 'user[password]', with: 'password'
-        find('[name=commit]').click
-        expect(page).to have_text('Welcome')
-      end
-
-      it 'unsuccessful login' do
-        visit root_url
-        find('#sign_in_modal').click
-        fill_in 'user[email]', with: '123@example.com'
-        fill_in 'user[password]', with: ''
-        find('[name=commit]').click
-        expect(page).not_to have_text('Welcome')
-      end
-    end
     context 'Visiting categories/index' do
       it 'expect new_category modal window' do
         visit categories_url
         expect(page).to have_selector('#new_ctg_btn')
-      end
-
-      it 'successful category creating' do
-        sign_in user
-        visit categories_url
-        count = Category.count
-        find('#new_ctg_btn').click
-        fill_in 'category[name]', with: 'some_new_category'
-        find('#modal-save').click
-        expect(Category.count).to be > count
-      end
-
-      it 'unsuccessful category creating' do
-        sign_in user
-        visit categories_url
-        count = Category.count
-        find('#new_ctg_btn').click
-        fill_in 'category[name]', with: ''
-        find('#modal-save').click
-        expect(Category.count).to eq count
       end
     end
 
     context 'Visiting categories/show' do
       it 'expect Follow/Unfollow button' do
         sign_in user
-        visit category_url(category: Category.first)
+        visit category_url(id: category)
         expect(page).to have_selector('#follow')
       end
     end
+
+    context 'Tests in browser', driver: :selenium_chrome do
+      it 'successful login' do
+        visit root_path
+        find_button('#sign_in_modal').click
+        fill_in 'user[email]', with: '123@example.com'
+        fill_in 'user[password]', with: 'password'
+        find('[name=commit]').click
+        expect(page).to have_text('Welcome')
+      end
+
+      it 'successful category creating' do
+        sign_in user
+        visit categories_path
+        count = Category.count
+        find('#new_ctg_btn').click
+        fill_in 'category[name]', with: 'some_new_category'
+        find('#modal-save').click
+        expect(Category.count).to be > count
+        find_link('Log out').click
+      end
+
+      it 'unsuccessful login' do
+        visit root_path
+        find_button('#sign_in_modal').click
+        fill_in 'user[email]', with: '123@example.com'
+        fill_in 'user[password]', with: ''
+        find('[name=commit]').click
+        expect(page).not_to have_text('Welcome')
+      end
+
+      it 'unsuccessful category creating' do
+        sign_in user
+        visit categories_path
+        count = Category.count
+        find('#new_ctg_btn').click
+        fill_in 'category[name]', with: ''
+        find('#modal-save').click
+        expect(Category.count).to eq count
+      end
+
+
+    end
+
+
+
+
+
 
 
   end

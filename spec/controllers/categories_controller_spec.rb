@@ -34,6 +34,7 @@ class CategoriesControllerTest < ActionController::TestCase
       end
 
       it 'equal to object when objects count: 1' do
+        subject
         expect(assigns(:categories)).to eq([category])
       end
     end

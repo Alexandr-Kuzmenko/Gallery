@@ -47,7 +47,7 @@
             = link_to I18n.t('active_admin.devise.links.sign_out'), destroy_user_session_path, method: :delete, class: "btn btn-info"
           - else
             = link_to I18n.t('active_admin.devise.links.sign_up'), new_user_registration_path, class: "btn btn-outline-dark"
-            %button.btn-outline-dark{ "data-target": "#sign_in_modal", "data-toggle": "modal", type: "button" }
+            %button.btn-outline-dark{ id: "#sign_in_modal", "data-target": "#sign_in_modal", "data-toggle": "modal", type: "button" }
               = I18n.t('active_admin.devise.links.sign_in')
             = link_to "#{I18n.t('active_admin.devise.links.sign_in_with')}Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-outline-dark"
 
