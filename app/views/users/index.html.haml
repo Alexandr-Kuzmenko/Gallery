@@ -1,42 +1,46 @@
 .user_info_block
-  .row
-    .col-xs-2
-      = link_to 'Delete account', user_path(@user), class: "btn btn-danger", method: :delete,
-      data: { confirm: 'Do you really want to delete your own account?'}
-  .row
-    .col-xs-2
-      %a.btn.btn-success.btn-block.disabled Email:
-    .col-xs-3
-      %a.btn.btn-primary.btn-block.disabled
-        = @user.email
-  %br/
-  .row
-    .col-xs-2
-      %a.btn.btn-success.btn-block.disabled Nickname:
-    .col-xs-3
-      %a.btn.btn-default.btn-block.disabled
-        = @user.nickname
-  %br/
-  .row
-    .col-xs-3
-      %a.btn.btn-success.btn-block.disabled Avatar:
-    .col-xs-3
-      %a.btn.btn-default.disabled
-        = image_tag(@user.avatar.url, alt: 'avatar', target: '_blank') if @user.avatar?
-  .row
-  %br/
-  .row
-    = link_to 'edit', edit_user_path(@user), class: "btn btn-primary"
-
+  .user_bar_menu.btn-toolbar.justify-content-between{ "aria-label": "Main site toolbar", role: "toolbar" }
+    .btn-group
+    .btn-group
+      = link_to 'Profile settings', edit_user_path(@user), class: "btn btn-warning btn-sm"
+      = link_to 'Delete account', user_path(@user), class: "btn btn-danger btn-sm", method: :delete,
+                                  data: { confirm: 'Do you really want to delete your own account?'}
+  .container.align-items-center
+    .row
+      .col-auto
+        .card{ style: "width: 102px;" }
+          - if @user.avatar?
+            = image_tag(@user.avatar.url, alt: 'avatar')
+          - else
+            = image_tag("avatar_default.jpg", alt: "avatar")
+          %button.btn.btn-info.btn-sm.btn-block.disabled
+            Avatar:
+          /.card-body
+      .col-auto.other
+        %button.btn.btn-info.btn-sm.btn-block.disabled
+          Email:
+          = @user.email
+        %button.btn.btn-info.btn-sm.btn-block.disabled
+          Nickname:
+          - if @user.nickname
+            = @user.nickname
+          - else
+            user
+            = @user.id
+    /.row
+    /  .col-auto
+    /  .col-auto.other
 %br/
 .subscriptions_block
-  .row
-    - @user.subscriptions.each do |subs|
-      .row
-        %a.btn.btn-success.disabled
-          .col-xs-12
+  .btn-toolbar{ "aria-label": "Subscriptions", role: "toolbar" }
+    %alert.alert.alert-dark{ role: "alert", style: "width: 100%;" }
+      Your subscriptions:
+  - @user.subscriptions.each do |subs|
+    .btn-group.ml-2.mr-2.mt-2.mb-2{ "aria-label" => "recent wallpapers", role: "group"}
+      .container.align-items-center
+        .row
+          %button.btn.btn-sm.btn-success.disabled.mb-2
             #{ subs.category.name } - last updates
-      .row
-        - subs.category.wallpapers.last(5).reverse.each do |wp|
-          = link_to(image_tag(wp.image.thumb.url), wallpaper_path(wp), class: "btn btn-default")
-
+        .row
+          - subs.category.wallpapers.last(5).reverse.each do |wp|
+            = link_to(image_tag(wp.image.thumb.url), wallpaper_path(wp), class: "btn btn-dark btn-sm mr-2")
