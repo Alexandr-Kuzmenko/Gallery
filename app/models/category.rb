@@ -10,6 +10,6 @@ class Category < ApplicationRecord
   paginates_per 5
   max_paginates_per 5
 
-  validates :name, presence: true
+  validates :name, :categorized, presence: true
   validates :name, uniqueness: true
 end

@@ -12,15 +12,15 @@ RSpec.describe AdminUser, type: :model do
     # FactoryBot.create(:activity)
   end
 
-  describe 'name' do
-    it 'Random admin_user creating' do
-      # @user = FactoryBot.create(admin_user)
-      # @name = Faker::Name.name
-      # puts "current users email is: #{@user.email}, password: #{@user.encrypted_password}, nickname: #{@user.nickname}"
-      # expect(@user.email).not_to be_nil
-      expect(@category.name).not_to be_nil
-    end
-  end
+  # describe 'name' do
+  #   it 'Random admin_user creating' do
+  #     # @user = FactoryBot.create(admin_user)
+  #     # @name = Faker::Name.name
+  #     # puts "current users email is: #{@user.email}, password: #{@user.encrypted_password}, nickname: #{@user.nickname}"
+  #     # expect(@user.email).not_to be_nil
+  #     # expect(@category.name).not_to be_nil
+  #   end
+  # end
 
   # describe "check fields" do
   #   it { expect(@user).to respond_to(:email) }

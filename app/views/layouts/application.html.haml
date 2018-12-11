@@ -12,26 +12,26 @@
       .center_block
         %h1
           = I18n.t("header.wallpapers_gallery")
-      .bar_menu.btn-toolbar.justify-content-between{"aria-label": "Main site toolbar", role: "toolbar" }
+      .bar_menu.btn-toolbar.justify-content-between{ "aria-label": "Main site toolbar", role: "toolbar" }
         .btn-group
-          %button.btn.btn-outline-danger.disabled
-            Root_page
+          /%button.btn.btn-outline-danger.disabled
+          /  Root_page
           = link_to I18n.t('header.main_bar.categories'), categories_path, class: "btn btn-outline-dark"
-          %button.btn.btn-secondary.dropdown
-            .dropdown-toggle{ "data-toggle": "dropdown", "data-target": "#" }
+          %button.btn.btn-secondary.dropdown{ id: 'top5categories' }
+            .dropdown-toggle{ "data-toggle": 'dropdown', "data-target": '#' }
               = I18n.t("header.main_bar.top_categories")
               %b.caret
             %ul.dropdown-menu
               - @top_categories.each do |cat|
                 %li
                   = link_to "#{cat.name}", category_path(cat), class: "btn btn-outline-dark btn-sm btn-block"
-          %button.btn.btn-outline-danger.disabled
-            top_images
+          /%button.btn.btn-outline-danger.disabled
+          /  top_images
           = link_to I18n.t('header.main_bar.upload'), new_wallpaper_path, class: "btn btn-outline-dark"
-          %button.btn.btn-outline-danger.disabled
-            recent_comments
+          /%button.btn.btn-outline-danger.disabled
+          /  recent_comments
           = link_to I18n.t('header.main_bar.wallpapers'), wallpapers_path, class: "btn btn-outline-dark"
-          %button.btn.btn-secondary.dropdown
+          %button.btn.btn-secondary.dropdown{ id: 'localization' }
             .dropdown-toggle{ "data-toggle": "dropdown", "data-target": "#" }
               = I18n.t("header.localization")
               %b.caret
@@ -46,21 +46,21 @@
             = link_to I18n.t('active_admin.devise.profile'), user_index_path, class: "btn btn-warning"
             = link_to I18n.t('active_admin.devise.links.sign_out'), destroy_user_session_path, method: :delete, class: "btn btn-info"
           - else
-            = link_to I18n.t('active_admin.devise.links.sign_up'), new_user_registration_path, class: "btn btn-outline-primary"
-            %button.btn-outline-primary{ "data-target": "#sign_in_modal", "data-toggle": "modal", type: "button" }
+            = link_to I18n.t('active_admin.devise.links.sign_up'), new_user_registration_path, class: "btn btn-outline-dark"
+            %button.btn-outline-dark{ "data-target": "#sign_in_modal", "data-toggle": "modal", type: "button" }
               = I18n.t('active_admin.devise.links.sign_in')
-            = link_to "#{I18n.t('active_admin.devise.links.sign_in_with')}Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-outline-primary"
+            = link_to "#{I18n.t('active_admin.devise.links.sign_in_with')}Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-outline-dark"
 
     / modal windows
-    #sign_in_modal.modal.fade{"aria-hidden": "true", role: "dialog", tabindex: "-1"}
-      .modal-dialog.modal-dialog-centered{role: "document"}
+    #sign_in_modal.modal.fade{ "aria-hidden": "true", role: "dialog", tabindex: "-1" }
+      .modal-dialog.modal-dialog-centered{ role: "document" }
         .modal-content
           .modal-header
             .col-auto.mr-auto
               .btn.btn-outline-primary.disabled
                 Authorization
             .col-auto
-              %button.close{"aria-label": "Close", "data-dismiss": "modal", type: "button"}
+              %button.close{ "aria-label": "Close", "data-dismiss": "modal", type: "button" }
                 ×
           .modal-body
             = render "devise/sessions/modal"

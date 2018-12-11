@@ -4,9 +4,9 @@
       Category: #{@category.name}
     - if current_user
       - if exist_subscription?(@category)
-        = link_to 'Unfollow', new_category_subscription_path(@category), class: "btn btn-info"
+        = link_to 'Unfollow', new_category_subscription_path(@category), class: "btn btn-info", id: 'follow'
       - else
-        = link_to 'Follow', new_category_subscription_path(@category), class: "btn btn-warning"
+        = link_to 'Follow', new_category_subscription_path(@category), class: "btn btn-warning", id: 'follow'
     - if own?(@category)
       = link_to 'Edit Category name', edit_category_path(@category), class: "btn btn-warning"
     = link_to 'Delete category', category_path(@category), class: "btn btn-danger", method: :delete, |
