@@ -1,7 +1,23 @@
 ActiveAdmin.register Wallpaper do
-  includes :comments
+
+  permit_params :title
   menu priority: 4
-  permit_params :title, :category_id, :image
+  includes :comments
+
+  controller do
+    before_action :load_categories, only: [:new, :create, :edit, :update, :show]
+    before_action :load_wallpaper, only: [:show, :edit, :update, :destroy]
+
+    private
+
+    def load_wallpaper
+      @wallpaper = Wallpaper.friendly.find(params[:id])
+    end
+
+    def load_categories
+      @categories = Category.all
+    end
+  end
 
   index do
     selectable_column
@@ -14,57 +30,12 @@ ActiveAdmin.register Wallpaper do
     actions
   end
 
-  show do
-    # renders app/views/admin/posts/_some_partial.html.erb
-    render 'form', { wallpaper: wallpaper }
-  end
-
-
   index as: :grid do |wallpaper|
-    link_to image_tag(wallpaper.image.mini_thumb.url), admin_wallpaper_path(wallpaper)
-  end
-
-  controller do
-    before_action :load_categories, only: [:new, :create, :edit, :update]
-    before_action :load_wallpaper, only: [:show, :edit, :update, :destroy]
-
-    # def create
-    #   @wallpaper = Wallpaper.new(wallpaper_params)
-    #   if @wallpaper.save
-    #     Wallpaper.prepare_notification_list(@wallpaper)
-    #     redirect_to admin_wallpapers_path
-    #   else
-    #     render :new
-    #   end
-    # end
-
-    def update
-      @wallpaper = Category.friendly.find(params[:id])
-      if @wallpaper.update_attributes(wallpaper_params)
-        redirect_to admin_wallpapers_path
-      else
-        render :edit
-      end
-    end
-
-    def destroy
-      @wallpaper.destroy
-      redirect_to admin_wallpapers_path
-    end
-
-    private
-
-    def load_wallpaper
-      @wallpaper = Wallpaper.friendly.find(params[:id])
-    end
-
-    def wallpaper_params
-      params.require(:wallpaper).permit(:title, :category_id, :image, :image_cache)
-    end
-
-    def load_categories
-      @categories = Category.all
+    ul do
+      li image_tag(wallpaper.image.thumb.url, alt: 'image')
+      li link_to "GOTO --> #{wallpaper.title}", wallpaper_path(wallpaper), class: "button", target: '_blank'
     end
   end
+
   form partial: 'form'
 end

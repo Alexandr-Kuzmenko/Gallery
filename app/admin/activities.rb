@@ -1,6 +1,7 @@
 ActiveAdmin.register Activity do
+
+  actions :all, except: [:new, :create, :edit, :update]
   menu priority: 6
-  permit_params
 
   index do
     selectable_column

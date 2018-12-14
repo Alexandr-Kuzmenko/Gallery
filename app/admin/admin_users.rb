@@ -1,11 +1,11 @@
 ActiveAdmin.register AdminUser do
-  menu priority: 2
-  #permit_params :email, :encrypted_password, :password_confirmation
+
   permit_params do
     permitted = [:encrypted_password, :password_confirmation, :nickname, :avatar]
     permitted << :email if params[:action] == 'create'
     permitted
   end
+  menu priority: 2
 
   index do
     column :email
