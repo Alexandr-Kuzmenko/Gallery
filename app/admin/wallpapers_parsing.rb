@@ -1,5 +1,5 @@
 ActiveAdmin.register_page "Parsing" do
-  menu priority: 7, label: proc{ 'Parsing' }
+  menu priority: 8, label: proc{ 'Parsing' }
   require 'rubygems'
   require 'nokogiri'
   require 'open-uri'

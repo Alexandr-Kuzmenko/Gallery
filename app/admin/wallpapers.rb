@@ -1,7 +1,7 @@
 ActiveAdmin.register Wallpaper do
 
   permit_params :title
-  menu priority: 4
+  menu priority: 5
   includes :comments
 
   controller do
@@ -23,7 +23,7 @@ ActiveAdmin.register Wallpaper do
     selectable_column
     column :title
     column :id
-    column :category_id
+    column :category
     column :created_at
     column :updated_at
     column :likes_count

@@ -1,7 +1,7 @@
 ActiveAdmin.register Category do
 
   permit_params :name
-  menu priority: 3
+  menu priority: 4
   includes :wallpapers
 
   controller do

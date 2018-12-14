@@ -1,7 +1,7 @@
 ActiveAdmin.register Activity do
 
   actions :all, except: [:new, :create, :edit, :update]
-  menu priority: 6
+  menu priority: 7
 
   index do
     selectable_column

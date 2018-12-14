@@ -2,7 +2,7 @@ ActiveAdmin.register Comment do
 
   actions :all, except: [:new, :create]
   permit_params :text, :wallpaper_id
-  menu priority: 5
+  menu priority: 6
 
   controller do
     before_action :load_comment, only: [:show, :edit, :update, :destroy]
@@ -22,9 +22,8 @@ ActiveAdmin.register Comment do
   index do
     selectable_column
     column :id
-    column :commentable_type
-    column :commentable_id
-    column :wallpaper_id
+    column 'Author', :commentable
+    column :wallpaper
     column :text
     column :created_at
     column :updated_at
