@@ -20,7 +20,7 @@ def random_commnets_create
   end
 end
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password', nickname: 'unique_one') if Rails.env.development?
 User.create!(email: 'user@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 Rake::Task["autofilling:init_filling"].execute
 random_likes_create
