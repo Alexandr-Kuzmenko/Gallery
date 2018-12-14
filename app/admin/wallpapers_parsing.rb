@@ -36,11 +36,10 @@ ActiveAdmin.register_page "Parsing" do
     panel "Parsed pictures" do
       pictures_list = parse_page(params[:link]) if uri?(params[:link])
       if pictures_list
-        ul do
-          pictures_list.each do |p|
-            li p
-            li image_tag(src=Pathname(p).to_s)
-            li button_to 'Save', save_current_picture(p)
+        pictures_list.each do |p|
+          ul do
+            li  image_tag(src=Pathname(p).to_s)
+            #li  button_to 'Save', { id: "save_image", class: "button" onclick: save_current_picture(p), method: :post },  }
           end
         end
       end

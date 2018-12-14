@@ -1,5 +1,10 @@
 ActiveAdmin.register User do
 
+  permit_params do
+    permitted = [:encrypted_password, :password_confirmation, :nickname, :avatar]
+    permitted << :email if params[:action] == 'create'
+    permitted
+  end
   menu priority: 3
 
   controller do

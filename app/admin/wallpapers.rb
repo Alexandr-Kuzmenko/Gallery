@@ -24,6 +24,9 @@ ActiveAdmin.register Wallpaper do
     column :title
     column :id
     column :category
+    column(:image) { |img| image_tag(img.image.mini_thumb.url, alt: 'image') }
+
+
     column :created_at
     column :updated_at
     column :likes_count
@@ -31,6 +34,7 @@ ActiveAdmin.register Wallpaper do
   end
 
   index as: :grid do |wallpaper|
+    resource_selection_cell wallpaper
     ul do
       li image_tag(wallpaper.image.thumb.url, alt: 'image')
       li link_to "GOTO --> #{wallpaper.title}", wallpaper_path(wallpaper), class: "button", target: '_blank'
