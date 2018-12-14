@@ -1,0 +1,20 @@
+= form_for @comment do |f|
+  %h4
+    .row
+      .col-auto
+        = f.label :text, 'Type your comment:'
+    .row
+      .col-auto
+        = f.text_area :text
+    .row
+      .col-auto
+        = f.label :category, 'Wallpaper_id: '
+    .row
+      .col-auto
+        = f.text_field :wallpaper_id
+    %br/
+    .row
+      .col-auto
+        = f.submit
+        = link_to 'Back', admin_comments_path, class: "button"
+        /= recaptcha_tags(theme: :light, ajax: :true, size: :compact)
