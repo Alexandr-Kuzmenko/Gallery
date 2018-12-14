@@ -1,12 +1,17 @@
-.container.align-items-center
+.container.align-items-left
   .btn-group
-    .col-xs-2
-      .btn.btn-outline-dark.disabled
-        = comment.commentable.email
-        types:
-    .col-xs-8.other
-    .col-xs-2.other
-      .btn.btn-outline-dark.disabled
+    .col-auto
+      /.btn.btn-dark-sm.disabled
+      - if comment.commentable.avatar?
+        = image_tag(comment.commentable.avatar.url, alt: 'avatar')
+      - else
+        = image_tag("avatar_default.jpg", alt: "avatar")
+      %h6
+        - if comment.commentable.nickname?
+          = comment.commentable.nickname
+        - else
+          = comment.commentable.nickname
+          = comment.commentable.id
+    .col-auto
+      .btn.btn-dark-sm.disabled
         = comment.text
-    %br/
-%br/

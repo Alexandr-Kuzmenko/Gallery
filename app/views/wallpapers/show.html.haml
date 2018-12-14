@@ -17,10 +17,11 @@
             = @wallpaper.likes_count
           = link_to 'like', new_wallpaper_like_path(@wallpaper), class: "btn btn-success"
 .row
-  .card{style: "width: 30rem;"}
-    .card-body
-      = render @wallpaper.comments.order('created_at')
-      %br/
-      = render 'comments/form' if current_user.present? || current_admin_user.present?
+  .card{ style: "width: 40rem;" }
+    .card-body{style: "background-color: #DCDCDC;"}
+      %h5
+        = render @wallpaper.comments.order('created_at')
+        %br/
+        = render 'comments/form' if current_user.present? || current_admin_user.present?
 
 / = link_to 'Get Fullscrean', fullsize_path, class: "btn btn-default"
