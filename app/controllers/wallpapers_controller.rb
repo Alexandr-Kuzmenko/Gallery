@@ -52,7 +52,7 @@ class WallpapersController < ApplicationController
   end
 
   def wallpaper_params
-    params.require(:wallpaper).permit(:title, :image, :category_id, :remote_image_url, :image_cache)
+    params.require(:wallpaper).permit(:title, :category_id, :image, :image_cache, :remote_image_url)
   end
 
   def load_wallpaper
@@ -62,8 +62,8 @@ class WallpapersController < ApplicationController
   def load_categories
     @categories = Category.includes(:subscriptions).all
   end
-  #
-  #def like_proc
-  #  @wallpaper.likes.action_like
-  #end
+
+  # def like_proc
+  #   @wallpaper.likes.action_like
+  # end
 end

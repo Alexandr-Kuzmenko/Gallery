@@ -18,13 +18,13 @@ class CategoriesController < ApplicationController
     user = current_admin_user || current_user
     render :new unless user
     category = user.categories.new(category_params)
-    raise NameBlank unless category.name
-    redirect_to categories_path if category.save
-  end
+    # raise NameBlank unless category.name
+    category.save ? redirection : (render :new)
+    end
 
   def update
     if @category.update_attributes(category_params)
-      redirect_to categories_path
+      redirection
     else
       render :edit
     end
@@ -37,11 +37,15 @@ class CategoriesController < ApplicationController
 
   private
 
+  def redirection
+    current_admin_user ? redirect_to(admin_categories_path) : redirect_to(categories_path)
+  end
+
   def load_category
     @category = Category.friendly.find(params[:id])
   end
 
   def category_params
-    params.require(:category).permit(:name)
+    params.require(:category).permit(:name, :locked)
   end
 end
