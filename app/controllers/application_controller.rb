@@ -20,7 +20,6 @@ class ApplicationController < ActionController::Base
     UserMailer.with(user: current_user).greetings_email.deliver_now
   end
 
-
   def default_url_options
     { locale: I18n.locale }
   end

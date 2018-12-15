@@ -50,6 +50,16 @@
             %button.btn-outline-dark{ id: "#sign_in_modal", "data-target": "#sign_in_modal", "data-toggle": "modal", type: "button" }
               = I18n.t('active_admin.devise.links.sign_in')
             = link_to "#{I18n.t('active_admin.devise.links.sign_in_with')}Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-outline-dark"
+      /alert windows
+      %h4
+        .btn-toolbar.mt-1{ "aria-label": "Notice toolbar", role: "notice alerts" }
+          .btn.btn-block.btn-sm
+            - flash.each do |key, value|
+              %div{class: "alert alert-#{key} alert-dismissible fade show", role: "alert" }
+                %strong
+                  = value
+                %button.close{ "aria-label": "Close", "data-dismiss": "alert", type: "button" }
+                  %span{ "aria-hidden": "true" } ×
 
     / modal windows
     #sign_in_modal.modal.fade{ "aria-hidden": "true", role: "dialog", tabindex: "-1" }
@@ -68,7 +78,7 @@
     = yield
 
     %footer
-      %p.notice
-        = notice
-      %p.alert
-        = alert
+    /  %p.notice
+    /    = notice
+    /  %p.alert
+    /    = alert

@@ -1,6 +1,10 @@
 class CategoriesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show, :new]
   before_action :load_category, only: [:show, :edit, :update, :destroy]
+
+  class SomethingBad < StandardError
+
+  end
 
   def index
     @categories = Category.all.order('wallpapers_count DESC, name').page(params[:page])
@@ -18,9 +22,13 @@ class CategoriesController < ApplicationController
     user = current_admin_user || current_user
     render :new unless user
     category = user.categories.new(category_params)
-    # raise NameBlank unless category.name
-    category.save ? redirection : (render :new)
+    if category.save
+      flash[:success] = 'Creation successful.'
+    else
+      flash[:warning] = 'Category has not been saved.'
     end
+    redirection
+  end
 
   def update
     if @category.update_attributes(category_params)
