@@ -1,0 +1,35 @@
+.row
+  .col-auto
+    .btn.btn-outline-primary.disabled
+      Registration
+%br/
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  %h4
+    = devise_error_messages!
+    .row
+      .col-auto
+        = f.label :email, 'Email:'
+    .row
+      .col-auto
+        = f.email_field :email, autofocus: true, autocomplete: "email"
+    .row
+      .col-auto
+        = f.label :password, 'Password:'
+    .row
+      .col-auto
+        = f.password_field :password, autocomplete: "new-password"
+    .row
+      .col-auto
+        %h6
+          - if @minimum_password_length
+            %em{b: ""}
+              #{@minimum_password_length} characters minimum
+    .row
+      .col-auto
+        = f.label :password_confirmation, 'Password confirmation:'
+    .row
+      .col-auto
+        = f.password_field :password_confirmation, autocomplete: "new-password"
+    .actions.mt-2
+      .col-auto
+        = f.submit 'Sign up', class: "btn btn-success"
