@@ -18,9 +18,9 @@ class User < ApplicationRecord
   validates :email, presence: true
   validates :password, confirmation: true, length: { in: 6..20 }, on: :create
   validates :password, confirmation: true, allow_blank: true, on: :update
-  validates :email, :nickname, uniqueness: true
-  validates :nickname, length: { in: 1..20 }
-  validates :nickname, uniqueness: { case_sensitive: false }
+  validates :email, uniqueness: true
+  validates :nickname, length: { in: 1..20 }, allow_blank: true
+  validates :nickname, uniqueness: { case_sensitive: false }, allow_blank: true
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

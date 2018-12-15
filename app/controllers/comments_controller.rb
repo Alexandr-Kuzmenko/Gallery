@@ -20,18 +20,21 @@ class CommentsController < ApplicationController
     user = current_admin_user || current_user
     if user
       comment = @wallpaper.comments.new(comment_params.merge(commentable: user))
-      if comment.save && verify_recaptcha(model: comment)
+      if verify_recaptcha(model: comment) && comment.valid?
+        comment.save
         @record_action = 'comments'
-        redirection
+      else
+        flash[:warning] = 'Comment has not been saved.'
       end
-    else
-      render :new
+    redirection
     end
   end
 
   def update
     if current_admin_user
-      redirect_to admin_comments_path if @comment.update_attributes(params.require(:comment).permit(:text, :wallpaper_id))
+      if @comment.update_attributes(params.require(:comment).permit(:text, :wallpaper_id))
+        redirect_to admin_comments_path
+      end
     else
       render :show
     end

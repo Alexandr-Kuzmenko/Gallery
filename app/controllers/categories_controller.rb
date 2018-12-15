@@ -32,8 +32,10 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update_attributes(category_params)
+      flash[:success] = 'Category parameters have been saved.'
       redirection
     else
+      flash[:warning] = 'Category has not been saved.'
       render :edit
     end
   end
