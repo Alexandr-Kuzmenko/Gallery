@@ -1,0 +1,19 @@
+= form_for wallpaper, local: true do |f|
+  .row
+    .col-auto
+      = f.submit 'Save wallpaper as:', class: 'form_submit'
+  .row
+    .container
+      .row
+        .col
+          = f.label :title, 'Image name:'
+        .col-5.other
+          = f.text_field :title, value: wallpaper.title
+      .row
+        .col
+          = f.label :category, 'Category: '
+        .col.other
+          = f.collection_select :category_id, categories, :id, :name
+
+  = f.hidden_field :remote_image_url, value: wallpaper.remote_image_url
+

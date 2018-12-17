@@ -4,8 +4,8 @@ ActiveAdmin.register_page "Parsing" do
   require 'nokogiri'
   require 'open-uri'
 
-  action_item :site_main_page do
-    link_to "Main_user page", "/"
+  action_item :root do
+    link_to 'User root', '/'
   end
 
   content title: proc{ 'Parsing' } do
@@ -26,7 +26,9 @@ ActiveAdmin.register_page "Parsing" do
     end
 
     def save_current_picture(path)
-      Wallpaper.create(title: 'noname', category_id: 1, remote_image_url: path)
+      categories = Category.includes(:subscriptions).all
+      wallpaper = Wallpaper.new(title: 'noname', category_id: 1, remote_image_url: path)
+      return wallpaper, categories
     end
 
     panel "Parsing pictures" do
@@ -35,17 +37,15 @@ ActiveAdmin.register_page "Parsing" do
 
     panel "Parsed pictures" do
       pictures_list = parse_page(params[:link]) if uri?(params[:link])
-      if pictures_list
-        pictures_list.each do |p|
-          ul do
-            li  image_tag(src=Pathname(p).to_s)
-            #li  button_to 'Save', { id: "save_image", class: "button" onclick: save_current_picture(p), method: :post },  }
-          end
+      pictures_list&.each do |path|
+        ul do
+          li image_tag(src=Pathname(path).to_s)
+          li render partial: 'save_form', locals: { wallpaper: save_current_picture(path)[0],
+                                                    categories: save_current_picture(path)[1] }
         end
       end
     end
   end
-  # page_action :set_link, method: :post do; end
 end
 
 
