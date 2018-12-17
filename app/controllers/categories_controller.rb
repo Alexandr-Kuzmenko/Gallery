@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show, :new]
+  skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :load_category, only: [:show, :edit, :update, :destroy]
 
   class SomethingBad < StandardError

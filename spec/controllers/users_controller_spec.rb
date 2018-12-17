@@ -60,14 +60,14 @@ class UsersControllerTest < ActionController::TestCase
 
       it 'redirect after update' do
         sign_in user
-        patch :update, params: { user: { nickname: 'just some new nickname' }, id: user.id }
+        patch :update, params: { user: { nickname: 'new nickname' }, id: user.id }
         expect(response).to redirect_to(users_path)
       end
 
       it 'db record params have changed' do
         sign_in user
         record = user.nickname
-        patch :update, params: { user: { nickname: 'just some new nickname' }, id: user.id }
+        patch :update, params: { user: { nickname: 'new nickname' }, id: user.id }
         expect(User.find_by_nickname(record)).to be_nil
       end
     end

@@ -39,6 +39,7 @@ RSpec.describe 'Categories behavior', type: :request do
 
     context 'Visiting categories/index' do
       it 'expect new_category modal window' do
+        sign_in user
         visit categories_url
         expect(page).to have_selector('#new_ctg_btn')
       end
@@ -63,13 +64,15 @@ RSpec.describe 'Categories behavior', type: :request do
       end
 
       it 'successful category creating' do
-        sign_in user
+        login_as(user)
+        #sign_in user
         visit categories_path
         count = Category.count
         find('#new_ctg_btn').click
         fill_in 'category[name]', with: 'some_new_category'
         find('#modal-save').click
-        expect(Category.count).to be > count
+        expect(page).to have_text("some_new_category")
+        #expect(Category.count).to be > count
         find_link('Log out').click
       end
 
