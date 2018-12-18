@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     record_signing('sign in')
   end
 
-  after_action only: :create, if: :registrations_controller? do
+  after_action only: :create, if: :registrations_controller_and_user? do
     UserMailer.with(user: current_user).greetings_email.deliver_now
   end
 
@@ -30,15 +30,15 @@ class ApplicationController < ActionController::Base
   private
 
   def record_signing(param)
-    current_user.activities.create(url_page: request.referrer, action_type: param) if current_user
+    current_user&.activities.create(url_page: request.referrer, action_type: param)
   end
 
   def record_navigation
-    current_user.activities.create(url_page: request.referrer, action_type: 'navigation') if current_user && location_has_changed
+    current_user&.activities.create(url_page: request.referrer, action_type: 'navigation') if location_has_changed
   end
 
   def record_changing
-    current_user.activities.create(url_page: request.referrer, action_type: @record_action) if current_user
+    current_user&.activities.create(url_page: request.referrer, action_type: @record_action)
   end
 
   def location_has_changed
@@ -49,8 +49,8 @@ class ApplicationController < ActionController::Base
     controller_name.eql?('sessions')
   end
 
-  def registrations_controller?
-    controller_name.eql?('registrations')
+  def registrations_controller_and_user?
+    controller_name.eql?('registrations') && current_user
   end
 
   def top_categories

@@ -3,7 +3,7 @@
     %button.btn.btn-success.disabled
       Category: #{@category.name}
     - if request.referer
-      = link_to 'Back', request.referrer, class: "btn btn-secondary"
+      = link_to 'Back', request.referrer, class: "btn btn-secondary", id: 'back'
     - if current_user
       - if exist_subscription?(@category)
         = link_to 'Unfollow', new_category_subscription_path(@category), class: "btn btn-info", id: 'follow'
