@@ -48,7 +48,7 @@ class WallpapersController < ApplicationController
   private
 
   def redirection
-    unless request.referer.include?("/#{I18n.locale}/admin/parsing")
+    unless request.referer&.&include?("/#{I18n.locale}/admin/parsing")
       current_admin_user ? redirect_to(admin_wallpapers_path) : redirect_to(wallpapers_path)
     end
   end

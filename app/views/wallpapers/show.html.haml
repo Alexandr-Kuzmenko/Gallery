@@ -3,6 +3,8 @@
     .col-auto
       .row
         .btn-group-sm.ml-2.mr-2.mt-2.mb-2
+          - if request.referer
+            = link_to 'Back', request.referrer, class: "btn btn-secondary"
           - if @wallpaper.category
             = link_to "Watch category: #{@wallpaper.category.name}", category_path(@wallpaper.category), class: "btn btn-info"
           - else
@@ -15,7 +17,11 @@
           %button.btn.btn-info.disabled
             Likes counter:
             = @wallpaper.likes_count
-          = link_to 'like', new_wallpaper_like_path(@wallpaper), class: "btn btn-success"
+          - if exist_like?(@wallpaper)
+            = link_to 'Unlike', new_wallpaper_like_path(@wallpaper), class: "btn btn-secondary", id: 'like'
+          - else
+            = link_to 'like', new_wallpaper_like_path(@wallpaper), class: "btn btn-info", id: 'like'
+
 .row
   .card{ style: "width: 40rem;" }
     .card-body{style: "background-color: #DCDCDC;"}

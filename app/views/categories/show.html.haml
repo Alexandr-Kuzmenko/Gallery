@@ -2,11 +2,13 @@
   .btn-group.ml-2.mr-2.mt-2.mb-2{"aria-label" => "Available actions", role: "group"}
     %button.btn.btn-success.disabled
       Category: #{@category.name}
+    - if request.referer
+      = link_to 'Back', request.referrer, class: "btn btn-secondary"
     - if current_user
       - if exist_subscription?(@category)
         = link_to 'Unfollow', new_category_subscription_path(@category), class: "btn btn-info", id: 'follow'
       - else
-        = link_to 'Follow', new_category_subscription_path(@category), class: "btn btn-warning", id: 'follow'
+        = link_to 'Follow', new_category_subscription_path(@category), class: "btn btn-info", id: 'follow'
     - if own?(@category)
       = link_to 'Edit Category name', edit_category_path(@category), class: "btn btn-warning"
       = link_to 'Delete category', category_path(@category), class: "btn btn-danger", method: :delete, |
