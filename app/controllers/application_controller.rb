@@ -15,9 +15,9 @@ class ApplicationController < ActionController::Base
     record_signing('sign in')
   end
 
-  after_action only: :create, if: :registrations_controller_and_user? do
-    UserMailer.with(user: current_user).greetings_email.deliver_now
-  end
+  # after_action only: :create, if: :registrations_controller_and_user? do
+  #   UserMailer.with(user: current_user).greetings_email.deliver_later
+  # end
 
   def default_url_options
     { locale: I18n.locale }
