@@ -21,7 +21,17 @@ ActiveAdmin.register_page "Parsing" do
     def parse_page(link)
       page = Nokogiri::HTML(open(link))
       picture_list = []
-      page.css("img").each { |n| picture_list << n.attr('src')}
+      page.css("img").each do |n|
+        picture_link = n.attr('src')
+        prefix1 = link[/^https?:/]
+        prefix2 = link[/^.*\/\/([^\/]+)/]
+        if picture_link.slice(0, 2).eql?('//')
+          picture_link = prefix1 + picture_link
+        elsif picture_link.slice(0, 1).eql?('/')
+          picture_link = prefix2 + picture_link
+        end
+        picture_list << picture_link
+      end
       picture_list
     end
 
