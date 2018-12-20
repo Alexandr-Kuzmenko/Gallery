@@ -15,9 +15,9 @@ class ApplicationController < ActionController::Base
     record_signing('sign in')
   end
 
-  # after_action only: :create, if: :registrations_controller_and_user? do
-  #   UserMailer.with(user: current_user).greetings_email.deliver_later
-  # end
+  after_action only: :create, if: :registrations_controller_and_user? do
+    UserMailer.with(user: current_user).greetings_email.deliver_later
+  end
 
   def default_url_options
     { locale: I18n.locale }
@@ -30,19 +30,19 @@ class ApplicationController < ActionController::Base
   private
 
   def record_signing(param)
-    current_user&.activities.create(url_page: request.referrer, action_type: param)
+    current_user.activities.create(url_page: request.referrer, action_type: param) if current_user
   end
 
   def record_navigation
-    current_user&.activities.create(url_page: request.referrer, action_type: 'navigation') if location_has_changed
+    current_user.activities.create(url_page: request.referrer, action_type: 'navigation') if current_user && location_has_changed
   end
 
   def record_changing
-    current_user&.activities.create(url_page: request.referrer, action_type: @record_action)
+    current_user.activities.create(url_page: request.referrer, action_type: @record_action) if current_user
   end
 
   def location_has_changed
-    current_user.activities.last.url_page != request.referrer if current_user && current_user.activities.first
+    current_user.activities.last.url_page != request.referrer if current_user.activities.first
   end
 
   def sessions_controller?
