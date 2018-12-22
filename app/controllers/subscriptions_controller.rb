@@ -4,7 +4,7 @@ class SubscriptionsController < ApplicationController
   def new
     @category = Category.friendly.find(params[:category_id])
     check_subscription ? unset_subscription : set_subscription
-    current_admin_user ? redirect_to(admin_category_path(@category)) : redirect_to(category_path(@category))
+    redirect_back fallback_location: category_url(@category)
   end
 
   private

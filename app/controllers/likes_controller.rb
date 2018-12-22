@@ -5,7 +5,7 @@ class LikesController < ApplicationController
   def new
     @wallpaper = Wallpaper.friendly.find(params[:wallpaper_id])
     check_like ? nail_like : put_like
-    current_admin_user ? redirect_to(admin_wallpaper_path(@wallpaper)) : redirect_to(wallpaper_path(@wallpaper))
+    redirect_back fallback_location: wallpapers_url
   end
 
   private
