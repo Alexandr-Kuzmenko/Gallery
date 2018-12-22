@@ -1,13 +1,11 @@
 = form_for [ @wallpaper, @wallpaper.comments.build ], local: true do |f|
-  .row
-    .col-auto
-      = f.label :text, "Type comment:"
-      %br/
-      .container.align-items-center
-        = f.submit 'Print', class: "btn btn-success btn-sm btn-block"
-    .col-auto-other
-      = f.text_area :text
-  %br/
-  .row
-    .col-auto
-      = recaptcha_tags(theme: :light, ajax: :true)#, size: :compact)
+  .new_comment_block
+    .row
+      .col
+        .captcha_block
+          = recaptcha_tags(theme: :light, ajax: :true, size: :compact)
+        .submit_block
+          = f.submit 'Print', class: "btn btn-success btn-block"
+      .col.other
+        .text_area_block
+          = f.text_area :text, cols: 50

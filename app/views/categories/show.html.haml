@@ -2,8 +2,10 @@
   .btn-group.ml-2.mr-2.mt-2.mb-2{"aria-label" => "Available actions", role: "group"}
     %button.btn.btn-success.disabled
       Category: #{@category.name}
-    - if request.referer
+    - if request.referer && request.referer != request.original_url
       = link_to 'Back', request.referrer, class: "btn btn-secondary", id: 'back'
+    - else
+      = link_to 'Back', categories_path, class: "btn btn-secondary", id: 'back'
     - if current_user
       - if exist_subscription?(@category)
         = link_to 'Unfollow', new_category_subscription_path(@category), class: "btn btn-info", id: 'follow'

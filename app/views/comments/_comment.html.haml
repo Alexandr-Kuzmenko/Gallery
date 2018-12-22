@@ -1,17 +1,15 @@
-.container.align-items-left
-  .btn-group
-    .col-auto
-      /.btn.btn-dark-sm.disabled
-      - if comment.commentable.avatar?
-        = image_tag(comment.commentable.avatar.url, alt: 'avatar')
+.comments_block.btn-group
+  .author_block
+    - if comment.commentable.avatar?
+      = image_tag(comment.commentable.avatar.url, alt: 'avatar')
+    - else
+      = image_tag("avatar_default.jpg", alt: "avatar")
+    %h6
+      - if comment.commentable.nickname?
+        = comment.commentable.nickname
       - else
-        = image_tag("avatar_default.jpg", alt: "avatar")
-      %h6
-        - if comment.commentable.nickname?
-          = comment.commentable.nickname
-        - else
-          = comment.commentable.nickname
-          = comment.commentable.id
-    .col-auto
-      .btn.btn-dark-sm.disabled
-        = comment.text
+        = comment.commentable.nickname
+        = comment.commentable.id
+  .comment_block
+    = comment.text
+%br/

@@ -4,7 +4,7 @@
       .container.align-items-center
         .row
           - if wallpaper.category
-            = link_to "Watch category: #{wallpaper.category.name}", category_path(wallpaper.category), class: "btn btn-info btn-sm btn-block"
+            = link_to "Watch category: #{wallpaper.category.name}", category_path(wallpaper.category), class: "btn btn-info btn-sm btn-block mb-2"
           - else
             %button.btn.btn-info.btn-sm.btn-block.disabled
               Uncategorized
@@ -14,17 +14,20 @@
             %br/
             .btn-group.ml-2.mr-2.mt-2.mb-2{"aria-label" => "Available actions", role: "group"}
               %button.btn.btn-info.disabled
-                Likes counter:
+                Likes:
                 = wallpaper.likes_count
-              = link_to 'like', new_wallpaper_like_path(wallpaper), class: "btn btn-success"
+                - if exist_like?(wallpaper)
+                  = link_to 'unlike', new_wallpaper_like_path(wallpaper), class: "btn btn-secondary btn-sm", id: 'like'
+                - else
+                  = link_to 'like', new_wallpaper_like_path(wallpaper), class: "btn btn-success btn-sm", id: 'like'
           .col-auto.other
             .btn-group-vertical.align-items-center.mb-1.ml-2.mr-2.mt-2.mb-2
               .btn-group.mb-1
                 = link_to 'Comment', wallpaper_path(wallpaper), class: "btn btn-block btn-success"
               .btn-group.mb-1
                 = link_to 'Correct', edit_wallpaper_path(wallpaper), class: "btn btn-block btn-info"
-              .btn-group.mb-1
-                = link_to 'Destroy', wallpaper_path(wallpaper), class: "btn btn-block btn-outline-danger", method: :delete,
-                data: { confirm: 'Are you sure?' }
+              /.btn-group.mb-1
+              /  = link_to 'Destroy', wallpaper_path(wallpaper), class: "btn btn-block btn-outline-danger", method: :delete,
+              /  data: { confirm: 'Are you sure?' }
 .row
   = paginate @wallpapers

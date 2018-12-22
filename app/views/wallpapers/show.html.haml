@@ -1,33 +1,26 @@
-.row
-  .container.align-items-center
-    .col-auto
-      .row
-        .btn-group-sm.ml-2.mr-2.mt-2.mb-2
-          - if request.referer
-            = link_to 'Back', request.referrer, class: "btn btn-secondary"
-          - if @wallpaper.category
-            = link_to "Watch category: #{@wallpaper.category.name}", category_path(@wallpaper.category), class: "btn btn-info"
-          - else
-            %button.btn.btn-info.btn-block.disabled
-              Uncategorized
-      .row
-        = link_to image_tag(@wallpaper.image.thumb.url, alt: 'image'), @wallpaper.image.url, class: "btn btn-secondary", target: '_blank'
-      .row
-        .btn-group-sm.ml-2.mr-2.mt-2.mb-2{"aria-label" => "Available actions", role: "group"}
-          %button.btn.btn-info.disabled
-            Likes counter:
-            = @wallpaper.likes_count
-          - if exist_like?(@wallpaper)
-            = link_to 'Unlike', new_wallpaper_like_path(@wallpaper), class: "btn btn-secondary", id: 'like'
-          - else
-            = link_to 'like', new_wallpaper_like_path(@wallpaper), class: "btn btn-info", id: 'like'
+.container.align-items-center
+  .row
+    .btn-group-sm.ml-2.mr-2.mt-2.mb-2
+      - if request.referer && request.referer != request.original_url
+        = link_to 'Back', request.referrer, class: "btn btn-secondary", id: 'back'
+      - else
+        = link_to 'Back', wallpapers_path, class: "btn btn-secondary", id: 'back'
+      - if @wallpaper.category
+        = link_to "Watch category: #{@wallpaper.category.name}", category_path(@wallpaper.category), class: "btn btn-info"
+      - else
+        %button.btn.btn-info.btn-block.disabled
+          Uncategorized
+  .row
+    = link_to image_tag(@wallpaper.image.thumb.url, alt: 'image'), @wallpaper.image.url, class: "btn btn-secondary", target: '_blank'
+  .row
+    .btn-group-sm.ml-2.mr-2.mt-2.mb-2{"aria-label" => "Available actions", role: "group"}
+      %button.btn.btn-info.disabled
+        Likes:
+        = @wallpaper.likes_count
+        - if exist_like?(@wallpaper)
+          = link_to 'unlike', new_wallpaper_like_path(@wallpaper), class: "btn btn-secondary", id: 'like'
+        - else
+          = link_to 'like', new_wallpaper_like_path(@wallpaper), class: "btn btn-success", id: 'like'
+= render 'comments/form' if current_user.present? || current_admin_user.present?
+= render @wallpaper.comments.order('created_at')
 
-.row
-  .card{ style: "width: 40rem;" }
-    .card-body{style: "background-color: #DCDCDC;"}
-      %h5
-        = render @wallpaper.comments.order('created_at')
-        %br/
-        = render 'comments/form' if current_user.present? || current_admin_user.present?
-
-/ = link_to 'Get Fullscrean', fullsize_path, class: "btn btn-default"
