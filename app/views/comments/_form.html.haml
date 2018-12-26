@@ -1,11 +1,7 @@
 = form_for [ @wallpaper, @wallpaper.comments.build ], local: true do |f|
   .new_comment_block
     .row
-      .col
-        .captcha_block
-          = recaptcha_tags(theme: :light, ajax: :true, size: :compact)
-        .submit_block
-          = f.submit 'Print', class: "btn btn-success btn-block"
-      .col.other
-        .text_area_block
-          = f.text_area :text, cols: 50
+      .captcha_block
+        = recaptcha_tags(theme: :light, ajax: :true, size: :compact)
+        = f.submit 'Print', class: "btn btn-success btn-block"
+      = f.text_area(:text, class: 'text_area_block')

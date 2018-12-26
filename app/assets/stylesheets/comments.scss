@@ -2,10 +2,7 @@
   padding: 0px;
   margin: 0px;
 }
-.col {
-  padding: 0px;
-  margin: 0px;
-}
+
 .comments_block {
   width: 36rem;
   position: static;
@@ -44,37 +41,43 @@
   border: solid 1px #000;
   border-radius: 2px;
 
-  margin-top: 2px;
-  margin-bottom: 2px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  padding: 0px;
 
   //background-color: #F5F5F5;
   background-color: #A9A9A9;
 
   .captcha_block {
     width: 10rem;
+    height: auto;
+    border: solid 1px #000;
     text-align: center;
     background-color: #696969;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-left: 2px;
-  }
 
-  .submit_block {
-    width: 10rem;
-    text-align: center;
-    background-color: #696969;
     padding-top: 2px;
     padding-bottom: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 0px;
+    margin-right: 0px;
   }
 
   .text_area_block {
-    width: 20rem;
-    padding: 0px;
-    margin: 0px;
+    width: 25.8rem;
+    height: auto;
+    border: solid 1px #000;
+    text-align: left;
+    background-color: #FFFFFF;
+
+    padding: 5px;
+
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 0px;
+    margin-right: 0px;
   }
-
-
-
 }
