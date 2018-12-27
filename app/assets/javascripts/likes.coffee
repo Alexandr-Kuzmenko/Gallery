@@ -1,3 +1,11 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).on 'turbolinks:load', ->
+  $(document).ready ->
+    $('#like').click ->
+      switch $('#like').text()
+        when 'Like'
+          $('#like').html 'Unlike'
+          $('#like').toggleClass('btn-secondary btn-success')
+        when 'Unlike'
+          $('#like').html 'Like'
+          $('#like').toggleClass('btn-secondary btn-success')
+    #  $('lcount').load(location.href+' lcount'))
