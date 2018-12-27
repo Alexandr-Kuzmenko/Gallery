@@ -4,7 +4,7 @@ class WallpapersController < ApplicationController
   before_action :load_wallpaper, only: [:show, :edit, :update, :destroy, :fullsize]
 
   def index
-    @wallpapers = Wallpaper.all.order('likes_count DESC, title').page(params[:page])
+    @wallpapers = Wallpaper.all.order('likes_count DESC, title').page(params[:wallpapers_page])
   end
 
   def show; end
