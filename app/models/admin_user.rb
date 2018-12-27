@@ -12,7 +12,7 @@ class AdminUser < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable
 
-  #after_create { |admin| admin.send_reset_password_instructions }
+  after_create { |admin| admin.send_reset_password_instructions }
   def password_required?
     new_record? ? false : super
   end

@@ -44,7 +44,7 @@ header {
   .bar_menu {
     padding: 2px;
     margin: 5px;
-    margin-left: 10%;
+    margin-left: 15%;
     margin-right: 10%;
     text-align: center;
     position: relative;
@@ -66,23 +66,40 @@ header {
 body {
   aside {
     position: absolute;
-    width: 10%;
+    text-align: center;
+    width: 15%;
     height: 100%;
-    background: #000080;
+
+    border: solid 1px #000;
+    background: #DCDCDC;
+    padding: 5px;
+
+    //background: url(bg.jpg) no-repeat center /cover;
+
+    .recent_comment_block {
+      margin: 2px;
+      padding: 5px;
+
+      text-align: left;
+      word-wrap: break-word;
+      border: solid 1px #000;
+    }
+
   }
 
   main {
     position: absolute;
-    width: 90%;
+    width: 85%;
     overflow: hidden;
     overflow-Y: auto;
     height: 100%;
     margin-top: 0px;
     margin-bottom: 0px;
-    margin-left: 10%;
+    margin-left: 15%;
     margin-right: 0px;
     background: url(bg.jpg) no-repeat center /cover;
     padding: 1px;
+    padding-left: 5px;
 
     // h1 {
     //   font-size: 200%;

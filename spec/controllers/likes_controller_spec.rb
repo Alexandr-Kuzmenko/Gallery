@@ -18,7 +18,7 @@ class LikesControllerTest < ActionController::TestCase
         sign_in user
         random_like_new
         fresh_like = Like.last
-        expect(response).to redirect_to(wallpaper_path(fresh_like.wallpaper))
+        expect(response).to redirect_to(wallpapers_path)
       end
 
       it 'db records increase after like' do

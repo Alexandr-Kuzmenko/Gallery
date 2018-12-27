@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
-  before_action :top_categories
+  before_action :top_categories, :last_comments
   before_action :set_locale
   before_action :authenticate_user!, except: [:index], unless: :admin_user_signed_in?
 
@@ -55,6 +55,10 @@ class ApplicationController < ActionController::Base
 
   def top_categories
     @top_categories = Category.limit(5).order('wallpapers_count desc').to_a
+  end
+
+  def last_comments
+    @last_comments = Comment.limit(5).order('created_at desc').page(params[:comments_page])
   end
   # def extract_locale_from_accept_language_header
   #   request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first

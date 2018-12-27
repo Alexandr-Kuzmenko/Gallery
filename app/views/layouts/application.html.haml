@@ -7,6 +7,7 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     %script{ src: "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" }
+    %meta{ name: :viewport, content: 'width=device-width, initial-scale=0.8, shrink-to-fit=no' }
   %header
     .center_block
       /%h1
@@ -49,7 +50,6 @@
           %button.btn-outline-dark{ id: "#sign_in_modal", "data-target": "#sign_in_modal", "data-toggle": "modal", type: "button" }
             = I18n.t('active_admin.devise.links.sign_in')
           = link_to "#{I18n.t('active_admin.devise.links.sign_in_with')}Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-outline-dark"
-    /alert windows
 
     / modal windows
     #sign_in_modal.modal.fade{ "aria-hidden": "true", role: "dialog", tabindex: "-1" }
@@ -66,7 +66,24 @@
             = render "devise/sessions/modal"
   %body
     %aside
-      aside menu
+      %strong Recent comments:
+      - @last_comments.each do |comm|
+        .recent_comment_block
+          %strong
+            - if comm.commentable.nickname?
+              = comm.commentable.nickname
+            - else
+              = comm.commentable.nickname
+              = comm.commentable.id
+          prints at:
+          = image_tag(comm.wallpaper.image.mini_thumb.url, alt: 'image')
+          %br/
+          = comm.text.truncate(40, omission: '...')
+          = link_to '> watch full', wallpaper_path(comm.wallpaper)
+          %br/
+
+      = paginate @last_comments, param_name: 'comments_page'
+    /alert windows
     %main
       .btn-toolbar.mt-1{ "aria-label": "Notice toolbar", role: "notice alerts" }
         .btn.btn-block.btn-sm
@@ -80,10 +97,3 @@
       .content
         = yield
     %footer
-
-
-
-
-
-
-

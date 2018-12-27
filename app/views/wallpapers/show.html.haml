@@ -1,6 +1,6 @@
 .container.align-items-center
   .row
-    .btn-group-sm.ml-2.mr-2.mt-2.mb-2
+    .btn-group-sm.m-2
       - if request.referer && request.referer != request.original_url
         = link_to 'Back', request.referrer, class: "btn btn-secondary", id: 'back'
       - else
@@ -13,14 +13,14 @@
   .row
     = link_to image_tag(@wallpaper.image.thumb.url, alt: 'image'), @wallpaper.image.url, class: "btn btn-secondary", target: '_blank'
   .row
-    .btn-group-sm.ml-2.mr-2.mt-2.mb-2{"aria-label" => "Available actions", role: "group"}
+    .btn-group-sm.m-2{"aria-label" => "Available actions", role: "group"}
       %button.btn.btn-info.disabled
         Likes:
-        = @wallpaper.likes_count
+        %lcount
+          = @wallpaper.likes_count
         - if exist_like?(@wallpaper)
-          = link_to 'unlike', new_wallpaper_like_path(@wallpaper), class: "btn btn-secondary", id: 'like'
+          = link_to 'Unlike', new_wallpaper_like_path(@wallpaper), class: "btn btn-secondary", remote: true, id: 'like'
         - else
-          = link_to 'like', new_wallpaper_like_path(@wallpaper), class: "btn btn-success", id: 'like'
+          = link_to 'Like', new_wallpaper_like_path(@wallpaper), class: "btn btn-success", remote: true, id: 'like'
 = render 'comments/form' if current_user.present? || current_admin_user.present?
 = render @wallpaper.comments.order('created_at desc')
-

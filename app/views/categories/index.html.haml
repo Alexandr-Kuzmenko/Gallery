@@ -7,7 +7,7 @@
   - if Category.first
     .btn-toolbar{"aria-label" => "Toolbar with button groups", :role => "toolbar"}
       - @categories.each_with_index do |category, index|
-        .btn-group.ml-2.mr-2.mt-2.mb-2{"aria-label" => "top #{index + 1} category", role: "group"}
+        .btn-group.m-2{"aria-label" => "top #{index + 1} category", role: "group"}
           .container.align-items-center
             .row
               - if category.wallpapers.first
@@ -15,7 +15,7 @@
             .row
               = link_to category.name, category_path(category), class: "btn btn-info btn-sm btn-block", id: "button_show_link_#{index + 1}"
 .row
-  = paginate @categories
+  = paginate @categories, param_name: 'categories_page'
 
 #modal-window.modal.hide.fade{"aria-hidden": "true", "aria-labelledby": "modal-windowLabel", role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-dialog-centered{role: "document"}
