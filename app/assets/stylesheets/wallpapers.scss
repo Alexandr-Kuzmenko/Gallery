@@ -1,3 +1,34 @@
 .row {
   margin: 0px;
+  padding: 0px;
 }
+
+wp_info_container {
+  margin-left: 11rem;
+  padding: 0px;
+
+  nav_container {
+    width: 14rem;
+  }
+
+  wallpaper_container {
+    width: 14rem;
+    background-color: #6495ED;
+  }
+
+  likes_container {
+    width: 14rem;
+    background-color: #6495ED;
+  }
+}
+
+.btn, .btn-group {
+  padding: 5px;
+
+  margin-top: 2px;
+  margin-bottom: 2px;
+
+  margin-left: 0px;
+  margin-right: 0px;
+}
+

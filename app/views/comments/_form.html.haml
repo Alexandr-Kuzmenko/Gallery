@@ -1,5 +1,6 @@
 = form_for [ @wallpaper, @wallpaper.comments.build ], local: true do |f|
-  .new_comment_block
+  %print_field_btn.btn.btn-success Print comment
+  .new_comment_block{ style: "display: none" }
     .row
       .captcha_block
         = recaptcha_tags(theme: :light, ajax: :true, size: :compact)
