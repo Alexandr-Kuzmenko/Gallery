@@ -5,7 +5,8 @@ ActiveAdmin.register Activity do
 
   index do
     selectable_column
-    column(:user) {|usr| link_to usr.user.email, admin_user_path(usr.user.id) }
+    column(:user) { |usr| link_to usr.user.email, admin_user_path(usr.user.id) unless usr.user.nil? }
+    # column :user
     column :action_type
     column :url_page
     column :created_at

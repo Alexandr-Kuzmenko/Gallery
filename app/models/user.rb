@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :follows, through: :subscriptions, source: :category
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :activities
+  has_many :activities, dependent: :nullify
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2]
