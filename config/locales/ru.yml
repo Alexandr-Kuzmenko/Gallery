@@ -169,10 +169,10 @@ ru:
     view: "Вид"
     views:
       pagination:
-        first: "&laquo; Перв"
-        last: "Посл &raquo;"
-        previous: "&lsaquo; Пред"
-        next: "След &rsaquo;"
+        first: "&laquo;"
+        last: "&raquo;"
+        previous: "&lsaquo;"
+        next: "&rsaquo;"
         truncate: "&hellip;"
       helpers:
         page_entries_info:
