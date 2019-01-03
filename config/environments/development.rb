@@ -30,14 +30,6 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
 
-  # Don't care if the mailer can't send.
-  #config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.perform_caching = false
-  # manually added KAI
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -47,18 +39,23 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
   config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.perform_caching = false
+
+  config.action_mailer.perform_deliveries = true
+
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.smtp_settings = {
     address: 'smtp.gmail.com',
     port: 587,
-    domain: 'gmail.com',
-    user_name: 'admin@example.com',
-    password: 'password',
-
-    # user_name: ENV['DEV_MAILER_USER'],
-    # password: ENV['DEV_MAILER_PASS'],
-
+    domain: 'example.com',
+    user_name: Rails.application.credentials.aws[:main_mailer_email],
+    password: Rails.application.credentials.aws[:main_mailer_pass],
+    openssl_verify_mode: 'none',
     authentication: 'plain',
     enable_starttls_auto: true
   }

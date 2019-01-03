@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: 'gallery_site_emailer@example.com'
+  default from: 'admin@example.com'
 
   def greetings_email
     @user = params[:user]
