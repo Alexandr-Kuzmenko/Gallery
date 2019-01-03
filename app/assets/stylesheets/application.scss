@@ -67,11 +67,13 @@ body {
   aside {
     position: absolute;
     text-align: center;
+    overflow: scroll;
     width: 15%;
     height: 100%;
 
     border: solid 1px #000;
-    background: #DCDCDC;
+    background: url(aside-bg.jpg) no-repeat center /cover;
+    # background: #DCDCDC;
     padding: 5px;
 
     //background: url(bg.jpg) no-repeat center /cover;
@@ -84,7 +86,6 @@ body {
       word-wrap: break-word;
       border: solid 1px #000;
     }
-
   }
 
   main {
