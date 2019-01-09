@@ -6,4 +6,3 @@ I18n.available_locales = [:en, :ru]
 
 # Default locale
 I18n.default_locale = :en
-
