@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "font-awesome";
 @import "categories";
 @import "comments";
 @import "likes";
@@ -12,24 +13,27 @@ $zindex-modal-backdrop:    1040 !default;
 $zindex-modal:             1050 !default;
 $zindex-popover:           1060 !default;
 $zindex-tooltip:           1070 !default;
+
+
 html {
   height: 100%;
 }
 
 main, aside, body, footer {
-  padding: 2px; /* Поля */
+  padding: 0px; /* Поля */
   //border: solid 1px #000; /* Параметры рамки */
 }
 
 header {
-  padding: 1px;
+  padding: 0px;
   padding-bottom: 0px;
   margin-top: 0px;
-  margin-bottom: 2px;
+  margin-bottom: 0px;
   margin-left: 0px;
   margin-right: 0px;
   text-align: center;
   background: url(header-bg.jpg) no-repeat center /cover;
+  border: solid 1px #000;
 
   .center_block {
     color: #DC143C;
@@ -42,8 +46,9 @@ header {
   }
 
   .bar_menu {
-    padding: 2px;
-    margin: 5px;
+    padding: 4px;
+    margin-top: 0px;
+    margin-bottom: 1px;
     margin-left: 15%;
     margin-right: 10%;
     text-align: center;
@@ -67,7 +72,7 @@ body {
   aside {
     position: absolute;
     text-align: center;
-    overflow: scroll;
+    overflow: auto;
     width: 15%;
     height: 100%;
 
@@ -98,7 +103,8 @@ body {
     margin-bottom: 0px;
     margin-left: 15%;
     margin-right: 0px;
-    background: url(bg.jpg) no-repeat center /cover;
+    background: url(bg.jpg) no-repeat center center / cover;
+
     padding: 1px;
     padding-left: 5px;
 
@@ -107,4 +113,9 @@ body {
     //   font-family: Arial, Verdana, sans-serif;
     // }
   }
+}
+
+.img-thumbnail.first {
+  background-color: #ADD8E6;
+  align-content: center;
 }
