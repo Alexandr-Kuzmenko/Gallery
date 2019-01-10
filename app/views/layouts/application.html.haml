@@ -76,7 +76,7 @@
               = comm.commentable.nickname
               = comm.commentable.id
           prints at:
-          = image_tag(comm.wallpaper.image.mini_thumb.url, alt: 'image')
+          = image_tag(comm.wallpaper.image.mini_thumb.url, alt: 'image', class: 'img-fluid')
           %br/
           = comm.text.truncate(40, omission: '...')
           = link_to '> watch full', wallpaper_path(comm.wallpaper)

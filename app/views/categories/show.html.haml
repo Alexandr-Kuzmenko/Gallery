@@ -8,9 +8,9 @@
       = link_to 'Back', categories_path, class: "btn btn-secondary", id: 'back'
     - if current_user
       - if exist_subscription?(@category)
-        = link_to 'Unfollow', new_category_subscription_path(@category), class: "btn btn-danger", remote: true, id: 'follow'
+        = link_to (fa_icon 'bell-o'), new_category_subscription_path(@category), class: "btn btn-danger", remote: true, id: 'follow'
       -else
-        = link_to 'Follow', new_category_subscription_path(@category), class: "btn btn-info", remote: true, id: 'follow'
+        = link_to (fa_icon 'bell'), new_category_subscription_path(@category), class: "btn btn-info", remote: true, id: 'follow'
     - if own?(@category)
       = link_to 'Edit Category name', edit_category_path(@category), class: "btn btn-warning"
       = link_to 'Delete category', category_path(@category), class: "btn btn-danger", method: :delete, |
@@ -19,8 +19,7 @@
   .btn-group.m-2{"aria-label" => "top #{index + 1} wallpapers", role: "group"}
     .container.align-items-center
       .row
-        = link_to image_tag(wallpaper.image.thumb.url, alt: 'image'), wallpaper.image.url, class: "btn btn-secondary", target: '_blank'
+        = link_to image_tag(wallpaper.image.thumb.url, alt: 'image'), wallpaper.image.url, class: 'img-thumbnail first', target: '_blank'
       .row
         = link_to 'Comment', wallpaper_path(wallpaper), class: "btn btn-default"
         = link_to 'Edit', edit_wallpaper_path(wallpaper), class: "btn btn-default"
-
