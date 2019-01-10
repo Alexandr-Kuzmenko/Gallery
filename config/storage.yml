@@ -10,7 +10,7 @@ amazon:
   service: S3
   access_key_id: <%= Rails.application.credentials.aws[:aws_akid] %>
   secret_access_key: <%= Rails.application.credentials.aws[:aws_akid] %>
-  region: EU (Frankfurt)
+  region: eu-central-1
   bucket: gallery-starting-bucket
 
 # Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
