@@ -1,14 +1,16 @@
 class Wallpaper < ApplicationRecord
-  mount_uploader :image, ImageUploader
+  extend FriendlyId
+
   belongs_to :category, counter_cache: true
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  extend FriendlyId
+  validates :title, :image, :category_id, presence: true
+
   friendly_id :title, use: :slugged
+
+  mount_uploader :image, ImageUploader
 
   paginates_per 9
   max_paginates_per 20
-
-  validates :title, :image, :category_id, presence: true
 end
