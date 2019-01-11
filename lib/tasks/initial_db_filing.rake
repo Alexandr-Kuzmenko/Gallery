@@ -1,7 +1,7 @@
 namespace :autofilling do
   desc 'Import initial pack of images and categories to db from folder below'
   task init_filling: :environment do
-    Dir.chdir("storage/Wallpapers_for_Site")
+    Dir.chdir('storage/wallpapers_for_site')
     Dir.foreach(Dir.pwd) do |d|
       unless d.include? ?.
         @category = AdminUser.first.categories.new(name: d)
@@ -16,10 +16,10 @@ namespace :autofilling do
             @wallpaper.save
           end
         end
-        Dir.chdir("../")
+        Dir.chdir('../')
       end
     end
-    Dir.chdir("../../")
-    p 'Task complete'
+    Dir.chdir('../../')
+    p 'Autofilling task complete'
   end
 end

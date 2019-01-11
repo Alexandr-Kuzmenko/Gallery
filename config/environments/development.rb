@@ -75,4 +75,8 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   config.i18n.available_locales = [:en, :ru]
+
+  ENV['AWS_ACCESS_KEY_ID'] = Rails.application.credentials.aws[:aws_akid]
+  ENV['AWS_SECRET_ACCESS_KEY'] = Rails.application.credentials.aws[:aws_sak]
+  ENV['AWS_REGION'] = 'eu-central-1'
 end

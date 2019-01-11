@@ -44,9 +44,10 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 # Hand-written in Project gems
 gem 'activeadmin'
-gem 'aws-sdk-s3', require: false
+gem 'aws-sdk-s3' # , require: false
 gem 'carrierwave', '~> 1.0'
 gem 'devise'
+gem 'fog-aws'
 gem 'font-awesome-rails'
 gem 'friendly_id', '~> 5.2.0'
 gem 'haml-rails', '~> 1.0'
@@ -57,8 +58,6 @@ gem 'omniauth-google-oauth2'
 gem 'rails-i18n'
 gem 'recaptcha'
 gem 'rspec-rails', '~> 3.8'
-
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

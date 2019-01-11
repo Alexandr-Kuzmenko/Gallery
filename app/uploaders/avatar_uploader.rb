@@ -1,7 +1,8 @@
 class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  storage :file
+  storage :file if Rails.env.development?
+  storage :fog if Rails.env.production?
 
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
@@ -16,7 +17,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    "avatar.jpg" if original_filename
+    'avatar.jpg' if original_filename
   end
 
   private
@@ -24,7 +25,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def default_avatar_resolution(width, height)
     manipulate! do |img|
       img.combine_options do |c|
-        c.fuzz "3%"
+        c.fuzz '3%'
         c.trim
         c.resize "#{width}x#{height}>"
         c.resize "#{width}x#{height}<"

@@ -2,21 +2,22 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
-  #process :store_dimensions
+  # process :store_dimensions
 
-  #def resize_to_fit_by_percentage(percentage)
+  # def resize_to_fit_by_percentage(percentage)
   #  resize_to_fit model.width*percentage, nil
-  #end
+  # end
 
-  #def store_dimensions
+  # def store_dimensions
   #  if file && model
   #    model.width, model.height = ::MiniMagick::Image.open(file.file)[:dimensions]
   #  end
-  #end
+  # end
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
-  # storage :fog
+  # storage :file
+  storage :file if Rails.env.development?
+  storage :fog if Rails.env.production?
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -64,7 +65,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  #def filename
-  #  "wallpaper#{model.id}.jpg" if original_filename
-  #end
+  # def filename
+  #   "wallpaper#{model.id}.jpg" if original_filename
+  # end
 end

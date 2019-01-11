@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 2019_01_09_161754) do
   create_table "wallpapers", force: :cascade do |t|
     t.string "title"
     t.integer "category_id"
-    t.string "image"
+    t.string "image", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "likes_count", default: 0
