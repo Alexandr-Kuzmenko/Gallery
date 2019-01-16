@@ -12,8 +12,3 @@ $(document).on 'turbolinks:load', ->
           $('#follow').html '<i class="fa fa-bell"></i>'
           $('#follow').toggleClass('btn-info btn-danger')
       return
-
-    $('.carousel').find('.carousel-item').first().addClass('active')
-    $('.carousel').carousel({
-        interval: 5000
-      })

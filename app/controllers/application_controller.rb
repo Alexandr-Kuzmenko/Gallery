@@ -55,6 +55,11 @@ class ApplicationController < ActionController::Base
 
   def top_categories
     @top_categories = Category.limit(5).order('wallpapers_count desc').to_a
+    @bg_wallpapers = []
+    @top_categories.each do |ctg|
+      @bg_wallpapers << ctg.wallpapers.limit(2).order('likes_count desc').to_a
+    end
+    @bg_wallpapers = @bg_wallpapers.flatten
   end
 
   def last_comments

@@ -1,19 +1,3 @@
-.row.justify-content-md-center
-  /.container
-  #carouselExampleFade.carousel.slide.carousel-fade{"data-ride" => "carousel"}
-    .carousel-inner
-      - @categories.each do |c|
-        - c.wallpapers.each_with_index do |cw, j|
-          .carousel-item
-            %img.img-thumbnail.car_img.d-block{:alt => "...", :src => cw.image.url}/
-            .carousel-caption.d-none.d-md-block.align-center
-              = link_to 'Watch', wallpaper_path(cw)
-    %a.carousel-control-prev{"data-slide" => "prev", :href => "#carouselExampleFade", :role => "button"}
-      %span.carousel-control-prev-icon{"aria-hidden" => "true"}
-      %span.sr-only Previous
-    %a.carousel-control-next{"data-slide" => "next", :href => "#carouselExampleFade", :role => "button"}
-      %span.carousel-control-next-icon{"aria-hidden" => "true"}
-      %span.sr-only Next
 .row
   - if user?
     = link_to 'New category', new_category_path, { remote: true, "data-toggle": "modal",
@@ -21,13 +5,13 @@
                                                     class: "btn btn-info" }
 .row
   - if Category.first
-    .btn-toolbar{"aria-label" => "Toolbar with button groups", :role => "toolbar"}
+    .btn-toolbar{"aria-label" => "Toolbar with button groups", role: "toolbar"}
       - @categories.each_with_index do |category, index|
         .btn-group.m-2{"aria-label" => "top #{index + 1} category", role: "group"}
           .container.align-items-center
             .row
               - if category.wallpapers.first
-                = link_to image_tag(category.wallpapers.sample.image.thumb.url, alt: 'image', class: 'img-thumbnail first'), category_path(category)
+                = link_to image_tag(category.wallpapers.sample.image.thumb.url, alt: 'image', class: 'img-thumbnail'), category_path(category)
             .row
               = link_to category.name, category_path(category), class: "btn btn-info btn-sm btn-block", id: "button_show_link_#{index + 1}"
 .row
