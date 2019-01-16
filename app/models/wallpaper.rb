@@ -11,6 +11,6 @@ class Wallpaper < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-  paginates_per 9
+  paginates_per 6
   max_paginates_per 20
 end

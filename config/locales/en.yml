@@ -184,7 +184,7 @@ en:
           more_pages:
             display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
   header:
-    localization: "Localization"
+    localization: "EN"
     main_bar:
       categories: "Categories"
       top_categories: "TOP categories"

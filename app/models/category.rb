@@ -11,6 +11,6 @@ class Category < ApplicationRecord
 
   friendly_id :name, use: :slugged
 
-  paginates_per 5
-  max_paginates_per 5
+  paginates_per 6
+  max_paginates_per 6
 end
