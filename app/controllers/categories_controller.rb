@@ -7,6 +7,7 @@ class CategoriesController < ApplicationController
   end
 
   def index
+    @e_categories = Category.all.where(wallpapers_count: 0)
     @categories = Category.all.order('wallpapers_count DESC, name').page(params[:categories_page])
   end
 

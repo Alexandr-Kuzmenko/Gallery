@@ -58,52 +58,53 @@
               -#.carousel-caption.d-none.d-md-block.align-center
               -#  = link_to 'Watch', wallpaper_path(bgw)
 
-    %col-left
-      #nav_aside.overlay
-        %button.btn{id: 'nav_bar_close'}
-          = fa_icon 'chevron-left'
-        .overlay-content
-          = link_to I18n.t('header.main_bar.categories'), categories_path
-          %button.btn.btn-secondary.dropdown{ id: 'top5categories' }
-            .dropdown-toggle{ "data-toggle": 'dropdown', "data-target": '#' }
-              = I18n.t("header.main_bar.top_categories")
-              %b.caret
-            %ul.dropdown-menu
-              - @top_categories.each do |cat|
-                %li
-                  = link_to "#{cat.name}", category_path(cat)
-          = link_to I18n.t('header.main_bar.wallpapers'), wallpapers_path
-          = link_to I18n.t('header.main_bar.upload'), new_wallpaper_path
-      %button.btn{id: 'nav_bar_open'}
-        = fa_icon 'navicon'
+    %content
+      %col-left
+        #nav_aside.overlay
+          %button.btn{id: 'nav_bar_close'}
+            = fa_icon 'chevron-left'
+          .overlay-content
+            = link_to I18n.t('header.main_bar.categories'), categories_path
+            %button.btn.btn-secondary.dropdown{ id: 'top5categories' }
+              .dropdown-toggle{ "data-toggle": 'dropdown', "data-target": '#' }
+                = I18n.t("header.main_bar.top_categories")
+                %b.caret
+              %ul.dropdown-menu
+                - @top_categories.each do |cat|
+                  .overlay_menu.li
+                    = link_to "#{cat.name}", category_path(cat)
+            = link_to I18n.t('header.main_bar.wallpapers'), wallpapers_path
+            = link_to I18n.t('header.main_bar.upload'), new_wallpaper_path
+        %button.btn{id: 'nav_bar_open'}
+          = fa_icon 'navicon'
 
-    %col-mid
-      .btn-toolbar.mt-1{ "aria-label": "Notice toolbar", role: "notice alerts" }
-        .btn.btn-block.btn-sm
-          - flash.each do |key, value|
-            %div{class: "alert alert-#{key} alert-dismissible fade show", role: "alert" }
-              %strong
-                = value
-              %button.close{ "aria-label": "Close", "data-dismiss": "alert", type: "button" }
-                %span{ "aria-hidden": "true" } ×
-      = yield
 
-    %col-right
-      .info_text_block
-        %strong Recent comments:
-      - @last_comments.each do |comm|
-        .info_text_block
-          %strong
-            - if comm.commentable.nickname?
-              = comm.commentable.nickname
-            - else
-              = comm.commentable.nickname
-              = comm.commentable.id
-          prints at:
-          = image_tag(comm.wallpaper.image.mini_thumb.url, alt: 'image', class: 'img-fluid')
-          %br/
-          = comm.text.truncate(40, omission: '...')
-          = link_to '> watch full', wallpaper_path(comm.wallpaper)
-          %br/
-      = paginate @last_comments, param_name: 'comments_page'
-  %footer
+      %col-mid
+        = yield
+
+      %col-right
+        .info_text_block{style: 'text-align: center;'}
+          %strong Recent comments:
+        - @last_comments.each do |comm|
+          .info_text_block
+            %strong
+              - if comm.commentable.nickname?
+                = comm.commentable.nickname
+              - else
+                = comm.commentable.class
+                = comm.commentable.id
+            prints at:
+            = image_tag(comm.wallpaper.image.mini_thumb.url, alt: 'image', class: 'img-fluid')
+            = comm.text.truncate(40, omission: '...')
+            = link_to '-->watch', wallpaper_path(comm.wallpaper)
+        .row
+          = paginate @last_comments, param_name: 'comments_page'
+      -#%footer
+      -#  .btn-toolbar.mt-1{ "aria-label": "Notice toolbar", role: "notice alerts" }
+      -#    .btn.btn-block.btn-sm
+      -#      - flash.each do |key, value|
+      -#        %div{class: "alert alert-#{key} alert-dismissible fade show", role: "alert" }
+      -#          %strong
+      -#            = value
+      -#          %button.close{ "aria-label": "Close", "data-dismiss": "alert", type: "button" }
+      -#            %span{ "aria-hidden": "true" } ×
