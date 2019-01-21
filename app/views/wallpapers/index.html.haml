@@ -1,35 +1,19 @@
 .row
-  - @wallpapers.each_with_index do |wallpaper, index|
-    .btn-group.m-2{"aria-label" => "top #{index + 1} wallpapers", role: "group"}
-      .container.align-items-center
-        .row
+  - @wallpapers.each do |wallpaper|
+    .col-auto.p-0
+      .container-fluid
+        .info_text_block{style: 'text-align: center;'}
           - if wallpaper.category
-            = link_to "Watch category: #{wallpaper.category.name}", category_path(wallpaper.category), class: "btn btn-info btn-sm btn-block mb-2"
+            = link_to "Watch category: #{wallpaper.category.name}", category_path(wallpaper.category)
           - else
-            %button.btn.btn-info.btn-sm.btn-block.disabled
+            %p
               Uncategorized
-        .row
-          .col-auto
-            .img-thumbnail.first
-              = link_to image_tag(wallpaper.image.thumb.url, alt: 'image'), wallpaper.image.url, target: '_blank'
-              .caption
-                %span
-                  Likes:
-                %lcount
-                  = wallpaper.likes_count
-                - if exist_like?(wallpaper)
-                  = link_to (fa_icon 'thumbs-down'), new_wallpaper_like_path(wallpaper), class: "btn btn-secondary btn-sm", remote: true, id: 'like'
-                - else
-                  = link_to (fa_icon 'thumbs-up'), new_wallpaper_like_path(wallpaper), class: "btn btn-success btn-sm", remote: true, id: 'like'
-                  /.btn-group.m-2{"aria-label" => "Available actions", role: "group"}
-          .col-auto.other
-            .btn-group-vertical.align-items-center.m-2
-              .btn-group.mb-1
-                = link_to 'Comment', wallpaper_path(wallpaper), class: "btn btn-block btn-success"
-              .btn-group.mb-1
-                = link_to 'Correct', edit_wallpaper_path(wallpaper), class: "btn btn-block btn-info"
-              /.btn-group.mb-1
-              /  = link_to 'Destroy', wallpaper_path(wallpaper), class: "btn btn-block btn-outline-danger", method: :delete,
-              /  data: { confirm: 'Are you sure?' }
-.row
-  = paginate @wallpapers, param_name: 'wallpapers_page'
+        %div.img-thumbnail
+          = link_to wallpaper.image.url, target: '_blank' do
+            %img.img-fluid{ alt: 'wallpaper', src: wallpaper.image.thumb.url }
+            .caption.align-content-space-between
+              = link_to 'Correct', edit_wallpaper_path(wallpaper)
+              %button.btn.btn-sm.disabled
+                = wallpaper.title
+              = link_to 'Comment', wallpaper_path(wallpaper), class: 'btn btn-sm btn-success'
+= paginate @wallpapers, param_name: 'wallpapers_page'

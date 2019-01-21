@@ -13,16 +13,17 @@
           - unless e_cat.wallpapers.first
             .emp_cat.li
               = link_to e_cat.name, (category_path(e_cat))
-.row.container-fluid
+.row
   - if Category.first
-    - @categories.each_with_index do |category, index|
+    - @categories.each do |category|
       - if category.wallpapers.first
-        .btn-group.mb-2.mr-2{'aria-label' => "top #{index + 1} category", role: 'group'}
-          %div.img-thumbnail
-            = link_to(category_path(category)) do
-              %img.img-fluid{ alt: 'cat_img_sample', src: category.wallpapers.sample.image.thumb.url }
-              .caption
-                = category.name
+        .col-auto.p-0
+          .container-fluid
+            %div.img-thumbnail
+              = link_to(category_path(category)) do
+                %img.img-fluid{ alt: 'cat_img_sample', src: category.wallpapers.sample.image.thumb.url }
+                .caption
+                  = category.name
 
 = paginate @categories, param_name: 'categories_page'
 

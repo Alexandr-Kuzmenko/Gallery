@@ -1,26 +1,30 @@
-%wp_info_container.align-items-center
-  %nav_container.btn-group-sm.justify-content-between
-  .row
-    - if request.referer && request.referer != request.original_url
-      = link_to 'Back', request.referrer, class: "btn btn-secondary", id: 'back'
-    - else
-      = link_to 'Back', wallpapers_path, class: "btn btn-secondary", id: 'back'
+.row
+  .btn-group.flex-wrap.mb-2{'aria-label' => 'Available actions', role: 'group'}
     - if @wallpaper.category
       = link_to "Watch category: #{@wallpaper.category.name}", category_path(@wallpaper.category), class: "btn btn-info"
     - else
       %button.btn.btn-info.btn-block.disabled
         Uncategorized
-  .row
-    .img-thumbnail.first
-      = link_to image_tag(@wallpaper.image.thumb.url, alt: 'image'), @wallpaper.image.url, target: '_blank'
-      .caption
-        %span
-          Likes:
-        %lcount
-          = @wallpaper.likes_count
-        - if exist_like?(@wallpaper)
-          = link_to (fa_icon 'thumbs-down'), new_wallpaper_like_path(@wallpaper), class: "btn btn-sm btn-secondary", remote: true, id: 'like'
-        - else
-          = link_to (fa_icon 'thumbs-up'), new_wallpaper_like_path(@wallpaper), class: "btn btn-sm btn-success", remote: true, id: 'like'
-= render 'comments/form' if current_user.present? || current_admin_user.present?
-= render @wallpaper.comments.order('created_at desc')
+    - if request.referer && request.referer != request.original_url
+      = link_to 'Back', request.referrer, class: "btn btn-secondary", id: 'back'
+    - else
+      = link_to 'Back', wallpapers_path, class: "btn btn-secondary", id: 'back'
+.row
+  .col-auto.p-0
+    .container-fluid
+      %div.img-thumbnail
+        = link_to @wallpaper.image.url, target: '_blank' do
+          %img.img-fluid{ alt: 'wallpaper', src: @wallpaper.image.thumb.url }
+          .caption.align-content-center
+            %span
+              Likes:
+            %lcount
+              = @wallpaper.likes_count
+            - if exist_like?(@wallpaper)
+              = link_to (fa_icon 'thumbs-down'), new_wallpaper_like_path(@wallpaper), class: "btn btn-sm btn-secondary", remote: true, id: 'like'
+            - else
+              = link_to (fa_icon 'thumbs-up'), new_wallpaper_like_path(@wallpaper), class: "btn btn-sm btn-success", remote: true, id: 'like'
+.row
+  = render 'comments/form' if current_user.present? || current_admin_user.present?
+.row
+  = render @wallpaper.comments.order('created_at desc')

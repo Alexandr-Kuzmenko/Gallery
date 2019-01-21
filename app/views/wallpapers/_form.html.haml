@@ -1,45 +1,32 @@
 = form_for @wallpaper do |f|
-  %h4
-    .row
-      .col-auto
-        = f.label :title, 'Image name:'
-    .row
-      .col-auto
-        = f.text_field :title
-    .row
-      .col-auto
-        = f.label :category, 'Category: '
-    .row
-      .col-auto
-        = f.collection_select :category_id, @categories, :id, :name
-    %br/
-    .row
-      .col-auto
-        .card{style: "width: 20rem;"}
-          .card-body
-            .row
-              .col-auto
-                = f.label :image, 'Local file:', class: "btn disabled btn-info"
-            .row
-              .col-auto
-                = f.file_field :image, class: "btn btn-sm btn-secondary"
-                = f.hidden_field :image_cache
-      .col-auto.other
-        %br/
-        %button.btn.btn-info.disabled
-          Choose
-          %br/
-          one of
-      .col-auto.other
-        .card{style: "width: 20rem;"}
-          .card-body
-            .row
-              .col-auto
-                = f.label :remote_image_url, "Link to image URL:", class: "btn disabled btn-info"
-            .row
-              .col-auto
-                = f.text_field :remote_image_url
-    %br/
-    .row
-      .col-auto
-        = f.submit 'Save', class: "btn btn-success"
+  .row
+    %table
+      %tbody
+        %tr
+          %td
+            = f.label :title, 'Image name:'
+          %td
+            = f.text_field :title
+        %tr
+          %td
+            = f.label :category, 'Category: '
+          %td
+            = f.collection_select :category_id, @categories, :id, :name
+        %tr
+          %td
+            = f.label :image, 'Local file:'
+          %td
+            = f.file_field :image
+            = f.hidden_field :image_cache
+        %tr
+          %td{ colspan: '2' }
+            %span Choose one of
+            %button.btn.btn-sm.btn-warning
+              = fa_icon 'arrows-v'
+        %tr
+          %td
+            = f.label :remote_image_url, 'Image-link URL:'
+          %td
+            = f.text_field :remote_image_url
+  .actions
+    = f.submit 'Save', class: 'btn btn-success'

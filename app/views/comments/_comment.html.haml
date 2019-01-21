@@ -1,17 +1,16 @@
 .comments_block.btn-group
   .author_block
     - if comment.commentable.avatar?
-      = image_tag(comment.commentable.avatar.url, alt: 'avatar')
+      %img.img-fluid{ alt: 'avatar', src: comment.commentable.avatar.url }
     - else
-      = image_tag("avatar_default.jpg", alt: "avatar")
-    %h6
+      = image_tag "avatar_default.jpg", alt: "avatar", class: 'img img-fluid'
+    %p.m-0
       - if comment.commentable.nickname?
         = comment.commentable.nickname
       - else
-        = comment.commentable.nickname
+        = comment.commentable.class
         = comment.commentable.id
-      %br/
+    %p.m-0
       = comment.created_at.strftime("%Y-%m-%d %H:%M")
   .comment_block
     = comment.text
-%br/

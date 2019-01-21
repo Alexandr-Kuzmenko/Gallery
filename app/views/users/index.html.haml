@@ -1,46 +1,53 @@
-.user_info_block
-  .user_bar_menu.btn-toolbar.justify-content-between{ "aria-label": "Main site toolbar", role: "toolbar" }
-    .btn-group
-    .btn-group
-      = link_to 'Profile settings', edit_user_path(@user), class: "btn btn-warning btn-sm"
-      = link_to 'Delete account', user_path(@user), class: "btn btn-danger btn-sm", method: :delete,
-                                  data: { confirm: 'Do you really want to delete your own account?'}
-  .container.align-items-center
+.user_bar_menu.btn-toolbar.justify-content-between.mb-2{ "aria-label": 'User menu devider', role: 'toolbar' }
+  .btn-group.flex-wrap{'aria-label' => 'Available actions', role: 'group'}
+    = link_to 'Profile settings', edit_user_path(@user), class: 'btn btn-warning'
+  .btn-group.flex-wrap{'aria-label' => 'Delete action', role: 'group'}
+    = link_to 'Delete account', user_path(@user), class: 'btn btn-danger', method: :delete,
+                                data: { confirm: 'Do you really want to delete your own account?'}
+.row
+  .container-fluid.align-items-center
     .row
-      .col-auto
-        .card{ style: "width: 102px;" }
+      .col-auto.p-0.mr-1
+        %div.img-thumbnail
           - if @user.avatar?
-            = image_tag(@user.avatar.url, alt: 'avatar')
+            %img.img-fluid{ alt: 'avatar', src: @user.avatar.url }
           - else
-            = image_tag("avatar_default.jpg", alt: "avatar")
-          %button.btn.btn-info.btn-sm.btn-block.disabled
-            Avatar:
-          /.card-body
-      .col-auto.other
-        %button.btn.btn-info.btn-sm.btn-block.disabled
-          Email:
-          = @user.email
-        %button.btn.btn-info.btn-sm.btn-block.disabled
-          Nickname:
-          - if @user.nickname
-            = @user.nickname
-          - else
-            user
-            = @user.id
-    /.row
-    /  .col-auto
-    /  .col-auto.other
-%br/
-.subscriptions_block
-  .btn-toolbar{ "aria-label": "Subscriptions", role: "toolbar" }
-    %alert.alert.alert-dark{ role: "alert", style: "width: 100%;" }
-      Your subscriptions:
-  - @user.subscriptions.each do |subs|
-    .btn-group.ml-2.mr-2.mt-2.mb-2{ "aria-label" => "recent wallpapers", role: "group"}
-      .container.align-items-center
-        .row
-          %button.btn.btn-sm.btn-success.disabled.mb-2
-            #{ subs.category.name } - last updates
-        .row
-          - subs.category.wallpapers.last(5).reverse.each do |wp|
-            = link_to(image_tag(wp.image.thumb.url), wallpaper_path(wp), class: "btn btn-dark btn-sm mr-2")
+            %img.img-fluid{ alt: 'avatar', src: 'avatar_default.jpg' }
+          .caption
+            %span
+              Avatar
+      .col-auto.other.p-0
+        %table.table-bordered.table-striped{ style: 'background-color: #DCDCDC;' }
+          %tbody
+            %tr
+              %td
+                %span
+                  Email:
+              %td
+                = @user.email
+            %tr
+              %td
+                %span
+                  Nickname:
+              - if @user.nickname && !@user.nickname.eql?('')
+                %td
+                  = @user.nickname
+              - else
+                %td
+                  %span User
+                  = @user.id
+- if @user.subscriptions.first
+  .subscriptions_block
+    .row
+      %alert.alert.alert-success{ role: "alert", style: 'width: 50%; height: 40px;' }
+        %span.vertical-center
+          Your subscriptions:
+    - @user.subscriptions.each do |subs|
+      %button.btn.btn-sm.btn-success.disabled.mb-2.mt-2
+        %span
+          #{ subs.category.name } - last updates
+      .row
+        - subs.category.wallpapers.last(5).reverse.each do |wp|
+          %div.img-thumbnail
+            = link_to  wallpaper_path(wp), target: '_blank' do
+              %img.img-fluid{ alt: 'recent wallpaper', src: wp.image.thumb.url }

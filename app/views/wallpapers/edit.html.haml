@@ -1,8 +1,16 @@
-= image_tag(@wallpaper.image.thumb.url, alt: 'image', class: 'img-thumbnail img-fluid')
-.info_text_block{style: "width: 20rem;"}
-  Edit wallpaper and then press "Save", or get
-  = link_to 'back', wallpapers_path
-  to Gallery
-.card{style: "width: 20rem;"}
-  .card-body
-    = render 'editform', wallpaper: @wallpaper
+.row
+  .col-auto.p-0
+    .container-fluid
+      %div.img-thumbnail
+        %img.img-fluid{ alt: 'wallpaper', src: @wallpaper.image.thumb.url }
+        .caption.align-content-space-between
+          %button.btn.btn-sm.disabled
+            = @wallpaper.title
+    .card{style: "width: 26rem;"}
+      .card-body
+        .info_text_block
+          Edit wallpaper and then press "Save", or get
+          = link_to 'back', wallpapers_path
+          to Gallery list
+        %br/
+        = render 'editform', wallpaper: @wallpaper

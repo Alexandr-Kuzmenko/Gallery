@@ -1,12 +1,6 @@
 = form_for @category do |f|
-  %h4
-    .row
-      .col-auto
-        = f.label :name, 'Name:'
-    .row
-      .col-auto
-        = f.text_field :name
-    %br/
-    .actions
-      .col-auto
-        = f.submit 'Save', class: "btn btn-info", id: 'modal-save'
+  = f.label :name, 'Name:'
+  = f.text_field :name
+  %br/
+  .actions
+    = f.submit 'Save', class: "btn btn-info", id: 'modal-save'

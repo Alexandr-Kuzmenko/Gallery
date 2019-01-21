@@ -1,7 +1,12 @@
-.info_text_block{style: "width: 20rem;"}
-  Edit your settings and then press "Save", or get
-  = link_to 'back', user_index_path
-  to your profile
 .card{style: "width: 20rem;"}
   .card-body
+    .info_text_block
+      Edit your settings and then press "Save", or get
+      = link_to 'back', user_index_path
+      to your profile
+    %br/
     = render 'form', user: @user
+
+
+
+

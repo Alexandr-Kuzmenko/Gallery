@@ -1,6 +1,6 @@
-.info_text_block{style: "width: 20rem;"}
-  Correct category name or get
-  = link_to 'back', category_path(@category)
 .card{style: "width: 20rem;"}
   .card-body
+    .info_text_block
+      Correct category name or get
+      = link_to 'back', category_path(@category)
     = render 'form', category: @category

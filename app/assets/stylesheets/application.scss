@@ -36,20 +36,58 @@ body {
     transform: translate3d(0, 0, 0);
   }
 
+  table {
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .container-fluid {
+    padding: 0;
+    margin: 0 5px 5px 0;
+  }
+
+  div.img-thumbnail {
+    background-color: #D3D3D3;
+    border: 1px solid black;
+    text-align: center;
+  }
+
   .info_text_block {
     padding: 2px 5px 2px 5px;
 
-    background: #DCDCDC;
+    background-color: #DCDCDC;
     word-wrap: break-word;
     border: solid 1px #000;
+    border-radius: 2px;
   }
-
-
 
   a:hover, a:focus {
     color: red;
     text-decoration: none;
   }
+
+  div.card {
+    margin: 0 5px 5px 5px;
+  }
+
+  .card-body {
+    background: #DCDCDC;
+    word-wrap: break-word;
+  }
+
+  .modal-content {
+    padding: 5px;
+
+    .modal-header {
+      padding: 0;
+      margin-bottom: 5px;
+    }
+
+    .modal-body {
+      padding: 0;
+    }
+  }
+  //Here goes structure page elements
 
   header {
     min-height: 50px;
@@ -187,6 +225,7 @@ body {
       width: calc(100% - 180px);
       max-height: 100vh;
       overflow-y: visible;
+      padding-left: 2px;
     }
 
     col-right {

@@ -1,16 +1,16 @@
 = form_for @user do |f|
-  %h4
-    .row
-      .col-auto
-        = f.label :nickname, 'My nickname:'
-      .col-auto
-        = f.text_field :nickname
-    .row
-      .col-auto
-        = f.label :avatar, 'My avatar:'
-      .col-auto
-        = f.file_field :avatar
-    %br/
-    .row
-      .col-auto
-        = f.submit 'Save', class: "btn btn-success"
+  .row
+    %table
+      %tbody
+        %tr
+          %td
+            = f.label :nickname, 'Nickname:'
+          %td
+            = f.text_field :nickname
+        %tr
+          %td
+            = f.label :avatar, 'Avatar:'
+          %td
+            = f.file_field :avatar
+  .actions
+    = f.submit 'Save', class: 'btn btn-success'
