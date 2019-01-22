@@ -12,7 +12,7 @@
           - if @user.avatar?
             %img.img-fluid{ alt: 'avatar', src: @user.avatar.url }
           - else
-            %img.img-fluid{ alt: 'avatar', src: 'avatar_default.jpg' }
+            = image_tag 'avatar_default.jpg', alt: 'avatar', class: 'img-fluid'
           .caption
             %span
               Avatar

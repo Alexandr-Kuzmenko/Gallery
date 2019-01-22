@@ -1,18 +1,15 @@
 = form_for @category do |f|
-  %h4
-    .row
-      .col-auto
-        = f.label :name, 'Name:'
-    .row
-      .col-auto
-        = f.text_field :name
-    .row
-      .col-auto
-        = f.label :locked, 'Is category locked?'
-      .col-auto
-        = f.check_box :locked
-    %br/
-    .action
-      .col-auto
-        = f.submit 'Save', class: "btn btn-info"
-        = link_to 'Back', admin_categories_path, class: "button"
+  .row
+    %table
+      %tbody
+        %tr
+          %td
+            = f.label :name, 'Name:'
+            = f.text_field :name
+        %tr
+          %td{ colspan: '2' }
+            = f.label :locked, 'Is category locked?'
+            = f.check_box :locked
+  .action
+    = f.submit 'Save', class: "btn btn-info"
+    = link_to 'Back', admin_categories_path, class: "button"

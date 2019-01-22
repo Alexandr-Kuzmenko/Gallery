@@ -1,6 +1,9 @@
-.info_text_block{style: "width: 20rem; align: "left""}
-  Please, log in to do this action.
 .card{ style: "width: 20rem;" }
   .card-body
+    .row
+      .btn.btn-outline-primary.disabled
+        %span
+          Authorization
+    %br/
     = render "devise/sessions/modal"
-= render "devise/shared/links"
+    = render "devise/shared/links"

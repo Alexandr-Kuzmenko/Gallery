@@ -3,7 +3,7 @@
     - if comment.commentable.avatar?
       %img.img-fluid{ alt: 'avatar', src: comment.commentable.avatar.url }
     - else
-      = image_tag "avatar_default.jpg", alt: "avatar", class: 'img img-fluid'
+      = image_tag 'avatar_default.jpg', alt: "avatar", class: 'img-fluid'
     %p.m-0
       - if comment.commentable.nickname?
         = comment.commentable.nickname
