@@ -75,9 +75,9 @@
                     = link_to "#{cat.name}", category_path(cat)
             = link_to I18n.t('header.main_bar.wallpapers'), wallpapers_path
             = link_to I18n.t('header.main_bar.upload'), new_wallpaper_path
+            = link_to I18n.t('header.main_bar.all_comments'), comments_path
         %button.btn{id: 'nav_bar_open'}
           = fa_icon 'navicon'
-
 
       %col-mid
         = yield
@@ -97,14 +97,10 @@
             = image_tag(comm.wallpaper.image.mini_thumb.url, alt: 'image', class: 'img-fluid')
             = comm.text.truncate(40, omission: '...')
             = link_to '-->watch', wallpaper_path(comm.wallpaper)
-        .row
-          = paginate @last_comments, param_name: 'comments_page'
-      -#%footer
-      -#  .btn-toolbar.mt-1{ "aria-label": "Notice toolbar", role: "notice alerts" }
-      -#    .btn.btn-block.btn-sm
-      -#      - flash.each do |key, value|
-      -#        %div{class: "alert alert-#{key} alert-dismissible fade show", role: "alert" }
-      -#          %strong
-      -#            = value
-      -#          %button.close{ "aria-label": "Close", "data-dismiss": "alert", type: "button" }
-      -#            %span{ "aria-hidden": "true" } ×
+      %footer
+        - flash.each do |key, value|
+          %div{class: "alert alert-#{key} alert-dismissible fade show", role: "alert" }
+            %strong.vertical-center
+              = value
+            %button.vertical-center.close{ "aria-label": "Close", "data-dismiss": "alert", type: "button" }
+              %span{ "aria-hidden": "true" } ×

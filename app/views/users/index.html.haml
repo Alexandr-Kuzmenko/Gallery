@@ -47,7 +47,9 @@
         %span
           #{ subs.category.name } - last updates
       .row
-        - subs.category.wallpapers.last(5).reverse.each do |wp|
-          %div.img-thumbnail
-            = link_to  wallpaper_path(wp), target: '_blank' do
-              %img.img-fluid{ alt: 'recent wallpaper', src: wp.image.thumb.url }
+        .container-fluid
+          - subs.category.wallpapers.last(5).reverse.each do |wp|
+            .col-4
+              .img-thumbnail
+                = link_to  wallpaper_path(wp), target: '_blank' do
+                  %img.img-fluid{ alt: 'recent wallpaper', src: wp.image.thumb.url }

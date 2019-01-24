@@ -1,14 +1,8 @@
 .row
-  - @wallpapers.each do |wallpaper|
-    .col-auto.p-0
-      .container-fluid
-        .info_text_block{style: 'text-align: center;'}
-          - if wallpaper.category
-            = link_to "Watch category: #{wallpaper.category.name}", category_path(wallpaper.category)
-          - else
-            %p
-              Uncategorized
-        %div.img-thumbnail
+  .container-fluid
+    - @wallpapers.each do |wallpaper|
+      .col-4
+        .img-thumbnail
           = link_to wallpaper.image.url, target: '_blank' do
             %img.img-fluid{ alt: 'wallpaper', src: wallpaper.image.thumb.url }
             .caption.align-content-space-between
@@ -16,4 +10,10 @@
               %button.btn.btn-sm.disabled
                 = wallpaper.title
               = link_to 'Comment', wallpaper_path(wallpaper), class: 'btn btn-sm btn-success'
+              %br/
+              - if wallpaper.category
+                = link_to "Watch category: #{wallpaper.category.name}", category_path(wallpaper.category)
+              - else
+                %p
+                  Uncategorized
 = paginate @wallpapers, param_name: 'wallpapers_page'

@@ -1,5 +1,5 @@
 .row
-  .btn-group.mb-2{'aria-label' => 'Available actions', role: 'group'}
+  .btn-group.flex-wrap.mb-2{'aria-label' => 'Available actions', role: 'group'}
     %button.btn.btn-success.disabled
       Category: #{@category.name}
     - if request.referer && request.referer != request.original_url
@@ -16,10 +16,10 @@
       = link_to 'Delete category', category_path(@category), class: 'btn btn-danger', method: :delete, |
         data: { confirm: 'Are you sure?' }
 .row
-  - @category.wallpapers.each do |wallpaper|
-    .col-auto.p-0
-      .container-fluid
-        %div.img-thumbnail
+  .container-fluid
+    - @category.wallpapers.each do |wallpaper|
+      .col-4
+        .img-thumbnail
           = link_to wallpaper.image.url, target: '_blank' do
             %img.img-fluid{ alt: 'category wallpaper', src: wallpaper.image.thumb.url }
             .caption.align-content-space-between

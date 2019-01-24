@@ -4,22 +4,23 @@
       = link_to 'New category', new_category_path, { remote: true, "data-toggle": "modal",
                                                       "data-target": "#modal-window", id: 'new_ctg_btn',
                                                       class: "btn btn-info" }
-    %button.btn.btn-secondary.dropdown{ id: 'empty_categories' }
-      .dropdown-toggle{ "data-toggle": 'dropdown', "data-target": '#' }
-        Empty categories
-        %b.caret
-      %ul.dropdown-menu
-        - @e_categories.each do |e_cat|
-          - unless e_cat.wallpapers.first
-            .emp_cat.li
-              = link_to e_cat.name, (category_path(e_cat))
-.row
-  - if Category.first
-    - @categories.each do |category|
-      - if category.wallpapers.first
-        .col-auto.p-0
-          .container-fluid
-            %div.img-thumbnail
+      %button.btn.btn-secondary{ id: 'empty_ctg_btn' }
+        .dropdown
+          .dropdown-toggle{ "data-toggle": 'dropdown', "data-target": '#' }
+            Empty categories
+            %b.caret
+          %ul.dropdown-menu
+            - @e_categories.each do |e_cat|
+              - unless e_cat.wallpapers.first
+                .emp_cat.li
+                  = link_to e_cat.name, (category_path(e_cat))
+- if Category.first
+  .row
+    .container-fluid
+      - @categories.each do |category|
+        - if category.wallpapers.first
+          .col-4
+            .img-thumbnail
               = link_to(category_path(category)) do
                 %img.img-fluid{ alt: 'cat_img_sample', src: category.wallpapers.sample.image.thumb.url }
                 .caption

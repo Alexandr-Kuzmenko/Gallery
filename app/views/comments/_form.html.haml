@@ -1,8 +1,7 @@
 = form_for [ @wallpaper, @wallpaper.comments.build ], local: true do |f|
-  %print_field_btn.btn.btn-success Print comment
+  %print_field_btn.btn.btn-primary Print comment
   .new_comment_block{ style: "display: none" }
-    .row
-      .captcha_block
-        = recaptcha_tags(theme: :light, ajax: :true, size: :compact)
-        = f.submit 'Print', class: "btn btn-success btn-block"
-      = f.text_area(:text, class: 'text_area_block')
+    .captcha_block
+      = recaptcha_tags(theme: :light, ajax: :true, size: :compact)
+      = f.submit 'Print', class: "btn btn-success btn-block"
+    = f.text_area(:text, class: 'text_area_block')

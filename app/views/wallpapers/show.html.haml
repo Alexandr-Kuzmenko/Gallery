@@ -10,9 +10,9 @@
     - else
       = link_to 'Back', wallpapers_path, class: "btn btn-secondary", id: 'back'
 .row
-  .col-auto.p-0
-    .container-fluid
-      %div.img-thumbnail
+  .container-fluid
+    .col-4
+      .img-thumbnail
         = link_to @wallpaper.image.url, target: '_blank' do
           %img.img-fluid{ alt: 'wallpaper', src: @wallpaper.image.thumb.url }
           .caption.align-content-center
@@ -26,6 +26,10 @@
               - else
                 = link_to (fa_icon 'thumbs-up'), new_wallpaper_like_path(@wallpaper), class: "btn btn-sm btn-success", remote: true, id: 'like'
 .row
-  = render 'comments/form' if current_user.present? || current_admin_user.present?
+  .container-fluid
+    .col-6
+      = render 'comments/form' if current_user.present? || current_admin_user.present?
 .row
-  = render @wallpaper.comments.order('created_at desc')
+  .container-fluid
+    .col-6
+      = render @wallpaper.comments.order('created_at desc')

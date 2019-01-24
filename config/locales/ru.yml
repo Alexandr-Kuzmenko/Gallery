@@ -190,6 +190,7 @@ ru:
       top_categories: "ТОП категорий"
       wallpapers: "Галерея"
       upload: "Загрузить обои"
+      all_comments: "Все комментарии"
     main_page_welcome: "Добро пожаловать, %{email}"
     wallpapers_gallery: "Галерея обоев"
 

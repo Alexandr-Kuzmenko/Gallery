@@ -19,3 +19,21 @@ $(document).on 'turbolinks:load', ->
       $('#nav_aside').css
         'min-width': '0px';
     return
+
+# resizeTimer = undefined
+# $(document).ready ->
+#   $(window).resize ->
+#     clearTimeout resizeTimer
+#     resizeTimer = setTimeout((->
+#       if innerWidth >= 1280
+#         $('#carouselBgWp').carousel({
+#           interval: 400
+#         })
+#         alert 'start'
+#       else
+#         $('#carouselBgWp').carousel('pause')
+#         alert 'stop'
+#       return
+#     ), 500)
+#     return
+#   return

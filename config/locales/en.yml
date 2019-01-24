@@ -190,6 +190,7 @@ en:
       top_categories: "TOP categories"
       wallpapers: "Gallery"
       upload: "Upload wallpaper"
+      all_comments: "All comments"
     main_page_welcome: "Welcome, %{email}"
     wallpapers_gallery: "Wallpapers gallery"
 

@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   before_action :load_parent_wallpaper, only: [:create]
 
   def index
-    @comments = Comment.all
+    @comments = Comment.all.order('created_at DESC').page(params[:comments_page])
   end
 
   def show; end
