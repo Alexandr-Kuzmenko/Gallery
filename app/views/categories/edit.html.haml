@@ -1,6 +1,8 @@
-.card{style: "width: 20rem;"}
-  .card-body
-    .info_text_block
-      Correct category name or get
-      = link_to 'back', category_path(@category)
-    = render 'form', category: @category
+.d-flex.mt-1.justify-content-center
+  .card{style: "width: 20rem;"}
+    .card-body
+      .info_text_block
+        %span
+          Correct category name or get
+        = link_to 'back', category_path(@category)
+      = render 'form', category: @category

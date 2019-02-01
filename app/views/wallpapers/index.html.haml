@@ -1,19 +1,25 @@
-.row
-  .container-fluid
-    - @wallpapers.each do |wallpaper|
-      .col-4
-        .img-thumbnail
+.main_nav_bar
+  #menu-overlay-btn.btn.btn-primary
+    = fa_icon 'navicon'
+  #log-overlay-btn.btn.btn-primary
+    = fa_icon 'key'
+.page_content
+  %tile_block
+    .row.justify-content-center
+      - @wallpapers.each do |wallpaper|
+        .col.col-12.col-xs-6.col-md-6.col-lg-4.col-xl-3
           = link_to wallpaper.image.url, target: '_blank' do
-            %img.img-fluid{ alt: 'wallpaper', src: wallpaper.image.thumb.url }
-            .caption.align-content-space-between
-              = link_to 'Correct', edit_wallpaper_path(wallpaper)
-              %button.btn.btn-sm.disabled
-                = wallpaper.title
-              = link_to 'Comment', wallpaper_path(wallpaper), class: 'btn btn-sm btn-success'
-              %br/
-              - if wallpaper.category
-                = link_to "Watch category: #{wallpaper.category.name}", category_path(wallpaper.category)
-              - else
+            .img-overlaid
+              %img.img-fluid{ alt: 'wallpaper', src: wallpaper.image.thumb.url }
+              #tile.overlay.align-content-space-around
                 %p
-                  Uncategorized
-= paginate @wallpapers, param_name: 'wallpapers_page'
+                  = wallpaper.title
+                = link_to 'Correct', edit_wallpaper_path(wallpaper)
+                = link_to 'Comment', wallpaper_path(wallpaper)
+                - if wallpaper.category
+                  = link_to "Watch category: #{wallpaper.category.name}", category_path(wallpaper.category)
+                - else
+                  %p
+                    Uncategorized
+    .row
+      = paginate @wallpapers, param_name: 'wallpapers_page'

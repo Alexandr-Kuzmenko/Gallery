@@ -1,14 +1,29 @@
 print_field_btn {
-  margin: 2px 0;
   padding: 5px 2px;
   width: 10rem;
 }
-
-.comments_block {
+.new_comment_block {
   position: relative;
   display: grid;
+  grid-template-columns: 164px auto;
+  .captcha_block {
+    padding: 2px;
+    border: solid 1px #000;
+    border-radius: 4px;
+    background-color: #5A5A5A;
+  }
+  .text_area_block {
+    padding: 2px 5px;
+    border: solid 1px #000;
+    border-radius: 4px;
+    background-color: #FFFFF0;
+  }
+}
+.comments_block {
+  position: relative;
+  width: 90%;
+  display: grid;
   grid-template-columns: 110px auto;
-
   .author_block {
     padding: 5px 2px;
     text-align: center;
@@ -17,53 +32,30 @@ print_field_btn {
     border-radius: 4px;
     background-color: #DCDCDC;
   }
-
   .comment_block {
     margin: 0;
     padding: 2px 5px;
     word-wrap: break-word;
     border: solid 1px #000;
     border-radius: 4px;
-    background-color: #DCDCDC;
+    background-color: #FFFFF0;
   }
 }
+.comments_table {
+  display: table;
+  margin: 0 20px;
+  padding: 2px;
+  border-left: solid 1px #000;
+  border-collapse: collapse;
+  background-color: #DCDCDC;
 
-.new_comment_block {
-  position: relative;
-  display: grid;
-  grid-template-columns: 164px auto;
-
-  .captcha_block {
+  th, td {
     padding: 2px;
+    text-align: center;
     border: solid 1px #000;
-    border-radius: 4px;
-    background-color: #5A5A5A;
-  }
-
-  .text_area_block {
-    padding: 2px 5px;
-    border: solid 1px #000;
-    border-radius: 4px;
-    background-color: #DCDCDC;
   }
 }
-
-  .comments_table {
-    display: table;
-    margin: 0 20px;
-    padding: 2px;
-    border-left: solid 1px #000;
-    border-collapse: collapse;
-    background-color: #DCDCDC;
-
-    th, td {
-      padding: 2px;
-      text-align: center;
-      border: solid 1px #000;
-    }
-  }
-
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 479px) {
   .comments_block {
     grid-template-columns: auto;
 

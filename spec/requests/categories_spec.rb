@@ -48,7 +48,7 @@ RSpec.describe 'Categories behavior', type: :request do
       sign_in user
       category
       visit categories_url
-      expect(page).to have_selector('#empty_ctg_btn')
+      expect(page).to have_selector('#empty_ctg_collapse')
     end
   end
 

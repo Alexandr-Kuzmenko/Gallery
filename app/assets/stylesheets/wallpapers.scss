@@ -2,54 +2,8 @@
   margin: 0;
   padding: 0;
 }
-
 .caption {
   align-content: center;
   text-align: center;
   padding: 2px;
-}
-.col-6 {
-  width: 50%;
-  padding: 0;
-}
-
-
-.col-4 {
-  float: left;
-  margin-bottom: 2px;
-  transition-property: width;
-  transition: width 5s;
-}
-
-.img-thumbnail {
-  max-width: 394px;
-  margin: 0px auto;
-}
-
-@media screen and (max-width: 720px) {
-  .col-4 {
-    max-width: 100%;
-  }
-
-  .col-6 {
-    width: 100%;
-    max-width: 100%;
-  }
-}
-
-@media screen and (min-width: 721px) and (max-width:1279px) {
-  .col-4 {
-    max-width: 49%;
-  }
-
-  .col-6 {
-    width: 80%;
-    max-width: 80%;
-  }
-}
-
-@media screen and (min-width: 1280px) {
-  .col-4 {
-    max-width: 33%;
-  }
 }

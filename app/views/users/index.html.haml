@@ -1,55 +1,72 @@
-.user_bar_menu.btn-toolbar.justify-content-between.mb-2{ "aria-label": 'User menu devider', role: 'toolbar' }
-  .btn-group.flex-wrap{'aria-label' => 'Available actions', role: 'group'}
-    = link_to 'Profile settings', edit_user_path(@user), class: 'btn btn-warning'
-  .btn-group.flex-wrap{'aria-label' => 'Delete action', role: 'group'}
-    = link_to 'Delete account', user_path(@user), class: 'btn btn-danger', method: :delete,
-                                data: { confirm: 'Do you really want to delete your own account?'}
-.row
-  .container-fluid.align-items-center
-    .row
-      .col-auto.p-0.mr-1
-        %div.img-thumbnail
-          - if @user.avatar?
-            %img.img-fluid{ alt: 'avatar', src: @user.avatar.url }
-          - else
-            = image_tag 'avatar_default.jpg', alt: 'avatar', class: 'img-fluid'
-          .caption
-            %span
-              Avatar
-      .col-auto.other.p-0
-        %table.table-bordered.table-striped{ style: 'background-color: #DCDCDC;' }
-          %tbody
-            %tr
-              %td
-                %span
-                  Email:
-              %td
-                = @user.email
-            %tr
-              %td
-                %span
-                  Nickname:
-              - if @user.nickname && !@user.nickname.eql?('')
-                %td
-                  = @user.nickname
-              - else
-                %td
-                  %span User
-                  = @user.id
-- if @user.subscriptions.first
-  .subscriptions_block
-    .row
-      %alert.alert.alert-success{ role: "alert", style: 'width: 50%; height: 40px;' }
-        %span.vertical-center
-          Your subscriptions:
-    - @user.subscriptions.each do |subs|
-      %button.btn.btn-sm.btn-success.disabled.mb-2.mt-2
-        %span
-          #{ subs.category.name } - last updates
+.main_nav_bar
+  #menu-overlay-btn.btn.btn-primary
+    = fa_icon 'navicon'
+  #log-overlay-btn.btn.btn-primary
+    = fa_icon 'key'
+  #mid-overlay-btn.btn.btn-primary
+    = fa_icon 'chevron-down'
+  .mid-overlay
+    .overlay
+      - if request.referer && request.referer != request.original_url
+        = link_to 'Back', request.referrer, id: 'back'
+      - else
+        = link_to 'Back', categories_path, id: 'back'
+      = link_to 'Profile settings', edit_user_path(@user)
+      = link_to 'Account deleting', '', { id: 'acc_del', 'data-target' => '#acc_deleting', 'data-toggle' => 'collapse' }
+      #acc_deleting.collapse
+        .li
+          = link_to 'Delete account', user_path(@user), method: :delete,
+                    data: { confirm: 'Do you really want to delete your own account?'}
+.page_content
+  .row.mt-5
+    .container-fluid.align-items-center
       .row
-        .container-fluid
-          - subs.category.wallpapers.last(5).reverse.each do |wp|
-            .col-4
-              .img-thumbnail
-                = link_to  wallpaper_path(wp), target: '_blank' do
-                  %img.img-fluid{ alt: 'recent wallpaper', src: wp.image.thumb.url }
+        .col-auto.p-0.mr-1
+          %div.img-thumbnail
+            - if @user.avatar?
+              %img.img-fluid{ alt: 'avatar', src: @user.avatar.url }
+            - else
+              = image_tag 'avatar_default.jpg', alt: 'avatar', class: 'img-fluid'
+            .caption
+              %span
+                Avatar
+        .col-auto.other.p-0
+          %table.table-bordered.table-striped{ style: 'background-color: #DCDCDC;' }
+            %tbody
+              %tr
+                %td
+                  %span
+                    Email:
+                %td
+                  = @user.email
+              %tr
+                %td
+                  %span
+                    Nickname:
+                - if @user.nickname && !@user.nickname.eql?('')
+                  %td
+                    = @user.nickname
+                - else
+                  %td
+                    %span User
+                    = @user.id
+  - if @user.subscriptions.first
+    .subscriptions_block
+      .row.mt-1
+        %alert.alert.alert-success{ role: "alert", style: 'width: 50%; height: 40px;' }
+          %span.vertical-center
+            Your subscriptions:
+      - @user.subscriptions.each do |subs|
+        %button.btn.btn-sm.btn-success.disabled.m-1
+          %span
+            #{ subs.category.name } - last updates
+        %tile_block
+          .row.justify-content-center
+            - subs.category.wallpapers.last(12).reverse.each do |wp|
+              .col.col-12.col-xs-6.col-md-6.col-lg-4.col-xl-3
+                .img-overlaid
+                  = link_to  wallpaper_path(wp), target: '_blank' do
+                    %img.img-fluid{ alt: 'recent wallpaper', src: wp.image.thumb.url }
+                    #tile.overlay
+                      %p
+                        = wp.title

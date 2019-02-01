@@ -1,35 +1,39 @@
-.row
-  .btn-group.flex-wrap.mb-2{'aria-label' => 'Available actions', role: 'group'}
-    - if @wallpaper.category
-      = link_to "Watch category: #{@wallpaper.category.name}", category_path(@wallpaper.category), class: "btn btn-info"
-    - else
-      %button.btn.btn-info.btn-block.disabled
-        Uncategorized
-    - if request.referer && request.referer != request.original_url
-      = link_to 'Back', request.referrer, class: "btn btn-secondary", id: 'back'
-    - else
-      = link_to 'Back', wallpapers_path, class: "btn btn-secondary", id: 'back'
-.row
-  .container-fluid
-    .col-4
-      .img-thumbnail
+.main_nav_bar
+  #menu-overlay-btn.btn.btn-primary
+    = fa_icon 'navicon'
+  #log-overlay-btn.btn.btn-primary
+    = fa_icon 'key'
+  #mid-overlay-btn.btn.btn-primary
+    = fa_icon 'chevron-down'
+  .mid-overlay
+    .overlay
+      - if request.referer && request.referer != request.original_url
+        = link_to 'Back', request.referrer, id: 'back'
+      - else
+        = link_to 'Back', wallpapers_path, id: 'back'
+      - if @wallpaper.category
+        = link_to "Watch category: #{@wallpaper.category.name}", category_path(@wallpaper.category)
+      - else
+        %p
+          Uncategorized
+.page_content
+  .d-flex.mt-5.justify-content-center
+    %tile_block
+      .row
         = link_to @wallpaper.image.url, target: '_blank' do
-          %img.img-fluid{ alt: 'wallpaper', src: @wallpaper.image.thumb.url }
-          .caption.align-content-center
-            %button.btn.btn-sm.btn-info.disabled
-              = fa_icon 'heart'
-              %lcount
-                = @wallpaper.likes_count
-            - if current_user
-              - if exist_like?(@wallpaper)
-                = link_to (fa_icon 'thumbs-down'), new_wallpaper_like_path(@wallpaper), class: "btn btn-sm btn-secondary", remote: true, id: 'like'
-              - else
-                = link_to (fa_icon 'thumbs-up'), new_wallpaper_like_path(@wallpaper), class: "btn btn-sm btn-success", remote: true, id: 'like'
-.row
-  .container-fluid
-    .col-6
-      = render 'comments/form' if current_user.present? || current_admin_user.present?
-.row
-  .container-fluid
-    .col-6
-      = render @wallpaper.comments.order('created_at desc')
+          .img-overlaid
+            %img.img-fluid{ alt: 'wallpaper', src: @wallpaper.image.thumb.url }
+            #tile.overlay.align-content-space-around
+              %button.btn.btn-sm.btn-info.disabled
+                = fa_icon 'heart'
+                %lcount
+                  = @wallpaper.likes_count
+              - if current_user
+                - if exist_like?(@wallpaper)
+                  = link_to (fa_icon 'thumbs-down'), new_wallpaper_like_path(@wallpaper), class: "btn btn-sm btn-secondary", remote: true, id: 'like'
+                - else
+                  = link_to (fa_icon 'thumbs-up'), new_wallpaper_like_path(@wallpaper), class: "btn btn-sm btn-success", remote: true, id: 'like'
+  .d-flex.mt-1.justify-content-center
+    = render 'comments/form' if current_user.present? || current_admin_user.present?
+  .d-flex.mt-1.justify-content-center
+    = render @wallpaper.comments.order('created_at desc')

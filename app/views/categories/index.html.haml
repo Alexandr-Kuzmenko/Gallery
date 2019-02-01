@@ -1,33 +1,51 @@
-.row
-  .btn-group.flex-wrap.mb-2{'aria-label' => 'Available actions', role: 'group'}
-    - if user?
-      = link_to 'New category', new_category_path, { remote: true, "data-toggle": "modal",
-                                                      "data-target": "#modal-window", id: 'new_ctg_btn',
-                                                      class: "btn btn-info" }
-      %button.btn.btn-secondary{ id: 'empty_ctg_btn' }
-        .dropdown
-          .dropdown-toggle{ "data-toggle": 'dropdown', "data-target": '#' }
-            Empty categories
-            %b.caret
-          %ul.dropdown-menu
-            - @e_categories.each do |e_cat|
-              - unless e_cat.wallpapers.first
-                .emp_cat.li
-                  = link_to e_cat.name, (category_path(e_cat))
-- if Category.first
-  .row
-    .container-fluid
-      - @categories.each do |category|
-        - if category.wallpapers.first
-          .col-4
-            .img-thumbnail
-              = link_to(category_path(category)) do
-                %img.img-fluid{ alt: 'cat_img_sample', src: category.wallpapers.sample.image.thumb.url }
-                .caption
-                  = category.name
+.main_nav_bar
+  #menu-overlay-btn.btn.btn-primary
+    = fa_icon 'navicon'
+  #log-overlay-btn.btn.btn-primary
+    = fa_icon 'key'
+  - if user?
+    #mid-overlay-btn.btn.btn-primary
+      = fa_icon 'chevron-down'
+    .mid-overlay
+      .overlay
+        = link_to 'New category', new_category_path, { remote: true, "data-toggle": "modal",
+                                                        "data-target": "#modal-window", id: 'new_ctg_btn' }
+        = link_to 'Empty categories', '', { id: 'empty_ctg_collapse', 'data-target' => '#emp_cat_collapse', 'data-toggle' => 'collapse' }
+        #emp_cat_collapse.collapse
+          - @e_categories.each do |e_cat|
+            - unless e_cat.wallpapers.first
+              .li
+                = link_to e_cat.name, category_path(e_cat)
+.page_content
+  %backgr_field
+    #carouselBgWp.carousel.slide.carousel-fade{'data-ride' => 'carousel', 'data-pause' => 'false' }
+      .carousel-inner
+        - @bg_wallpapers.each do |bgw|
+          .carousel-item
+            %img.d-block{alt: 'bg_wp', src: bgw.image.url}
+              .carousel-caption.d-none.d-md-block.align-center
+                %strong
+                  = link_to 'Watch', wallpaper_path(bgw)
+      %a.carousel-control-prev{"data-slide" => "prev", :href => "#carouselBgWp", :role => "button"}
+        %span.carousel-control-prev-icon{"aria-hidden" => "true"}
+        %span.sr-only Previous
+      %a.carousel-control-next{"data-slide" => "next", :href => "#carouselBgWp", :role => "button"}
+        %span.carousel-control-next-icon{"aria-hidden" => "true"}
+        %span.sr-only Next
+  %tile_block
+    - if Category.first
+      .row.justify-content-center
+        - @categories.each do |category|
+          - if category.wallpapers.first
+            .col.col-12.col-xs-6.col-md-6.col-lg-4.col-xl-3
+              .img-overlaid
+                = link_to category_path(category) do
+                  %img.img-fluid{ alt: 'cat_img_sample', src: category.wallpapers.sample.image.thumb.url }
+                  #tile.overlay
+                    %p
+                      = category.name
 
-= paginate @categories, param_name: 'categories_page'
-
+  //= paginate @categories, param_name: 'categories_page'
 #modal-window.modal.hide.fade{"aria-hidden": "true", "aria-labelledby": "modal-windowLabel", role: "dialog", tabindex: "-1"}
   .modal-dialog.modal-dialog-centered{role: 'document'}
     .modal-content

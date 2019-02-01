@@ -1,36 +1,44 @@
-.row
-  .btn-group.flex-wrap.mb-2{'aria-label' => 'Available actions', role: 'group'}
-    - if request.referer && request.referer != request.original_url
-      = link_to 'Back', request.referrer, class: 'btn btn-secondary', id: 'back'
-    - else
-      = link_to 'Back', categories_path, class: 'btn btn-secondary', id: 'back'
-.row
-  .comments_table
-    %table.table-striped
-      %tbody
-        %tr
-          %th
-            Wallpaper
-          %th
-            Author
-          %th
-            Message
-          %th
-            Date
-        - @comments.each do |comm|
+.main_nav_bar
+  #menu-overlay-btn.btn.btn-primary
+    = fa_icon 'navicon'
+  #log-overlay-btn.btn.btn-primary
+    = fa_icon 'key'
+  #mid-overlay-btn.btn.btn-primary
+    = fa_icon 'chevron-down'
+  .mid-overlay
+    .overlay
+      - if request.referer && request.referer != request.original_url
+        = link_to 'Back', request.referrer, id: 'back'
+      - else
+        = link_to 'Back', categories_path, id: 'back'
+.page_content
+  .row.mt-5
+    .comments_table
+      %table.table-striped
+        %tbody
           %tr
-            %td
-              = link_to image_tag(comm.wallpaper.image.mini_thumb.url, alt: 'image', class: 'img-fluid'), wallpaper_path(comm.wallpaper)
-            %td
-              %strong
-                - if comm.commentable.nickname?
-                  = comm.commentable.nickname
-                - else
-                  = comm.commentable.class
-                  = comm.commentable.id
-            %td{style: 'text-align: left;'}
-              = comm.text
-            %td{style: 'font-size: 12px;'}
-              = comm.created_at
-.row
-  = paginate @comments, param_name: 'comments_page'
+            %th
+              Wallpaper
+            %th
+              Author
+            %th
+              Message
+            %th
+              Date
+          - @comments.each do |comm|
+            %tr
+              %td
+                = link_to image_tag(comm.wallpaper.image.mini_thumb.url, alt: 'image', class: 'img-fluid'), wallpaper_path(comm.wallpaper)
+              %td
+                %strong
+                  - if comm.commentable.nickname?
+                    = comm.commentable.nickname
+                  - else
+                    = comm.commentable.class
+                    = comm.commentable.id
+              %td{style: 'text-align: left;'}
+                = comm.text
+              %td{style: 'font-size: 12px;'}
+                = comm.created_at
+  .row
+    = paginate @comments, param_name: 'comments_page'

@@ -184,7 +184,7 @@ ru:
           more_pages:
             display_entries: "Displaying %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> of <b>%{total}</b> in total"
   header:
-    localization: "RU"
+    localization: "Ru"
     main_bar:
       categories: "Категории"
       top_categories: "ТОП категорий"

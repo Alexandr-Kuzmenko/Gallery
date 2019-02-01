@@ -1,5 +1,6 @@
-= form_for [ @wallpaper, @wallpaper.comments.build ], local: true do |f|
-  %print_field_btn.btn.btn-primary Print comment
+= form_for [ @wallpaper, @wallpaper.comments.build ], local: true, html: { style: 'width: 90%;' } do |f|
+  .d-flex.justify-content-center.m-1
+    %print_field_btn.btn.btn-primary Print comment
   .new_comment_block{ style: "display: none" }
     .captcha_block
       = recaptcha_tags(theme: :light, ajax: :true, size: :compact)

@@ -1,16 +1,12 @@
-.row
-  .col-auto.p-0
-    .container-fluid
-      %div.img-thumbnail
-        %img.img-fluid{ alt: 'wallpaper', src: @wallpaper.image.thumb.url }
-        .caption.align-content-space-between
-          %button.btn.btn-sm.disabled
-            = @wallpaper.title
-    .card{style: "width: 26rem;"}
-      .card-body
-        .info_text_block
-          Edit wallpaper and then press "Save", or get
-          = link_to 'back', wallpapers_path
-          to Gallery list
-        %br/
-        = render 'editform', wallpaper: @wallpaper
+.d-flex.mt-1.justify-content-center
+  .card{style: "width: 26rem;"}
+    %img.img-fluid{ alt: 'wallpaper', src: @wallpaper.image.thumb.url }
+    .caption{ style:'text-align: center;' }
+      = @wallpaper.title
+    .card-body
+      .info_text_block
+        Edit wallpaper and then press "Save", or get
+        = link_to 'back', wallpapers_path
+        to Gallery list
+      %br/
+      = render 'editform', wallpaper: @wallpaper

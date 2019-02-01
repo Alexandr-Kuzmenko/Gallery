@@ -1,11 +1,14 @@
-.card{style: "width: 20rem;"}
-  .card-body
-    .info_text_block
-      Enter the name of category you want to create, or get
-      - if request.referer
-        = link_to 'back', request.referrer
-      - else
-        = link_to 'back', categories_path
-      to Category list
-    %br/
-    = render 'form', category: @category
+.d-flex.mt-1.justify-content-center
+  .card{style: "width: 20rem;"}
+    .card-body
+      .info_text_block
+        %span
+          Enter the name of category you want to create, or get
+        - if request.referer
+          = link_to 'back', request.referrer
+        - else
+          = link_to 'back', categories_path
+        %span
+          to Category list
+      %br/
+      = render 'form', category: @category

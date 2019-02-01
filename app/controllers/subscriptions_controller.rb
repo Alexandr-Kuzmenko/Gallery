@@ -14,10 +14,12 @@ class SubscriptionsController < ApplicationController
   def set_subscription
     @subscription = current_user.subscriptions.create(category: @category)
     UserMailer.with(user: current_user, category: @category).subscribe_created_email.deliver_now
+    flash[:success] = 'Subscription have been created'
   end
 
   def unset_subscription
     @subscription.destroy
+    flash[:warning] = 'Subscription destroyed'
   end
 
   def check_subscription

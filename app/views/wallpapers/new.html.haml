@@ -1,12 +1,14 @@
-.card{style: "width: 26rem;"}
-  .card-body
-    .info_text_block
-      %span
-        Fill the fields and then press "Save", or get
-      - if request.referer
-        = link_to 'back', request.referrer
-      - else
-        = link_to 'back', wallpapers_path
-      to Gallery list
-    %br/
-    = render 'form', wallpaper: @wallpaper
+.d-flex.mt-1.justify-content-center
+  .card{style: "width: 26rem;"}
+    .card-body
+      .info_text_block
+        %span
+          Fill the fields and then press "Save", or get
+        - if request.referer
+          = link_to 'back', request.referrer
+        - else
+          = link_to 'back', wallpapers_path
+        %span
+          to Gallery list
+      %br/
+      = render 'form', wallpaper: @wallpaper
