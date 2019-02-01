@@ -21,6 +21,18 @@
                 ×
           .modal-body
             = render "devise/sessions/modal"
+    #sign_up_modal.modal.fade{ 'aria-hidden': 'true', role: 'dialog', tabindex: '-1' }
+      .modal-dialog.modal-dialog-centered{ role: 'document'}
+        .modal-content
+          .modal-header
+            .col-auto.mr-auto
+              .btn.btn-outline-primary.disabled
+                Registration
+            .col-auto
+              %button.close{ "aria-label": "Close", "data-dismiss": "modal", type: "button" }
+                ×
+          .modal-body
+            = render "devise/registrations/modal"
     %header
       .overlay-container
         .left-overlay
@@ -47,7 +59,8 @@
                 %span
                   Authorization
               = link_to I18n.t('active_admin.devise.links.sign_in'), '', { id: 'login_modal', 'data-target': '#sign_in_modal', 'data-toggle': 'modal' }
-              = link_to I18n.t("active_admin.devise.links.sign_up"), new_user_registration_path, id: 'sign_up'
+              = link_to I18n.t("active_admin.devise.links.sign_up"), '', { id: 'sign_up_modal', 'data-target': '#sign_up_modal', 'data-toggle': 'modal' }
+              //, new_user_registration_path, id: 'sign_up'
             = link_to I18n.t("header.localization"), '', { id: 'localization', 'data-target' => '#locale', 'data-toggle' => 'collapse' }
             #locale.collapse
               .li
