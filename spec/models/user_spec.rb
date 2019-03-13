@@ -104,11 +104,11 @@ RSpec.describe User, type: :model do
       expect(build(:user, password: '12asghjklhr9254yuy3')).to be_valid
     end
 
-    it 'invalid nickname length (not within [6..20])' do
+    it 'invalid nickname length (not within [1..20])' do
       expect(build(:user, nickname: 'qwerty_qwerty_qwerty1')).to_not be_valid
     end
 
-    it 'valid nickname length (within [6..20])' do
+    it 'valid nickname length (within [1..20])' do
       expect(build(:user, nickname: 'qop')).to be_valid
       expect(build(:user, nickname: 'qwerty_qwerty_qwerty')).to be_valid
     end
